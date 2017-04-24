@@ -39,6 +39,7 @@ android:
  - google-gdk-license-.+
 
 before_install:
+- cd ./CupertinoJudo
 - chmod +x gradlew
 
 before_script:
