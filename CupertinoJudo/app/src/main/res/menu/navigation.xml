@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_tournament"
+        android:icon="@drawable/ic_trophy_outline"
+        android:title="@string/title_tournament" />
+
+    <item
+        android:id="@+id/navigation_club"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_club" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_notifications_none_black_24dp"
+        android:title="@string/title_notifications" />
+
+</menu>
