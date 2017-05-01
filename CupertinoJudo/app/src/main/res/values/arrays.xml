@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="icons">
+        <item name="@drawable/ic_schedule" />
+        <item name="@drawable/ic_google_maps" />
+        <item name="@drawable/ic_pools" />
+        <item name="@drawable/ic_concession" />
+        <item name="@drawable/ic_venue_map" />
+        <item name="@drawable/ic_stats" />
+    </array>
+    <array name="title">
+        <item name="@string/schedule" />
+        <item name="@string/directions" />
+        <item name="@string/pools" />
+        <item name="@string/concession" />
+        <item name="@string/venue_map" />
+        <item name="@string/stats" />
+    </array>
+</resources>

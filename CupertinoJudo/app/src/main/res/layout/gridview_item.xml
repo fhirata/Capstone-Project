@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gridview_item"
+    android:layout_width="146dp"
+    android:layout_height="112dp"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tile_image"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_schedule" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tile_description"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="@color/lightGray"
+        android:gravity="center"
+        android:textColor="@color/colorBlueGreen"
+        android:textSize="16dp"
+        tools:text="Directions" />
+</LinearLayout>
