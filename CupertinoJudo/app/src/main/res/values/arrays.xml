@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="icons">
-        <item name="@drawable/ic_schedule" />
-        <item name="@drawable/ic_google_maps" />
-        <item name="@drawable/ic_pools" />
-        <item name="@drawable/ic_concession" />
-        <item name="@drawable/ic_venue_map" />
-        <item name="@drawable/ic_stats" />
+        <item>@drawable/ic_schedule</item>
+        <item>@drawable/ic_google_maps</item>
+        <item>@drawable/ic_pools</item>
+        <item>@drawable/ic_concession</item>
+        <item>@drawable/ic_venue_map</item>
+        <item>@drawable/ic_stats</item>
     </array>
-    <array name="title">
-        <item name="@string/schedule" />
-        <item name="@string/directions" />
-        <item name="@string/pools" />
-        <item name="@string/concession" />
-        <item name="@string/venue_map" />
-        <item name="@string/stats" />
-    </array>
+    <string-array name="title">
+        <item>@string/schedule</item>
+        <item>@string/directions</item>
+        <item>@string/pools</item>
+        <item>@string/concession</item>
+        <item>@string/venue_map</item>
+        <item>@string/stats</item>
+    </string-array>
 </resources>

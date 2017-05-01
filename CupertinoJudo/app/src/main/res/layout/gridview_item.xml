@@ -6,6 +6,8 @@
     android:layout_height="112dp"
     android:background="@color/white"
     android:gravity="center"
+    android:elevation="6dp"
+    android:layout_margin="20dp"
     android:orientation="vertical">
 
     <FrameLayout

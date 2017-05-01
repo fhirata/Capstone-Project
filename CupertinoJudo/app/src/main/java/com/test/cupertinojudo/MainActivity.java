@@ -62,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
 
         CJudoNotificationsFragment notificationsFragment = CJudoNotificationsFragment.newInstance();
         mFragments.add(NOTIFICATIONS, notificationsFragment);
+
+        if (null == savedInstanceState) {
+            swapFragment(TOURNAMENT);
+        }
     }
 
     private void swapFragment(int position) {

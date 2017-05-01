@@ -11,8 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.test.cupertinojudo.R;
 
 import java.util.ArrayList;
@@ -25,14 +23,14 @@ import java.util.List;
 public class CJudoTournamentGridViewAdapter extends BaseAdapter {
     List<CJudoTournamentTile> mTournamentTiles;
 
-    public CJudoTournamentGridViewAdapter(Context context) {
+    CJudoTournamentGridViewAdapter(Context context) {
         mTournamentTiles = new ArrayList<>();
         try {
             TypedArray icons = context.getResources().obtainTypedArray(R.array.icons);
-            TypedArray titles = context.getResources().obtainTypedArray(R.array.title);
+            String[] titles = context.getResources().getStringArray(R.array.title);
 
             for (int i = 0; i < icons.length(); i++) {
-                mTournamentTiles.add(new CJudoTournamentTile(titles.getString(i), icons.getDrawable(i)));
+                mTournamentTiles.add(new CJudoTournamentTile(titles[i], icons.getDrawable(i)));
             }
         } catch (Resources.NotFoundException ResNotFoundException) {
             Log.e("Adapter", ResNotFoundException.getMessage() );
@@ -63,12 +61,7 @@ public class CJudoTournamentGridViewAdapter extends BaseAdapter {
         description.setText(mTournamentTiles.get(position).getDescription());
 
         ImageView imageView = (ImageView) gridViewItem.findViewById(R.id.tile_image);
-        Glide.with(parent.getContext())
-                .load(mTournamentTiles.get(position).getDrawable())
-                .asBitmap()
-                .placeholder(mTournamentTiles.get(position).getDrawable())
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .into(imageView);
+        imageView.setImageDrawable(mTournamentTiles.get(position).getDrawable());
 
         return gridViewItem;
     }
