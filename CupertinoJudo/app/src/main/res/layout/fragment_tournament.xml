@@ -1,21 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/cupertino_judo_tournament" />
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize">
 
-    <GridView
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cupertino_judo_tournament"
+                app:layout_collapseMode="parallax" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/gridview_tournament"
-        android:horizontalSpacing="@dimen/tile_margin"
-        android:numColumns="2"
-        android:stretchMode="columnWidth" />
-</LinearLayout>
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <GridView
+            android:id="@+id/gridview_tournament"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:clipChildren="true"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/tile_margin"
+            android:nestedScrollingEnabled="true"
+            android:numColumns="2"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dp" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
