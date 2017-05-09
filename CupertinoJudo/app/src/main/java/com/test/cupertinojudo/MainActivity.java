@@ -82,14 +82,12 @@ public class MainActivity extends AppCompatActivity implements CJudoTournamentCo
         // Notifications fragment init
         CJudoNotificationsFragment notificationsFragment = (CJudoNotificationsFragment) getSupportFragmentManager().findFragmentByTag(CJudoNotificationsFragment.FRAGMENT_TAG);
         if (null == notificationsFragment) {
-            CJudoNotificationsFragment.newInstance();
+            notificationsFragment = CJudoNotificationsFragment.newInstance();
         }
         mFragments.add(NOTIFICATIONS, notificationsFragment);
 
         if (null == savedInstanceState) {
             swapFragment(TOURNAMENT);
-        } else {
-
         }
     }
 
