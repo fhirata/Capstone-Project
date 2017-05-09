@@ -9,10 +9,12 @@ import android.graphics.drawable.Drawable;
 public class CJudoTournamentTile {
     private String mDescription;
     private Drawable mIcon;
+    private int mId;
 
-    public CJudoTournamentTile(String description, Drawable icon) {
+    public CJudoTournamentTile(String description, Drawable icon, int id) {
         mDescription = description;
         mIcon = icon;
+        mId = id;
     }
 
     public String getDescription() {
@@ -21,5 +23,9 @@ public class CJudoTournamentTile {
 
     public Drawable getDrawable() {
         return mIcon;
+    }
+
+    public int getId() {
+        return mId;
     }
 }

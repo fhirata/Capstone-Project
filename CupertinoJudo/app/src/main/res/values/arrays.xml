@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <integer-array name="tile_ids">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
     <array name="icons">
         <item>@drawable/ic_schedule</item>
         <item>@drawable/ic_google_maps</item>

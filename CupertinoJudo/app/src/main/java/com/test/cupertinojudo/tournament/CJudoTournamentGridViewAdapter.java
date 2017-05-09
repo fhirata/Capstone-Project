@@ -1,9 +1,5 @@
 package com.test.cupertinojudo.tournament;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +9,6 @@ import android.widget.TextView;
 
 import com.test.cupertinojudo.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,20 +17,13 @@ import java.util.List;
 
 public class CJudoTournamentGridViewAdapter extends BaseAdapter {
     List<CJudoTournamentTile> mTournamentTiles;
+    CJudoTournamentContract.Presenter mPresenterInterface;
 
-    CJudoTournamentGridViewAdapter(Context context) {
-        mTournamentTiles = new ArrayList<>();
-        try {
-            TypedArray icons = context.getResources().obtainTypedArray(R.array.icons);
-            String[] titles = context.getResources().getStringArray(R.array.title);
-
-            for (int i = 0; i < icons.length(); i++) {
-                mTournamentTiles.add(new CJudoTournamentTile(titles[i], icons.getDrawable(i)));
-            }
-        } catch (Resources.NotFoundException ResNotFoundException) {
-            Log.e("Adapter", ResNotFoundException.getMessage() );
-        }
+    CJudoTournamentGridViewAdapter(CJudoTournamentContract.Presenter presenterInterface, List<CJudoTournamentTile> tournamentTiles) {
+        mPresenterInterface = presenterInterface;
+        mTournamentTiles = tournamentTiles;
     }
+
     @Override
     public int getCount() {
         return mTournamentTiles.size();
@@ -52,7 +40,7 @@ public class CJudoTournamentGridViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View gridViewItem =  inflater.inflate(R.layout.gridview_item, parent, false);
@@ -63,6 +51,15 @@ public class CJudoTournamentGridViewAdapter extends BaseAdapter {
         ImageView imageView = (ImageView) gridViewItem.findViewById(R.id.tile_image);
         imageView.setImageDrawable(mTournamentTiles.get(position).getDrawable());
 
+        gridViewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CJudoTournamentTile tournamentTile = mTournamentTiles.get(position);
+                if (null != tournamentTile) {
+                    mPresenterInterface.handleTileClick(tournamentTile);
+                }
+            }
+        });
         return gridViewItem;
     }
 }
