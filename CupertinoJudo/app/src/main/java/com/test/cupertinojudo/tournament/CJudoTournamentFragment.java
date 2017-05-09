@@ -21,6 +21,7 @@ import java.util.List;
  */
 
 public class CJudoTournamentFragment extends Fragment implements CJudoTournamentContract.ViewInterface {
+    public static final String FRAGMENT_TAG = "CJudoTournamentFragment";
     private CJudoTournamentGridViewAdapter mGridviewAdapter;
     private GridView mGridView;
     private CJudoTournamentContract.Presenter mPresenter;
@@ -32,6 +33,7 @@ public class CJudoTournamentFragment extends Fragment implements CJudoTournament
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Nullable

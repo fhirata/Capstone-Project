@@ -57,26 +57,45 @@ public class MainActivity extends AppCompatActivity implements CJudoTournamentCo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFragments = new Vector<>(MENU_ITEMS);
-
         setContentView(R.layout.activity_main);
+
+        mFragments = new Vector<>(MENU_ITEMS);
 
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        CJudoTournamentFragment tournamentFragment = CJudoTournamentFragment.newInstance();
+        // Tournament fragment init
+        CJudoTournamentFragment tournamentFragment = (CJudoTournamentFragment) getSupportFragmentManager().findFragmentByTag(CJudoTournamentFragment.FRAGMENT_TAG);
+        if (null == tournamentFragment) {
+            tournamentFragment = CJudoTournamentFragment.newInstance();
+        }
         new CJudoTournamentPresenter(tournamentFragment, this);
         mFragments.add(TOURNAMENT, tournamentFragment);
 
-        CJudoClubFragment clubFragment = CJudoClubFragment.newInstance();
+        // Club fragment init
+        CJudoClubFragment clubFragment = (CJudoClubFragment) getSupportFragmentManager().findFragmentByTag(CJudoClubFragment.FRAGMENT_TAG);
+        if (null == clubFragment) {
+            clubFragment = CJudoClubFragment.newInstance();
+        }
         mFragments.add(CLUB, clubFragment);
 
-        CJudoNotificationsFragment notificationsFragment = CJudoNotificationsFragment.newInstance();
+        // Notifications fragment init
+        CJudoNotificationsFragment notificationsFragment = (CJudoNotificationsFragment) getSupportFragmentManager().findFragmentByTag(CJudoNotificationsFragment.FRAGMENT_TAG);
+        if (null == notificationsFragment) {
+            CJudoNotificationsFragment.newInstance();
+        }
         mFragments.add(NOTIFICATIONS, notificationsFragment);
 
         if (null == savedInstanceState) {
             swapFragment(TOURNAMENT);
+        } else {
+
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override

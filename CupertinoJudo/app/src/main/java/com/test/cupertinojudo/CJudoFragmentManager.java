@@ -13,7 +13,7 @@ public class CJudoFragmentManager {
         FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.bottom_up, R.anim.bottom_down);
         transaction.addToBackStack(null);
-        transaction.add(fragmentContainer, fragment);
+        transaction.replace(fragmentContainer, fragment);
         transaction.commit();
     }
 }

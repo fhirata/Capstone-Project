@@ -24,7 +24,6 @@ public class CJudoTournamentScheduleFragment extends Fragment implements CJudoTo
         return new CJudoTournamentScheduleFragment();
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -59,4 +58,5 @@ public class CJudoTournamentScheduleFragment extends Fragment implements CJudoTo
     public void setPresenter(CJudoTournamentScheduleContract.Presenter presenter) {
         mPresenter = presenter;
     }
+
 }

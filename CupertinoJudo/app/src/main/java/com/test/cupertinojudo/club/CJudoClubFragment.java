@@ -15,9 +15,15 @@ import com.test.cupertinojudo.R;
  */
 
 public class CJudoClubFragment extends Fragment {
-
+    public static final String FRAGMENT_TAG = "CJudoClubFragment";
     public static CJudoClubFragment newInstance() {
         return new CJudoClubFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Nullable
