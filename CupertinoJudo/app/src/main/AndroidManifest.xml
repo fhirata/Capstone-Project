@@ -33,6 +33,11 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/cjudo_app_widget_info" />
         </receiver>
+        <provider
+            android:name=".data.source.local.CJTProvider"
+            android:authorities="@string/content_authority"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 
 </manifest>
