@@ -1,18 +1,18 @@
 package com.test.cupertinojudo.tournament.venue;
 
-import com.test.cupertinojudo.tournament.CJudoTournamentContract;
+import com.test.cupertinojudo.tournament.CJTContract;
 
 /**
  * Created by fabiohh on 5/8/17.
  */
 
 
-public class CJudoTournamentVenuePresenter implements CJudoTournamentVenueContract.PresenterInterface {
-    CJudoTournamentVenueFragment mViewInterface;
-    CJudoTournamentContract.ActivityInterface mActivityInterface;
+public class CJTVenuePresenter implements CJTVenueContract.PresenterInterface {
+    CJTVenueFragment mViewInterface;
+    CJTContract.ActivityInterface mActivityInterface;
     String mFile = "file:///android_asset/lynbrook%20school%20map.png";
 
-    public CJudoTournamentVenuePresenter(CJudoTournamentVenueFragment viewInterface, CJudoTournamentContract.ActivityInterface activityInterface) {
+    public CJTVenuePresenter(CJTVenueFragment viewInterface, CJTContract.ActivityInterface activityInterface) {
         mViewInterface = viewInterface;
         mActivityInterface = activityInterface;
 

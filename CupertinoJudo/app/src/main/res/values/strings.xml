@@ -85,4 +85,6 @@
     <string name="stats">Stats</string>
     <string name="directions">Directions</string>
     <string name="schedule">Schedule</string>
+    <string name="tournament_pools">Tournament Pools</string>
+    <string name="content_authority">com.test.cupertinojudo</string>
 </resources>

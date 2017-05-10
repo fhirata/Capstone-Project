@@ -11,19 +11,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.test.cupertinojudo.club.CJudoClubFragment;
+import com.test.cupertinojudo.club.CJClubFragment;
 import com.test.cupertinojudo.notifications.CJudoNotificationsFragment;
-import com.test.cupertinojudo.tournament.CJudoTournamentContract;
-import com.test.cupertinojudo.tournament.CJudoTournamentFragment;
-import com.test.cupertinojudo.tournament.CJudoTournamentPresenter;
-import com.test.cupertinojudo.tournament.schedule.CJudoTournamentScheduleFragment;
-import com.test.cupertinojudo.tournament.schedule.CJudoTournamentSchedulePresenter;
-import com.test.cupertinojudo.tournament.venue.CJudoTournamentVenueFragment;
-import com.test.cupertinojudo.tournament.venue.CJudoTournamentVenuePresenter;
+import com.test.cupertinojudo.tournament.CJTContract;
+import com.test.cupertinojudo.tournament.CJTFragment;
+import com.test.cupertinojudo.tournament.CJTPresenter;
+import com.test.cupertinojudo.tournament.pools.CJTPoolsActivity;
+import com.test.cupertinojudo.tournament.schedule.CJTScheduleFragment;
+import com.test.cupertinojudo.tournament.schedule.CJTSchedulePresenter;
+import com.test.cupertinojudo.tournament.venue.CJTVenueFragment;
+import com.test.cupertinojudo.tournament.venue.CJTVenuePresenter;
 
 import java.util.Vector;
 
-public class MainActivity extends AppCompatActivity implements CJudoTournamentContract.ActivityInterface {
+public class MainActivity extends AppCompatActivity implements CJTContract.ActivityInterface {
     private BottomNavigationView mBottomNavigationView;
     private Vector<Fragment> mFragments;
     private final int MENU_ITEMS = 3;
@@ -65,17 +66,17 @@ public class MainActivity extends AppCompatActivity implements CJudoTournamentCo
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Tournament fragment init
-        CJudoTournamentFragment tournamentFragment = (CJudoTournamentFragment) getSupportFragmentManager().findFragmentByTag(CJudoTournamentFragment.FRAGMENT_TAG);
+        CJTFragment tournamentFragment = (CJTFragment) getSupportFragmentManager().findFragmentByTag(CJTFragment.FRAGMENT_TAG);
         if (null == tournamentFragment) {
-            tournamentFragment = CJudoTournamentFragment.newInstance();
+            tournamentFragment = CJTFragment.newInstance();
         }
-        new CJudoTournamentPresenter(tournamentFragment, this);
+        new CJTPresenter(tournamentFragment, this);
         mFragments.add(TOURNAMENT, tournamentFragment);
 
         // Club fragment init
-        CJudoClubFragment clubFragment = (CJudoClubFragment) getSupportFragmentManager().findFragmentByTag(CJudoClubFragment.FRAGMENT_TAG);
+        CJClubFragment clubFragment = (CJClubFragment) getSupportFragmentManager().findFragmentByTag(CJClubFragment.FRAGMENT_TAG);
         if (null == clubFragment) {
-            clubFragment = CJudoClubFragment.newInstance();
+            clubFragment = CJClubFragment.newInstance();
         }
         mFragments.add(CLUB, clubFragment);
 
@@ -115,19 +116,19 @@ public class MainActivity extends AppCompatActivity implements CJudoTournamentCo
 
     @Override
     public void handleScheduleClick() {
-        CJudoTournamentScheduleFragment tournamentScheduleFragment = CJudoTournamentScheduleFragment.newInstance();
+        CJTScheduleFragment tournamentScheduleFragment = CJTScheduleFragment.newInstance();
 
         CJudoFragmentManager.replaceFragment(this, R.id.content, tournamentScheduleFragment);
 
-        new CJudoTournamentSchedulePresenter(tournamentScheduleFragment, this);
+        new CJTSchedulePresenter(tournamentScheduleFragment, this);
     }
 
     @Override
     public void handleVenueClick() {
-        CJudoTournamentVenueFragment venueFragment = CJudoTournamentVenueFragment.newInstance();
+        CJTVenueFragment venueFragment = CJTVenueFragment.newInstance();
         CJudoFragmentManager.replaceFragment(this, R.id.content, venueFragment);
 
-        new CJudoTournamentVenuePresenter(venueFragment, this);
+        new CJTVenuePresenter(venueFragment, this);
     }
 
     @Override
@@ -142,7 +143,8 @@ public class MainActivity extends AppCompatActivity implements CJudoTournamentCo
 
     @Override
     public void handlePoolsClick() {
-
+        Intent intent = new Intent(this, CJTPoolsActivity.class);
+        startActivity(intent);
     }
 
     @Override

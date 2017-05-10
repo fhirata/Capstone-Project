@@ -15,11 +15,11 @@ import java.util.List;
  * Created by fabiohh on 4/30/17.
  */
 
-public class CJudoTournamentGridViewAdapter extends BaseAdapter {
-    List<CJudoTournamentTile> mTournamentTiles;
-    CJudoTournamentContract.Presenter mPresenterInterface;
+public class CJTGridViewAdapter extends BaseAdapter {
+    List<CJTTile> mTournamentTiles;
+    CJTContract.Presenter mPresenterInterface;
 
-    CJudoTournamentGridViewAdapter(CJudoTournamentContract.Presenter presenterInterface, List<CJudoTournamentTile> tournamentTiles) {
+    CJTGridViewAdapter(CJTContract.Presenter presenterInterface, List<CJTTile> tournamentTiles) {
         mPresenterInterface = presenterInterface;
         mTournamentTiles = tournamentTiles;
     }
@@ -54,7 +54,7 @@ public class CJudoTournamentGridViewAdapter extends BaseAdapter {
         gridViewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CJudoTournamentTile tournamentTile = mTournamentTiles.get(position);
+                CJTTile tournamentTile = mTournamentTiles.get(position);
                 if (null != tournamentTile) {
                     mPresenterInterface.handleTileClick(tournamentTile);
                 }

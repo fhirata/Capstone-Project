@@ -5,6 +5,8 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
+import org.junit.Test;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,9 +24,7 @@ public class NotificationsFragmentScreenshot extends ActivityInstrumentationTest
         super(MainActivity.class);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    public void setUp() {
         mSolo = new Solo(getInstrumentation(), getActivity());
 
         // Click on the Notifications Tab to open the notifications fragment
@@ -32,6 +32,7 @@ public class NotificationsFragmentScreenshot extends ActivityInstrumentationTest
         mSolo.sleep(5000);
     }
 
+    @Test
     public void testScreenShot() {
         String path = Environment.getExternalStorageDirectory().getPath() + "/Robotium-Screenshots";
         File directory = new File(path);

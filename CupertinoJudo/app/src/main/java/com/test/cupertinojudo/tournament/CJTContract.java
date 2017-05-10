@@ -7,13 +7,13 @@ import com.test.cupertinojudo.BaseViewInterface;
  * Created by fabiohh on 4/26/17.
  */
 
-public interface CJudoTournamentContract {
+public interface CJTContract {
 
     interface Presenter extends BasePresenterInterface {
-        void handleTileClick(CJudoTournamentTile tournamentTile);
+        void handleTileClick(CJTTile tournamentTile);
     }
 
-    interface ViewInterface extends BaseViewInterface<CJudoTournamentContract.Presenter> {
+    interface ViewInterface extends BaseViewInterface<CJTContract.Presenter> {
 
     }
 

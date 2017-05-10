@@ -4,11 +4,11 @@ package com.test.cupertinojudo.tournament;
  * Created by fabiohh on 4/26/17.
  */
 
-public class CJudoTournamentPresenter implements CJudoTournamentContract.Presenter {
-    private CJudoTournamentContract.ActivityInterface mActivityInterface;
-    private CJudoTournamentContract.ViewInterface mViewInterface;
+public class CJTPresenter implements CJTContract.Presenter {
+    private CJTContract.ActivityInterface mActivityInterface;
+    private CJTContract.ViewInterface mViewInterface;
 
-    public CJudoTournamentPresenter(CJudoTournamentContract.ViewInterface tournamentFragment, CJudoTournamentContract.ActivityInterface activityInterface) {
+    public CJTPresenter(CJTContract.ViewInterface tournamentFragment, CJTContract.ActivityInterface activityInterface) {
         mActivityInterface = activityInterface;
         mViewInterface = tournamentFragment;
 
@@ -21,7 +21,7 @@ public class CJudoTournamentPresenter implements CJudoTournamentContract.Present
     }
 
     @Override
-    public void handleTileClick(CJudoTournamentTile tournamentTile) {
+    public void handleTileClick(CJTTile tournamentTile) {
         switch (tournamentTile.getId()) {
             case 0:
                 mActivityInterface.handleScheduleClick();
