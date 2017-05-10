@@ -64,15 +64,15 @@ public class CJTPersistenceContract {
         }
 
         public static Uri buildPlayersUri(int year) {
-            return Uri.parse(CONTENT_SCHEME + CONTENT_PARTICIPANTS_TYPE + SEPARATOR + year);
+            return CONTENT_URI.buildUpon().appendPath(Integer.toString(year)).build();
         }
 
         public static Uri buildPoolsUri(int year, String category) {
-            return Uri.parse(CONTENT_SCHEME + CONTENT_PARTICIPANTS_TYPE + SEPARATOR + year + SEPARATOR + category);
+            return CONTENT_URI.buildUpon().appendPath(Integer.toString(year)).appendEncodedPath(category).build();
         }
 
         public static Uri buildPoolUri(int year, String category, String poolName) {
-            return Uri.parse(CONTENT_SCHEME + CONTENT_PARTICIPANT_ITEM_TYPE + SEPARATOR + year + SEPARATOR + category + SEPARATOR + poolName);
+            return CONTENT_URI.buildUpon().appendPath(Integer.toString(year)).appendEncodedPath(category).appendEncodedPath(poolName).build();
         }
 
         public static int getYearFromUri(Uri uri) {

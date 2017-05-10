@@ -9,10 +9,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.CATEGORY;
 import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.CONTENT_AUTHORITY;
 import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.PATH_TOURNAMENT;
-import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.POOLNAME;
 
 /**
  * Created by fabiohh on 5/10/17.
@@ -22,10 +20,10 @@ public class CJTProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private CJTDbHelper mOpenHelper;
 
-    static final int PARTICIPANTS = 100;
-    static final int PARTICIPANTS_WITH_YEAR = 101;
-    static final int PARTICIPANTS_WITH_YEAR_CATEGORY = 102;
-    static final int PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME = 103;
+    public static final int PARTICIPANTS = 100;
+    public static final int PARTICIPANTS_WITH_YEAR = 101;
+    public static final int PARTICIPANTS_WITH_YEAR_CATEGORY = 102;
+    public static final int PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME = 103;
 
     // TODO: Using this for GROUP BY feature for retrieving categories and pools
     private static final SQLiteQueryBuilder sTournamentQueryBuilder;
@@ -54,12 +52,12 @@ public class CJTProvider extends ContentProvider {
                     "." + CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY + " = ?" +
                     "." + CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_POOL + " = ?";
 
-    static UriMatcher buildUriMatcher() {
+    public static UriMatcher buildUriMatcher() {
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(CONTENT_AUTHORITY, PATH_TOURNAMENT, PARTICIPANTS);
         uriMatcher.addURI(CONTENT_AUTHORITY, PATH_TOURNAMENT + "/#", PARTICIPANTS_WITH_YEAR);
-        uriMatcher.addURI(CONTENT_AUTHORITY, PATH_TOURNAMENT + "/#/" + CATEGORY + "/*", PARTICIPANTS_WITH_YEAR_CATEGORY);
-        uriMatcher.addURI(CONTENT_AUTHORITY, PATH_TOURNAMENT + "/#/" + CATEGORY + "/*" + POOLNAME + "/*", PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME);
+        uriMatcher.addURI(CONTENT_AUTHORITY, PATH_TOURNAMENT + "/#/*", PARTICIPANTS_WITH_YEAR_CATEGORY);
+        uriMatcher.addURI(CONTENT_AUTHORITY, PATH_TOURNAMENT + "/#/*/*", PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME);
 
         return uriMatcher;
     }
