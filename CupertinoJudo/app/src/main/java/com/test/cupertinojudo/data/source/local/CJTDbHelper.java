@@ -25,14 +25,14 @@ public class CJTDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME + " (" +
                     CJTPersistenceContract.CJudoParticipantEntry._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
                     CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_TOURNAMENT_YEAR + INTEGER_TYPE + COMMA_SEP +
-                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_FIRST    + TEXT_TYPE + COMMA_SEP +
-                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_LAST     + TEXT_TYPE + COMMA_SEP +
-                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CLUB     + TEXT_TYPE + COMMA_SEP +
-                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_BELT     + TEXT_TYPE + COMMA_SEP +
-                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_WEIGHT   + TEXT_TYPE + COMMA_SEP +
-                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_DOB      + TEXT_TYPE + COMMA_SEP +
-                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY + TEXT_TYPE + COMMA_SEP +
-                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_POOL     + TEXT_TYPE +
+                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_FIRST           + TEXT_TYPE + COMMA_SEP +
+                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_LAST            + TEXT_TYPE + COMMA_SEP +
+                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CLUB            + TEXT_TYPE + COMMA_SEP +
+                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_BELT            + TEXT_TYPE + COMMA_SEP +
+                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_WEIGHT          + INTEGER_TYPE + COMMA_SEP +
+                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_DOB             + INTEGER_TYPE + COMMA_SEP +
+                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY        + TEXT_TYPE + COMMA_SEP +
+                    CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_POOL            + TEXT_TYPE +
                     " )";
 
     public CJTDbHelper(Context context) {

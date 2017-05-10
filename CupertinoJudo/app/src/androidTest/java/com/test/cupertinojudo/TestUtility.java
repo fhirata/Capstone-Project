@@ -56,7 +56,7 @@ public class TestUtility extends AndroidTestCase {
         participantValues.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CLUB, "Stanford");
         participantValues.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_BELT, "Yellow");
         participantValues.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_WEIGHT, 67);
-        participantValues.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_DOB, "12/12/2006");
+        participantValues.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_DOB, TestUtility.TEST_DATE);
         participantValues.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY, "Junior Males");
         participantValues.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_POOL, "A");
 

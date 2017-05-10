@@ -4,11 +4,15 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_DOB;
+import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME;
+import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.CJudoParticipantEntry.buildParticipantUriWith;
 import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.CONTENT_AUTHORITY;
 import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.PATH_TOURNAMENT;
 
@@ -31,23 +35,23 @@ public class CJTProvider extends ContentProvider {
         sTournamentQueryBuilder = new SQLiteQueryBuilder();
 
         sTournamentQueryBuilder.setTables(
-                CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME);
+                TABLE_NAME);
     }
 
     // tournament.year = ?
     private static final String sTournamentParticipantsSelection =
-    CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME +
+    TABLE_NAME +
             "." + CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_TOURNAMENT_YEAR + " = ? ";
 
     // tournament.year = ? AND category = ?
     private static final String sTournamentParticipantsWithCategorySelection =
-            CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME +
+            TABLE_NAME +
             "." + CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_TOURNAMENT_YEAR + " = ? AND " +
             "." + CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY + " = ?";
 
     // tournament.year = ? AND category = ? AND pool = ?
     private static final String sTournamentParticipantsWithCategoryWithPoolNameSelection =
-            CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME +
+            TABLE_NAME +
                     "." + CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_TOURNAMENT_YEAR + " = ? AND " +
                     "." + CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY + " = ?" +
                     "." + CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_POOL + " = ?";
@@ -92,7 +96,7 @@ public class CJTProvider extends ContentProvider {
 
     private Cursor getTournamentParticipants(@NonNull Uri uri, @NonNull String[] projection, @NonNull String selection, @NonNull String[] selectionArgs, @Nullable String sortOrder) {
         return mOpenHelper.getReadableDatabase().query(
-                CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME,
+                TABLE_NAME,
                 projection,
                 selection,
                 selectionArgs,
@@ -120,16 +124,113 @@ public class CJTProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        Uri returnUri;
+
+        switch (match) {
+            case PARTICIPANTS:
+            case PARTICIPANTS_WITH_YEAR:
+            case PARTICIPANTS_WITH_YEAR_CATEGORY:
+            case PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME:
+                normalizeDate(values);
+                long _id = db.insert(TABLE_NAME, null, values);
+                if (_id > 0) {
+                    returnUri = buildParticipantUriWith(_id);
+                } else {
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                }
+                break;
+            default:
+                throw new android.database.SQLException("Failed to insert row into " + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+
+        return returnUri;
     }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        int rowsDeleted;
+
+        switch (match) {
+            case PARTICIPANTS:
+            case PARTICIPANTS_WITH_YEAR:
+            case PARTICIPANTS_WITH_YEAR_CATEGORY:
+            case PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME:
+                rowsDeleted = db.delete(TABLE_NAME, selection, selectionArgs);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        if (rowsDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsDeleted;
+    }
+
+    private void normalizeDate(ContentValues values) {
+        // normalize the date value
+        if (values.containsKey(COLUMN_NAME_DOB)) {
+            long dateValue = values.getAsLong(COLUMN_NAME_DOB);
+            values.put(COLUMN_NAME_DOB, Long.valueOf(dateValue));
+        }
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        int rowsImpacted;
+
+        switch (match) {
+            case PARTICIPANTS:
+            case PARTICIPANTS_WITH_YEAR:
+            case PARTICIPANTS_WITH_YEAR_CATEGORY:
+            case PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME:
+                rowsImpacted = db.update(TABLE_NAME, values, selection, selectionArgs);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (rowsImpacted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsImpacted;
+    }
+
+    @Override
+    public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case PARTICIPANTS:
+            case PARTICIPANTS_WITH_YEAR:
+            case PARTICIPANTS_WITH_YEAR_CATEGORY:
+            case PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME:
+                db.beginTransaction();
+                int returnCount = 0;
+                try {
+                    for (ContentValues value : values) {
+                        normalizeDate(value);
+                        long _id = db.insert(CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME, null, value);
+                        if (_id != -1) {
+                            returnCount++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+                getContext().getContentResolver().notifyChange(uri, null);
+                return returnCount;
+            default:
+                return super.bulkInsert(uri, values);
+        }
     }
 }
