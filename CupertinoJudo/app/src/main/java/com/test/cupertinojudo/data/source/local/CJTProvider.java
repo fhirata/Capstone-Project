@@ -9,9 +9,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.CATEGORY;
 import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.CONTENT_AUTHORITY;
 import static com.test.cupertinojudo.data.source.local.CJTPersistenceContract.PATH_TOURNAMENT;
@@ -30,7 +27,14 @@ public class CJTProvider extends ContentProvider {
     static final int PARTICIPANTS_WITH_YEAR_CATEGORY = 102;
     static final int PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME = 103;
 
+    // TODO: Using this for GROUP BY feature for retrieving categories and pools
     private static final SQLiteQueryBuilder sTournamentQueryBuilder;
+    static {
+        sTournamentQueryBuilder = new SQLiteQueryBuilder();
+
+        sTournamentQueryBuilder.setTables(
+                CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME);
+    }
 
     // tournament.year = ?
     private static final String sTournamentParticipantsSelection =
@@ -62,34 +66,33 @@ public class CJTProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        return false;
+        mOpenHelper = new CJTDbHelper(getContext());
+        return true;
     }
 
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        Cursor retCursor;
-        switch (sUriMatcher.match(uri)) {
 
+        Cursor retCursor;
+
+        switch (sUriMatcher.match(uri)) {
             case PARTICIPANTS:
-                retCursor = getCurrentTournamentParticipants(uri, projection, sortOrder);
-                break;
             case PARTICIPANTS_WITH_YEAR:
-                retCursor = getCurrentTournamentParticipantsByYear(uri, projection, selection, selectionArgs, sortOrder);
-                break;
             case PARTICIPANTS_WITH_YEAR_CATEGORY:
-                retCursor = getCurrentTournamentParticipants(uri, projection, sortOrder);
-                break;
             case PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME:
-                retCursor = getCurrentTournamentParticipants(uri, projection, sortOrder);
+                retCursor = getTournamentParticipants(uri, projection, selection, selectionArgs, sortOrder);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri:" + uri);
         }
+
         retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+
         return retCursor;
     }
-    private Cursor getCurrentTournamentParticipantsByYear(@NonNull Uri uri, @NonNull String[] projection, @NonNull String selection, @NonNull String[] selectionArgs, @Nullable String sortOrder) {
+
+    private Cursor getTournamentParticipants(@NonNull Uri uri, @NonNull String[] projection, @NonNull String selection, @NonNull String[] selectionArgs, @Nullable String sortOrder) {
         return mOpenHelper.getReadableDatabase().query(
                 CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME,
                 projection,
@@ -100,17 +103,20 @@ public class CJTProvider extends ContentProvider {
                 sortOrder
         );
     }
-
-    private Cursor getCurrentTournamentParticipants(@NonNull Uri uri, @NonNull String[] projection, @Nullable String sortOrder) {
-        String currentYear = currentYearDateFormat.format(today);
-
-        return sTournamentParticipantsSelection.
-    }
-
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+        switch(match) {
+            case PARTICIPANTS: // current year
+            case PARTICIPANTS_WITH_YEAR:
+            case PARTICIPANTS_WITH_YEAR_CATEGORY:
+                return CJTPersistenceContract.CJudoParticipantEntry.CONTENT_PARTICIPANTS_TYPE;
+            case PARTICIPANTS_WITH_YEAR_CATEGORY_POOLNAME:
+                return CJTPersistenceContract.CJudoParticipantEntry.CONTENT_PARTICIPANT_ITEM_TYPE;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
     }
 
     @Nullable

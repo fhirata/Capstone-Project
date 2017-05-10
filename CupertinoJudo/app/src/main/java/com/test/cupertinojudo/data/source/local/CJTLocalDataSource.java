@@ -24,7 +24,7 @@ public class CJTLocalDataSource implements CJTDataSource {
 
     @Override
     public void getCategories(@NonNull int year, @NonNull GetCategoryCallback callback) {
-
+        String currentYear = currentYearDateFormat.format(today);
     }
 
     @Override
