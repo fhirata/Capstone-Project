@@ -1,4 +1,4 @@
-package com.test.cupertinojudo.tournament.venue;
+package com.test.cupertinojudo.tournament.schedule;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,18 +16,18 @@ import com.test.cupertinojudo.R;
  * Created by fabiohh on 5/8/17.
  */
 
-public class CJudoTournamentVenueFragment extends Fragment implements CJudoTournamentVenueContract.ViewInterface {
+public class CJTScheduleFragment extends Fragment implements CJTScheduleContract.ViewInterface {
     private WebView mWebView;
-    private CJudoTournamentVenueContract.PresenterInterface mPresenterInterface;
+    private CJTScheduleContract.Presenter mPresenter;
 
-    public static CJudoTournamentVenueFragment newInstance() {
-        return new CJudoTournamentVenueFragment();
+    public static CJTScheduleFragment newInstance() {
+        return new CJTScheduleFragment();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenterInterface.start();
+        mPresenter.start();
     }
 
     @Override
@@ -39,9 +39,9 @@ public class CJudoTournamentVenueFragment extends Fragment implements CJudoTourn
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_tournament_venue, container, false);
+        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_tournament_schedule, container, false);
 
-        mWebView = (WebView) viewGroup.findViewById(R.id.tournament_venue_webview);
+        mWebView = (WebView) viewGroup.findViewById(R.id.tournament_schedule_webview);
 
         Toolbar toolbar = (Toolbar) viewGroup.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -50,12 +50,13 @@ public class CJudoTournamentVenueFragment extends Fragment implements CJudoTourn
         return viewGroup;
     }
 
-    public void loadVenue(String url) {
+    public void loadSchedule(String url) {
         mWebView.loadUrl(url);
     }
 
     @Override
-    public void setPresenter(CJudoTournamentVenueContract.PresenterInterface presenterInterface) {
-        mPresenterInterface = presenterInterface;
+    public void setPresenter(CJTScheduleContract.Presenter presenter) {
+        mPresenter = presenter;
     }
+
 }

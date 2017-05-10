@@ -11,11 +11,11 @@ import android.view.ViewGroup;
  * Lists the participats of a single pool
  */
 
-public class CJudoPoolFragment extends Fragment implements CJudoPoolContract.ViewInterface {
-    private CJudoPoolContract.Presenter mPresenter;
+public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInterface {
+    private CJTPoolContract.Presenter mPresenter;
 
-    public static CJudoPoolFragment newInstance() {
-        return new CJudoPoolFragment();
+    public static CJTPoolFragment newInstance() {
+        return new CJTPoolFragment();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CJudoPoolFragment extends Fragment implements CJudoPoolContract.Vie
     }
 
     @Override
-    public void setPresenter(CJudoPoolContract.Presenter presenter) {
+    public void setPresenter(CJTPoolContract.Presenter presenter) {
         mPresenter = presenter;
     }
 }

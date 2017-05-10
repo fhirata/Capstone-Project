@@ -1,14 +1,15 @@
-package com.test.cupertinojudo.tournament.pools;
+package com.test.cupertinojudo.tournament.schedule;
 
 import com.test.cupertinojudo.BasePresenterInterface;
 import com.test.cupertinojudo.BaseViewInterface;
 
 /**
- * Created by fabiohh on 5/9/17.
+ * Created by fabiohh on 5/8/17.
  */
 
-public interface CJudoPoolContract {
+interface CJTScheduleContract {
     interface ViewInterface extends BaseViewInterface<Presenter> {
+        void loadSchedule(String url);
     }
 
     interface Presenter extends BasePresenterInterface {

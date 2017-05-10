@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,13 +21,13 @@ import com.test.cupertinojudo.data.models.TournamentPool;
  * For a given category, list all the available pools
  */
 
-public class CJudoTournamentCategoryFragment extends Fragment implements CJudoTournamentCategoryContract.ViewInterface {
-    CJudoTournamentCategoryContract.Presenter mPresenterInterface;
+public class CJTCategoryFragment extends Fragment implements CJTCategoryContract.ViewInterface {
+    CJTCategoryContract.Presenter mPresenterInterface;
     RecyclerView mCategoryRecyclerview;
     CJudoTournamentCategoryAdapter mTournamentCategoryAdapter;
 
-    public static CJudoTournamentCategoryFragment newInstance() {
-        return new CJudoTournamentCategoryFragment();
+    public static CJTCategoryFragment newInstance() {
+        return new CJTCategoryFragment();
     }
 
     protected PoolsItemListener mPoolsItemListener = new PoolsItemListener() {
@@ -39,7 +38,7 @@ public class CJudoTournamentCategoryFragment extends Fragment implements CJudoTo
     };
 
     @Override
-    public void setPresenter(CJudoTournamentCategoryContract.Presenter presenter) {
+    public void setPresenter(CJTCategoryContract.Presenter presenter) {
         mPresenterInterface = presenter;
     }
 
@@ -53,7 +52,7 @@ public class CJudoTournamentCategoryFragment extends Fragment implements CJudoTo
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mTournamentCategoryAdapter = new CJudoTournamentCategoryAdapter(getContext(), mPoolsItemListener);
+        mTournamentCategoryAdapter = new CJudoTournamentCategoryAdapter(getContext(), null, mPoolsItemListener);
     }
 
     @Nullable
@@ -72,35 +71,38 @@ public class CJudoTournamentCategoryFragment extends Fragment implements CJudoTo
         return view;
     }
 
+    @Override
+    public void showPools(Cursor poolsCursor) {
+        mTournamentCategoryAdapter.swapCursor(poolsCursor);
+    }
+
     public interface PoolsItemListener {
         void onPoolsItemClick(int categoryId);
     }
 
-    private static class CJudoTournamentCategoryAdapter extends CursorAdapter {
+    private static class CJudoTournamentCategoryAdapter extends CursorRecyclerViewAdapter<CJudoTournamentCategoryAdapter.ViewHolder> {
         private PoolsItemListener mPoolsItemListener;
+        Cursor mCursor;
 
-        public CJudoTournamentCategoryAdapter(Context context, PoolsItemListener poolsItemListener) {
-            super(context, null, 0);
+        public CJudoTournamentCategoryAdapter(Context context, Cursor cursor, PoolsItemListener poolsItemListener) {
+            super(context, cursor);
             mPoolsItemListener = poolsItemListener;
+            mCursor = cursor;
         }
 
         @Override
-        public View newView(Context context, Cursor cursor, ViewGroup parent) {
-            View view = LayoutInflater.from(context).inflate(R.layout.pool_item, parent, false);
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pool_item, parent, false);
+            ViewHolder viewHolder = new ViewHolder(itemView);
 
-            ViewHolder viewHolder = new ViewHolder(view);
-            view.setTag(viewHolder);
-
-            return view;
+            return viewHolder;
         }
 
         @Override
-        public void bindView(View view, Context context, Cursor cursor) {
-            ViewHolder viewHolder = (ViewHolder) view.getTag();
-
+        public void onBindViewHolder(ViewHolder holder, Cursor cursor) {
             final TournamentPool tournamentPool = TournamentPool.from(cursor);
-            viewHolder.mTitle.setText(tournamentPool.getPoolName());
-            viewHolder.mRowView.setOnClickListener(new View.OnClickListener() {
+            holder.mTitle.setText(tournamentPool.getPoolName());
+            holder.mRowView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mPoolsItemListener.onPoolsItemClick(tournamentPool.getCategoryId());
@@ -108,11 +110,21 @@ public class CJudoTournamentCategoryFragment extends Fragment implements CJudoTo
             });
         }
 
-        public static class ViewHolder {
+        @Override
+        public int getItemCount() {
+            if (null == mCursor) {
+                return 0;
+            }
+
+            return mCursor.getCount();
+        }
+
+        public static class ViewHolder extends RecyclerView.ViewHolder{
             public final View mRowView;
             public final TextView mTitle;
 
             public ViewHolder(View view) {
+                super(view);
                 mRowView = view;
                 mTitle = (TextView) view.findViewById(R.id.pools_textview);
             }

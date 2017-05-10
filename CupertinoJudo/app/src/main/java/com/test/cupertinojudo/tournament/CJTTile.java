@@ -6,12 +6,12 @@ import android.graphics.drawable.Drawable;
  * Created by fabiohh on 4/30/17.
  */
 
-public class CJudoTournamentTile {
+public class CJTTile {
     private String mDescription;
     private Drawable mIcon;
     private int mId;
 
-    public CJudoTournamentTile(String description, Drawable icon, int id) {
+    public CJTTile(String description, Drawable icon, int id) {
         mDescription = description;
         mIcon = icon;
         mId = id;

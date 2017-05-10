@@ -20,14 +20,14 @@ import java.util.List;
  * Created by fabiohh on 4/23/17.
  */
 
-public class CJudoTournamentFragment extends Fragment implements CJudoTournamentContract.ViewInterface {
-    public static final String FRAGMENT_TAG = "CJudoTournamentFragment";
-    private CJudoTournamentGridViewAdapter mGridviewAdapter;
+public class CJTFragment extends Fragment implements CJTContract.ViewInterface {
+    public static final String FRAGMENT_TAG = "CJTFragment";
+    private CJTGridViewAdapter mGridviewAdapter;
     private GridView mGridView;
-    private CJudoTournamentContract.Presenter mPresenter;
+    private CJTContract.Presenter mPresenter;
 
-    public static CJudoTournamentFragment newInstance() {
-        return new CJudoTournamentFragment();
+    public static CJTFragment newInstance() {
+        return new CJTFragment();
     }
 
     @Override
@@ -48,20 +48,20 @@ public class CJudoTournamentFragment extends Fragment implements CJudoTournament
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        List<CJudoTournamentTile> tournamentTiles = new ArrayList<>();
+        List<CJTTile> tournamentTiles = new ArrayList<>();
         try {
             TypedArray icons = getResources().obtainTypedArray(R.array.icons);
             String[] titles = getResources().getStringArray(R.array.title);
             int[] ids = getResources().getIntArray(R.array.tile_ids);
 
             for (int i = 0; i < icons.length(); i++) {
-                tournamentTiles.add(new CJudoTournamentTile(titles[i], icons.getDrawable(i), ids[i]));
+                tournamentTiles.add(new CJTTile(titles[i], icons.getDrawable(i), ids[i]));
             }
         } catch (Resources.NotFoundException ResNotFoundException) {
             Log.e("Adapter", ResNotFoundException.getMessage() );
         }
 
-        mGridviewAdapter = new CJudoTournamentGridViewAdapter(mPresenter, tournamentTiles);
+        mGridviewAdapter = new CJTGridViewAdapter(mPresenter, tournamentTiles);
 
         mGridView.setAdapter(mGridviewAdapter);
     }
@@ -73,7 +73,7 @@ public class CJudoTournamentFragment extends Fragment implements CJudoTournament
     }
 
     @Override
-    public void setPresenter(CJudoTournamentContract.Presenter presenter) {
+    public void setPresenter(CJTContract.Presenter presenter) {
         mPresenter = presenter;
     }
 

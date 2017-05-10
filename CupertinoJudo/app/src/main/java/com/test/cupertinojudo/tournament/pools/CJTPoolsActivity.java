@@ -7,13 +7,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.test.cupertinojudo.R;
+import com.test.cupertinojudo.data.source.CJTRepository;
+import com.test.cupertinojudo.data.source.local.CJTLocalDataSource;
+import com.test.cupertinojudo.data.source.remote.CJTDataSource;
 
 /**
- * Created by fabiohh on 5/9/17.
+ *
  */
 
-public class CJudoTournamentPoolsActivity extends AppCompatActivity implements CJudoTournamentCategoryContract.ActivityInterface {
-    private CJudoTournamentCategoryFragment mCategoryFragment;
+public class CJTPoolsActivity extends AppCompatActivity implements CJTCategoryContract.ActivityInterface {
+    private CJTCategoryFragment mCategoryFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,9 +24,10 @@ public class CJudoTournamentPoolsActivity extends AppCompatActivity implements C
 
         setContentView(R.layout.activity_pools);
 
-        CJudoTournamentCategoryPresenter categoryPresenter = new CJudoTournamentCategoryPresenter(this);
+        CJTCategoryPresenter categoryPresenter = new CJTCategoryPresenter(this, mCategoryFragment,
+                CJTRepository.getInstance(CJTLocalDataSource.getInstance(), CJTDataSource.getInstance()));
 
-        mCategoryFragment = CJudoTournamentCategoryFragment.newInstance();
+        mCategoryFragment = CJTCategoryFragment.newInstance();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();

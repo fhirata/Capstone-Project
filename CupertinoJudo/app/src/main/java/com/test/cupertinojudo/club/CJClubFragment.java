@@ -14,10 +14,10 @@ import com.test.cupertinojudo.R;
  * Created by fabiohh on 4/23/17.
  */
 
-public class CJudoClubFragment extends Fragment {
-    public static final String FRAGMENT_TAG = "CJudoClubFragment";
-    public static CJudoClubFragment newInstance() {
-        return new CJudoClubFragment();
+public class CJClubFragment extends Fragment {
+    public static final String FRAGMENT_TAG = "CJClubFragment";
+    public static CJClubFragment newInstance() {
+        return new CJClubFragment();
     }
 
     @Override
