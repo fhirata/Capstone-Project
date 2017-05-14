@@ -1,4 +1,4 @@
-package com.test.cupertinojudo.tournament.pools;
+package com.test.cupertinojudo.tournament.categories;
 
 import android.database.Cursor;
 
@@ -6,19 +6,21 @@ import com.test.cupertinojudo.BasePresenterInterface;
 import com.test.cupertinojudo.BaseViewInterface;
 
 /**
- * Created by fabiohh on 5/9/17.
+ * Created by fabiohh on 5/13/17.
  */
 
-public interface CJTCategoryContract {
+public interface CJTDetailParticipantContract {
     interface Presenter extends BasePresenterInterface {
-        void handlePoolsItemClick(int category);
+
     }
 
     interface ViewInterface extends BaseViewInterface<Presenter> {
-        void showPools(Cursor poolsCursor);
+        void loadParticipant(Cursor participant);
+        void setLoadingIndicator(boolean enable);
+
     }
 
     interface ActivityInterface {
-        void handlePoolsItemClick(int categoryId);
+        void showError(int messageId);
     }
 }

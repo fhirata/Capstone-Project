@@ -1,55 +1,206 @@
 package com.test.cupertinojudo.data.models;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import com.test.cupertinojudo.data.source.local.CJTPersistenceContract;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by fabiohh on 5/9/17.
- */
-
 public class Participant {
-    private String mFirst;
-    private String mLast;
-    private String mFullName;
-    private String mPoolName;
-    private String mClub;
-    private Date mDOB;
-    private int mWeight;
-    private String mBelt;
-    private String mCategory;
 
-    public String getFirst() {
-        return mFirst;
+    @SerializedName("Last Name")
+    @Expose
+    private String mLastName;
+    @SerializedName("First Name")
+    @Expose
+    private String mFirstName;
+    @SerializedName("DOB")
+    @Expose
+    private String mDOB;
+    @SerializedName("Club")
+    @Expose
+    private String mClub;
+    @SerializedName("Belt")
+    @Expose
+    private String mBelt;
+    @SerializedName("Division")
+    @Expose
+    private String mDivision;
+    @SerializedName("Weight")
+    @Expose
+    private Integer mWeight;
+    @SerializedName("Pool")
+    @Expose
+    private String mPool;
+    // Transient to avoid being included in the json by gson
+    private transient int mTournamentYear;
+    private transient Date mDateDOB;
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+    private transient int mId;
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Participant() {
     }
 
-    public String getLast() {
-        return mLast;
+    /**
+     *
+     * @param mLastName
+     * @param weight
+     * @param division
+     * @param mPool
+     * @param club
+     * @param mBelt
+     * @param mFirstName
+     * @param mDOB
+     */
+    public Participant(String mLastName, String mFirstName, String mDOB, String club, String mBelt, String division, Integer weight, String mPool) {
+        super();
+        mLastName = mLastName;
+        mFirstName = mFirstName;
+        mDOB = mDOB;
+        mClub = club;
+        mBelt = mBelt;
+        mDivision = division;
+        mWeight = weight;
+        mPool = mPool;
+    }
+
+    public String getLastName() {
+        return mLastName;
+    }
+
+    public void setLastName(String lastName) {
+        mLastName = lastName;
+    }
+
+    public String getFirstName() {
+        return mFirstName;
+    }
+
+    public void setFirstName(String firstName) {
+        mFirstName = firstName;
+    }
+
+    public String getDOB() {
+        return mDOB;
+    }
+
+    public Date getDateDOB() {
+        return mDateDOB;
+    }
+    
+    public void setId(int id) {
+        mId = id;
+    }
+    
+    public int getId() {
+        return mId;
     }
 
     public String getFullName() {
-        return mFullName;
+        return mFirstName + " " + mLastName;
+    }
+    /**
+     * sestDOB will convert from regular string to Date Object
+     * @param dOB - expecting "12/2/2016" like date
+     */
+    public void setDateDOB(String dOB) {
+        mDOB = dOB;
+        try {
+            mDateDOB = sDateFormat.parse(dOB);
+        } catch (ParseException parseException) {
+            // Log error could not parse
+        }
     }
 
-    public String getPoolName() {
-        return mPoolName;
+    public String getDate() {
+        return sDateFormat.format(mDateDOB);
     }
 
     public String getClub() {
         return mClub;
     }
 
-    public Date getDOB() {
-        return mDOB;
-    }
-
-    public int getWeight() {
-        return mWeight;
+    public void setClub(String club) {
+        mClub = club;
     }
 
     public String getBelt() {
         return mBelt;
     }
 
-    public String getCategory() {
-        return mCategory;
+    public void setBelt(String belt) {
+        mBelt = belt;
+    }
+
+    public String getDivision() {
+        return mDivision;
+    }
+
+    public void setDivision(String division) {
+        mDivision = division;
+    }
+
+    public Integer getWeight() {
+        return mWeight;
+    }
+
+    public void setWeight(Integer weight) {
+        mWeight = weight;
+    }
+
+    public String getPool() {
+        return mPool;
+    }
+
+    public void setPool(String pool) {
+        mPool = pool;
+    }
+
+    public int getTournamentYear() {
+        return mTournamentYear;
+    }
+
+    public void setTournamentYear(int mTournamentYear) {
+        this.mTournamentYear = mTournamentYear;
+    }
+
+    public static Participant from(Cursor cursor) {
+        Participant participant = new Participant(
+                cursor.getString(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_LAST)),
+                cursor.getString(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_FIRST)),
+                cursor.getString(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_DOB)),
+                cursor.getString(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CLUB)),
+                cursor.getString(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_BELT)),
+                cursor.getString(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY)),
+                cursor.getInt(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_WEIGHT)),
+                cursor.getString(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_POOL))
+        );
+        participant.setId(cursor.getInt(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry._ID)));
+        return participant;
+    }
+    
+    public static ContentValues from(Participant participant) {
+
+        ContentValues values = new ContentValues();
+        values.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_TOURNAMENT_YEAR, participant.getTournamentYear());
+        values.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_FIRST, participant.getFirstName());
+        values.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_LAST, participant.getLastName());
+        values.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CLUB, participant.getClub());
+        values.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_BELT, participant.getBelt());
+        values.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_WEIGHT, participant.getWeight());
+        values.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_DOB, (participant.getDateDOB()).getTime()); // Make it a long before inserting into db
+        values.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY, participant.getDivision());
+        values.put(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_POOL, participant.getPool());
+
+        return values;
     }
 }

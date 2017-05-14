@@ -2,19 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?attr/listPreferredItemHeight">
+    android:layout_height="?attr/listPreferredItemHeight"
+    android:padding="10dp">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_group" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_group"
+        android:layout_gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/pools_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:paddingLeft="10dp"
         android:layout_gravity="center_vertical"
-        android:background="@color/colorAccent"
         android:textColor="@color/colorPrimaryDark"
         tools:text="Female Intermediate" />
 </LinearLayout>

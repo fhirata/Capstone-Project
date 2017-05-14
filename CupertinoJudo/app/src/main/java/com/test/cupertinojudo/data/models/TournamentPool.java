@@ -2,6 +2,8 @@ package com.test.cupertinojudo.data.models;
 
 import android.database.Cursor;
 
+import com.test.cupertinojudo.data.source.local.CJTPersistenceContract;
+
 import java.util.List;
 
 /**
@@ -39,6 +41,7 @@ public class TournamentPool {
 
     public static TournamentPool from(Cursor cursor) {
         // Assign cursor fields
+        String category = cursor.getString(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY));
         return new TournamentPool("Junior Males", 75, 85);
     }
 
