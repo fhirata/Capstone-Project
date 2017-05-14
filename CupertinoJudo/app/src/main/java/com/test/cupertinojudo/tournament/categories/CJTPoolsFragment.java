@@ -15,9 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.test.cupertinojudo.R;
-import com.test.cupertinojudo.data.models.TournamentCategory;
-
-import static android.R.attr.category;
+import com.test.cupertinojudo.data.models.TournamentPool;
 
 /**
  * For a given category, list all the available pools
@@ -34,8 +32,8 @@ public class CJTPoolsFragment extends Fragment implements CJTPoolsContract.ViewI
 
     protected PoolsItemListener mPoolsItemListener = new PoolsItemListener() {
         @Override
-        public void onPoolsItemClick(String poolName) {
-            mPresenterInterface.handlePoolItemClick(poolName);
+        public void onPoolsItemClick(String category, String poolName) {
+            mPresenterInterface.handlePoolItemClick(category, poolName);
         }
     };
 
@@ -59,6 +57,7 @@ public class CJTPoolsFragment extends Fragment implements CJTPoolsContract.ViewI
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.pools_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(mPresenterInterface.getCategory());
 
         mTournamentPoolsAdapter = new CJudoTournamentPoolsAdapter(getActivity(), null, mPoolsItemListener);
 
@@ -85,7 +84,7 @@ public class CJTPoolsFragment extends Fragment implements CJTPoolsContract.ViewI
     }
 
     public interface PoolsItemListener {
-        void onPoolsItemClick(String category);
+        void onPoolsItemClick(String category, String poolName);
     }
 
     private static class CJudoTournamentPoolsAdapter extends CursorRecyclerAdapter<CJudoTournamentPoolsAdapter.ViewHolder> {
@@ -106,12 +105,15 @@ public class CJTPoolsFragment extends Fragment implements CJTPoolsContract.ViewI
 
         @Override
         public void onBindViewHolderCursor(ViewHolder holder, Cursor cursor) {
-            final TournamentCategory category = TournamentCategory.from(cursor);
-            holder.mTitle.setText(category.getName());
+            final TournamentPool pool = TournamentPool.from(cursor);
+            Context context = holder.itemView.getContext();
+            String poolText = context.getString(R.string.pool_title);
+
+            holder.mTitle.setText(String.format(poolText,pool.getPoolName()));
             holder.mRowView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mPoolsItemListener.onPoolsItemClick(category.getName());
+                    mPoolsItemListener.onPoolsItemClick(pool.getCategory(), pool.getPoolName());
                 }
             });
         }

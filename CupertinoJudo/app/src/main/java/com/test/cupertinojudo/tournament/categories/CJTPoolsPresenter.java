@@ -26,8 +26,6 @@ public class CJTPoolsPresenter implements CJTPoolsContract.Presenter,
 
     @NonNull
     private final LoaderManager mLoaderManager;
-
-    private static final int TOURNAMENT_YEAR = 2016;
     private CJTPoolsContract.ViewInterface mViewInterface;
     private CJTPoolsContract.ActivityInterface mActivityInterface;
 
@@ -38,38 +36,44 @@ public class CJTPoolsPresenter implements CJTPoolsContract.Presenter,
     private final CJTLoaderProvider mLoaderProvider;
 
     String mCategory;
+    int mTournamentYear;
 
     public CJTPoolsPresenter(CJTPoolsContract.ActivityInterface activityInterface,
                                   CJTLoaderProvider loaderProvider,
                                   LoaderManager loaderManager,
                                   CJTPoolsContract.ViewInterface viewInterface,
-                                  CJTRepository repository, String category) {
+                                  CJTRepository repository, String category, int tournamentYear) {
         mActivityInterface = activityInterface;
         mLoaderProvider = loaderProvider;
         mLoaderManager = loaderManager;
         mViewInterface = viewInterface;
         mTournamentRepository = repository;
         mCategory = category;
+        if (tournamentYear != 0) {
+            mTournamentYear = tournamentYear;
+        }
     }
 
 
     @Override
     public void start() {
-        loadParticipants();
-    }
-
-    private void loadParticipants() {
         mViewInterface.setLoadingIndicator(true);
-        mTournamentRepository.getPools(TOURNAMENT_YEAR, mCategory, this);
+        mTournamentRepository.getPools(mTournamentYear, mCategory, this);
     }
 
     @Override
-    public void handlePoolItemClick(int year, String category, String poolName) {
-        mActivityInterface.handlePoolItemClick(TOURNAMENT_YEAR, category, poolName);
+    public void handlePoolItemClick(String category, String poolName) {
+        mActivityInterface.handlePoolItemClick(category, poolName);
     }
 
-    private void loadPools(Cursor data) {
-        mViewInterface.loadPools(data);
+    @Override
+    public String getCategory() {
+        return mCategory;
+    }
+
+    @Override
+    public int getTournamentYear() {
+        return mTournamentYear;
     }
 
     /**
@@ -77,7 +81,7 @@ public class CJTPoolsPresenter implements CJTPoolsContract.Presenter,
      */
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return mLoaderProvider.createTournamentPoolsLoader(TOURNAMENT_YEAR, mCategory);
+        return mLoaderProvider.createPoolsLoader(mTournamentYear, mCategory);
     }
 
     @Override

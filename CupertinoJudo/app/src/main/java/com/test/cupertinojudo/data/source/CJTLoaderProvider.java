@@ -28,19 +28,7 @@ public class CJTLoaderProvider {
         mContext = checkNotNull(context, "context cannot be null");
     }
 
-    public Loader<Cursor> createTournamentParticipantsLoader(int year, String category, String pool) {
-        return new CursorLoader(mContext,
-                CJTPersistenceContract.CJudoParticipantEntry.CONTENT_URI,
-                null,
-                CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_TOURNAMENT_YEAR + " = ? AND " +
-                        CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY + " = ? AND " +
-                CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_POOL + " = ?",
-                new String[]{String.valueOf(year), category, pool},
-                null
-        );
-    }
-
-    public Loader<Cursor> createTournamentCategoriesLoader(int year) {
+    public Loader<Cursor> createCategoriesLoader(int year) {
         return new CursorLoader(mContext,
                 CJTPersistenceContract.CJudoParticipantEntry.buildCategoriesUri(year),
                 null,
@@ -50,13 +38,25 @@ public class CJTLoaderProvider {
         );
     }
 
-    public Loader<Cursor> createTournamentPoolsLoader(int year, String categories) {
+    public Loader<Cursor> createPoolsLoader(int year, String categories) {
         return new CursorLoader(mContext,
-                CJTPersistenceContract.CJudoParticipantEntry.buildCategoriesUri(year),
+                CJTPersistenceContract.CJudoParticipantEntry.buildPoolsUri(year, categories),
                 null,
                 CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_TOURNAMENT_YEAR + " = ? AND " +
                 CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY + " = ?",
                 new String[]{String.valueOf(year), categories},
+                null
+        );
+    }
+
+    public Loader<Cursor> createPoolLoader(int year, String category, String pool) {
+        return new CursorLoader(mContext,
+                CJTPersistenceContract.CJudoParticipantEntry.buildPoolUri(year, category, pool),
+                null,
+                CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_TOURNAMENT_YEAR + " = ? AND " +
+                        CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY + " = ? AND " +
+                        CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_POOL + " = ?",
+                new String[]{String.valueOf(year), category, pool},
                 null
         );
     }

@@ -15,7 +15,7 @@
         android:id="@+id/pools_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:paddingLeft="10dp"
         android:layout_gravity="center_vertical"
         android:textColor="@color/colorPrimaryDark"

@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 
 import com.test.cupertinojudo.data.models.Participant;
 import com.test.cupertinojudo.data.models.TournamentCategory;
-import com.test.cupertinojudo.data.models.TournamentPool;
 
 import java.util.List;
 
@@ -32,17 +31,7 @@ public class CJTRepository implements CJTDataSource {
 
     @Override
     public void getParticipant(@NonNull int participantId, @NonNull final GetParticipantCallback callback) {
-        mLocalDataSource.getParticipant(participantId, new GetParticipantCallback() {
-            @Override
-            public void onParticipantLoaded(@NonNull Participant participant) {
-                callback.onParticipantLoaded(participant);
-            }
-
-            @Override
-            public void onDataNotAvailable(String errorMessage) {
-                callback.onDataNotAvailable(errorMessage);
-            }
-        });
+        callback.onParticipantLoaded(null);
     }
 
     @Override
@@ -91,32 +80,12 @@ public class CJTRepository implements CJTDataSource {
 
     @Override
     public void getPools(@NonNull int year, @NonNull String category, @NonNull final GetPoolsCallback callback) {
-        mLocalDataSource.getPools(year, category, new GetPoolsCallback() {
-            @Override
-            public void onPoolsLoaded(List<TournamentPool> pools) {
-                callback.onPoolsLoaded(pools);
-            }
-
-            @Override
-            public void onDataNotAvailable(String errorMessage) {
-                callback.onDataNotAvailable(errorMessage);
-            }
-        });
+        callback.onPoolsLoaded(null);
     }
 
     @Override
     public void getPool(@NonNull int year, @NonNull String category, @NonNull String poolName, @NonNull final GetPoolCallback callback) {
-        mLocalDataSource.getPool(year, category, poolName, new GetPoolCallback() {
-            @Override
-            public void onPoolLoaded(@NonNull TournamentPool pool) {
-                callback.onPoolLoaded(pool);
-            }
-
-            @Override
-            public void onDataNotAvailable(String errorMessage) {
-                callback.onDataNotAvailable(errorMessage);
-            }
-        });
+        callback.onPoolLoaded(null);
     }
 
     public interface LoadDataCallback {

@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.test.cupertinojudo.R;
@@ -21,14 +23,16 @@ import com.test.cupertinojudo.data.models.Participant;
  */
 
 public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInterface {
-    public static final String CATEGORY = "category";
-    public static final String POOL = "pool";
 
     private CJudoTournamentPoolAdapter mPoolAdapter;
     private CJTPoolContract.Presenter mPresenter;
-    private PoolItemListener mPoolItemListener;
-    private String mCategory;
-    private String mPoolName;
+    RecyclerView mPoolRecyclerview;
+    protected PoolItemListener mPoolItemListener = new PoolItemListener() {
+        @Override
+        public void onPoolItemClick(int participantId) {
+            mPresenter.handleParticipantItemClick(participantId);
+        }
+    };
 
     public interface PoolItemListener {
         void onPoolItemClick(int participantId);
@@ -36,13 +40,6 @@ public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInt
 
     public static CJTPoolFragment newInstance(String category, String pool) {
         CJTPoolFragment poolFragment = new CJTPoolFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putString(CATEGORY, category);
-        bundle.putString(POOL, pool);
-
-        poolFragment.setArguments(bundle);
-
         return poolFragment;
     }
 
@@ -50,10 +47,12 @@ public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInt
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+    }
 
-        Bundle bundle = getArguments();
-        mCategory = bundle.getString(CATEGORY);
-        mPoolName = bundle.getString(POOL);
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
     }
 
     @Nullable
@@ -61,11 +60,17 @@ public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInt
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_categories, container, false);
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.pools_toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(mPresenter.getPoolName());
 
-        mPoolAdapter = new CJudoTournamentPoolAdapter(getContext(), null, mPoolItemListener);
+        mPoolAdapter = new CJudoTournamentPoolAdapter(getActivity(), null, mPoolItemListener);
+
+        mPoolRecyclerview = (RecyclerView) view.findViewById(R.id.pools_recyclerview);
+        mPoolRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mPoolRecyclerview.setAdapter(mPoolAdapter);
+
         return view;
     }
 
@@ -77,7 +82,7 @@ public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInt
 
     @Override
     public void loadPool(Cursor cursor) {
-
+        mPoolAdapter.swapCursor(cursor);
     }
 
     @Override
@@ -85,11 +90,10 @@ public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInt
 
     }
 
-
     private static class CJudoTournamentPoolAdapter extends CursorRecyclerAdapter<CJudoTournamentPoolAdapter.ViewHolder> {
-        private CJTPoolFragment.PoolItemListener mPoolItemListener;
+        private PoolItemListener mPoolItemListener;
 
-        public CJudoTournamentPoolAdapter(Context context, Cursor cursor, CJTPoolFragment.PoolItemListener poolItemListener) {
+        public CJudoTournamentPoolAdapter(Context context, Cursor cursor, PoolItemListener poolItemListener) {
             super(cursor);
             mPoolItemListener = poolItemListener;
         }
@@ -106,23 +110,32 @@ public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInt
         public void onBindViewHolderCursor(ViewHolder holder, Cursor cursor) {
             final Participant participant = Participant.from(cursor);
             holder.mFullName.setText(participant.getFullName());
+            holder.mClub.setText((participant.getClub()));
             holder.mRowView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mPoolItemListener.onPoolItemClick(participant.getId());
                 }
             });
+            if (cursor.isFirst()) {
+                holder.mAvatarFrameLayout.setBackground(holder.itemView.getContext().getDrawable(R.drawable.ic_avatar_connector_last));
+            } else if (cursor.isLast()) {
+                holder.mAvatarFrameLayout.setBackground(holder.itemView.getContext().getDrawable(R.drawable.ic_avatar_connector_first));
+            }
         }
 
         static class ViewHolder extends RecyclerView.ViewHolder{
             public final View mRowView;
             public final TextView mFullName;
             public final TextView mClub;
+            public final FrameLayout mAvatarFrameLayout;
 
             public ViewHolder(View view) {
                 super(view);
+
                 mRowView = view;
-                mFullName = (TextView) view.findViewById(R.id.name_textview);
+                mAvatarFrameLayout = (FrameLayout) view.findViewById(R.id.avatar_framelayout);
+                mFullName = (TextView) view.findViewById(R.id.fullname_textview);
                 mClub = (TextView) view.findViewById(R.id.club_textview);
             }
         }

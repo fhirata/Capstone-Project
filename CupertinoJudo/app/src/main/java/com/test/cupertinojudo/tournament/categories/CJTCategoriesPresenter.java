@@ -27,9 +27,9 @@ public class CJTCategoriesPresenter implements CJTCategoriesContract.Presenter,
     @NonNull
     private final LoaderManager mLoaderManager;
 
-    private static final int TOURNAMENT_YEAR = 2016;
     private CJTCategoriesContract.ViewInterface mViewInterface;
     private CJTCategoriesContract.ActivityInterface mActivityInterface;
+    private int mTournamentYear;
 
     @NonNull
     private final CJTRepository mTournamentRepository;
@@ -41,23 +41,20 @@ public class CJTCategoriesPresenter implements CJTCategoriesContract.Presenter,
                                   CJTLoaderProvider loaderProvider,
                                   LoaderManager loaderManager,
                                   CJTCategoriesContract.ViewInterface viewInterface,
-                                  CJTRepository repository) {
+                                  CJTRepository repository, int tournamentYear) {
         mActivityInterface = activityInterface;
         mLoaderProvider = loaderProvider;
         mLoaderManager = loaderManager;
         mViewInterface = viewInterface;
         mTournamentRepository = repository;
+        mTournamentYear = tournamentYear;
     }
 
 
     @Override
     public void start() {
-        loadParticipants();
-    }
-
-    private void loadParticipants() {
         mViewInterface.setLoadingIndicator(true);
-        mTournamentRepository.getParticipants(TOURNAMENT_YEAR, this);
+        mTournamentRepository.getParticipants(mTournamentYear, this);
     }
 
     @Override
@@ -65,16 +62,12 @@ public class CJTCategoriesPresenter implements CJTCategoriesContract.Presenter,
         mActivityInterface.handlePoolsItemClick(category);
     }
 
-    private void loadCategories(Cursor data) {
-        mViewInterface.loadCategories(data);
-    }
-
     /**
      * LoaderManager.LoaderCallbacks implementations
      */
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return mLoaderProvider.createTournamentCategoriesLoader(TOURNAMENT_YEAR);
+        return mLoaderProvider.createCategoriesLoader(mTournamentYear);
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.test.cupertinojudo.BaseViewInterface;
 public interface CJTPoolContract {
     interface Presenter extends BasePresenterInterface {
         void handleParticipantItemClick(int participantId);
+        String getPoolName();
     }
 
     interface ViewInterface extends BaseViewInterface<Presenter> {

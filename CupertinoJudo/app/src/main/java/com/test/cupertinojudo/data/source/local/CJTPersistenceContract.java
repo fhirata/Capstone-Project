@@ -18,6 +18,7 @@ public class CJTPersistenceContract {
     public static final String PATH_TOURNAMENT = "tournament";
     public static final String PATH_CATEGORY = "category";
     public static final String PATH_POOL = "pool";
+    public static final String PATH_PARTICIPANT = "participant";
     private static final String CONTENT_SCHEME = "content://";
     public static final Uri BASE_CONTENT_URI = Uri.parse(CONTENT_SCHEME + CONTENT_AUTHORITY);
 
@@ -72,8 +73,15 @@ public class CJTPersistenceContract {
         public static final Uri POOLS_CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).appendPath(COLUMN_NAME_POOL).build();
 
-        public static Uri buildParticipantUriWith(long participantId) {
+        public static final Uri PARTICIPANT_CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).appendPath(PATH_PARTICIPANT).build();
+
+        public static Uri buildParticipantUri(long participantId) {
             return ContentUris.withAppendedId(CONTENT_URI, participantId);
+        }
+
+        public static Uri buildParticipantUriWith(long participantId) {
+            return PARTICIPANT_CONTENT_URI.buildUpon().appendPath(Long.toString(participantId)).build();
         }
 
         public static Uri buildCategoriesUri(int year) {
@@ -94,6 +102,10 @@ public class CJTPersistenceContract {
 
         public static Uri buildPoolUri(int year, String category, String poolName) {
             return CONTENT_URI.buildUpon().appendPath(Integer.toString(year)).appendEncodedPath(category).appendEncodedPath(poolName).build();
+        }
+
+        public static long getParticipantIdFromUri(Uri uri) {
+            return Long.parseLong(uri.getPathSegments().get(2));
         }
 
         public static int getYearFromUri(Uri uri) {

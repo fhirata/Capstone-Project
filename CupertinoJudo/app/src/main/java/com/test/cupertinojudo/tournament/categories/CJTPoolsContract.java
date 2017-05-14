@@ -11,7 +11,9 @@ import com.test.cupertinojudo.BaseViewInterface;
 
 public interface CJTPoolsContract {
     interface Presenter extends BasePresenterInterface {
-        void handlePoolItemClick(int year, String Category, String pool);
+        void handlePoolItemClick(String Category, String pool);
+        String getCategory();
+        int getTournamentYear();
     }
 
     interface ViewInterface extends BaseViewInterface<Presenter> {
@@ -21,7 +23,7 @@ public interface CJTPoolsContract {
     }
 
     interface ActivityInterface {
-        void handlePoolItemClick(int year, String Category, String pool);
+        void handlePoolItemClick(String Category, String pool);
         void showError(int messageId);
     }
 }

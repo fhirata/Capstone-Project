@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/pools_toolbar"
@@ -15,17 +16,32 @@
         app:titleTextColor="@color/colorPrimaryDark"
         tools:src="Player Information" />
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="center">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/name_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/listPreferredItemHeightSmall"
+            android:layout_weight="5"
+            android:gravity="bottom"
+            tools:text="John Smith"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_columnWeight="2"
+            android:layout_gravity="bottom" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_notifications_black_24dp" />
-    </FrameLayout>
+            android:id="@+id/avatar_imageview"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_participant"
+            android:layout_weight="1"
+            app:layout_gravity="center" />
+    </LinearLayout>
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/gridlayout_player"
@@ -35,28 +51,9 @@
         app:columnCount="2">
 
         <TextView
-            android:id="@+id/name_label"
-            android:layout_width="0dp"
-            android:layout_height="?attr/listPreferredItemHeightSmall"
-            android:text="Name"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill_horizontal" />
-
-        <TextView
-            android:id="@+id/name_textview"
-            android:layout_width="0dp"
-            android:layout_height="?attr/listPreferredItemHeightSmall"
-            android:text="John Smith"
-            android:textSize="24sp"
-            app:layout_columnWeight="2"
-            app:layout_gravity="fill_horizontal" />
-
-        <TextView
             android:id="@+id/club_label"
             android:layout_width="0dp"
-            android:layout_height="?attr/listPreferredItemHeightSmall"
+            android:layout_height="wrap_content"
             android:text="Club"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -66,8 +63,9 @@
         <TextView
             android:id="@+id/club_textview"
             android:layout_width="0dp"
-            android:layout_height="?attr/listPreferredItemHeightSmall"
-            android:text="Stanford"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/listPreferredItemHeightSmall"
+            tools:text="Stanford"
             android:textSize="24sp"
             app:layout_columnWeight="2"
             app:layout_gravity="fill_horizontal" />
@@ -87,8 +85,9 @@
         <TextView
             android:id="@+id/weight_textview"
             android:layout_width="0dp"
-            android:layout_height="?attr/listPreferredItemHeightSmall"
-            android:text="120lb"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/listPreferredItemHeightSmall"
+            tools:text="120lb"
             android:textSize="24sp"
             app:layout_columnWeight="2"
             app:layout_gravity="fill_horizontal" />
@@ -107,8 +106,9 @@
         <TextView
             android:id="@+id/belt_textview"
             android:layout_width="0dp"
-            android:layout_height="?attr/listPreferredItemHeightSmall"
-            android:text="Yellow"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/listPreferredItemHeightSmall"
+            tools:text="Yellow"
             android:textSize="24sp"
             app:layout_columnWeight="2"
             app:layout_gravity="fill_horizontal" />

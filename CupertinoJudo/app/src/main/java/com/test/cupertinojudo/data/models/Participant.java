@@ -61,16 +61,16 @@ public class Participant {
      * @param mFirstName
      * @param mDOB
      */
-    public Participant(String mLastName, String mFirstName, String mDOB, String club, String mBelt, String division, Integer weight, String mPool) {
+    public Participant(String lastName, String firstName, String dOB, String club, String belt, String division, Integer weight, String pool) {
         super();
-        mLastName = mLastName;
-        mFirstName = mFirstName;
-        mDOB = mDOB;
+        mLastName = lastName;
+        mFirstName = firstName;
+        mDOB = dOB;
         mClub = club;
-        mBelt = mBelt;
+        mBelt = belt;
         mDivision = division;
         mWeight = weight;
-        mPool = mPool;
+        mPool = pool;
     }
 
     public String getLastName() {

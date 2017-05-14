@@ -1,6 +1,5 @@
 package com.test.cupertinojudo.tournament.categories;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,8 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.test.cupertinojudo.R;
+import com.test.cupertinojudo.UnitsFormatterUtil;
+import com.test.cupertinojudo.data.models.Participant;
 
 /**
  * Created by fabiohh on 5/13/17.
@@ -18,7 +21,12 @@ import com.test.cupertinojudo.R;
 
 public class CJTDetailParticipantFragment extends Fragment implements CJTDetailParticipantContract.ViewInterface {
     CJTDetailParticipantContract.Presenter mPresenterInterface;
-    public static String PARTICIPANT = "participant";
+
+    private TextView mNameTextView;
+    private ImageView mParticipantImageView;
+    private TextView mClubTextView;
+    private TextView mBeltTextView;
+    private TextView mWeightTextView;
 
     public static CJTDetailParticipantFragment newInstance() {
         return new CJTDetailParticipantFragment();
@@ -43,13 +51,23 @@ public class CJTDetailParticipantFragment extends Fragment implements CJTDetailP
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.pools_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(R.string.participant_screen_title);
+
+        mNameTextView = (TextView) view.findViewById(R.id.name_textview);
+        mParticipantImageView = (ImageView) view.findViewById(R.id.avatar_imageview);
+        mClubTextView = (TextView) view.findViewById(R.id.club_textview);
+        mBeltTextView = (TextView) view.findViewById(R.id.belt_textview);
+        mWeightTextView = (TextView) view.findViewById(R.id.weight_textview);
 
         return view;
     }
 
     @Override
-    public void loadParticipant(Cursor participant) {
-
+    public void loadParticipant(Participant participant) {
+        mNameTextView.setText(participant.getFullName());
+        mClubTextView.setText(participant.getClub());
+        mBeltTextView.setText(participant.getBelt());
+        mWeightTextView.setText(UnitsFormatterUtil.formatWeight(getContext(), participant.getWeight()));
     }
 
     @Override
@@ -60,9 +78,5 @@ public class CJTDetailParticipantFragment extends Fragment implements CJTDetailP
     @Override
     public void setPresenter(CJTDetailParticipantContract.Presenter presenter) {
         mPresenterInterface = presenter;
-    }
-
-    public interface PoolsItemListener {
-        void onPoolsItemClick(String category);
     }
 }

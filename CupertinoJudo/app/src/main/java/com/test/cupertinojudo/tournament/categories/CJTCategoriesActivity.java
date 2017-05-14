@@ -19,6 +19,7 @@ public class CJTCategoriesActivity extends AppCompatActivity implements CJTCateg
 CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetailParticipantContract.ActivityInterface {
     private CJTCategoriesFragment mCategoryFragment;
     private CJTCategoriesPresenter mCategoryPresenter;
+    private static final int TOURNAMENT_YEAR = 2016;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +35,8 @@ CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetail
                 loaderProvider,
                 getSupportLoaderManager(),
                 mCategoryFragment,
-                Injection.provideTournamentRepository(this)
+                Injection.provideTournamentRepository(this),
+                TOURNAMENT_YEAR
                 );
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -54,12 +56,14 @@ CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetail
                 getSupportLoaderManager(),
                 poolsFragment,
                 Injection.provideTournamentRepository(this),
-                category
+                category,
+                TOURNAMENT_YEAR
         );
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.pools_container, poolsFragment);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.pools_container, poolsFragment);
         transaction.commit();
 
         poolsFragment.setPresenter(poolsPresenter);
@@ -67,7 +71,7 @@ CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetail
     }
 
     @Override
-    public void handlePoolItemClick(int year, String category, String pool) {
+    public void handlePoolItemClick(String category, String pool) {
         CJTPoolFragment poolFragment = CJTPoolFragment.newInstance(category, pool);
         CJTPoolPresenter poolPresenter = new CJTPoolPresenter(
                 this,
@@ -76,12 +80,14 @@ CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetail
                 poolFragment,
                 Injection.provideTournamentRepository(this),
                 category,
-                pool
+                pool,
+                TOURNAMENT_YEAR
         );
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.pools_container, poolFragment);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.pools_container, poolFragment);
         transaction.commit();
 
         poolFragment.setPresenter(poolPresenter);
@@ -101,7 +107,8 @@ CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetail
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.pools_container, participantFragment);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.pools_container, participantFragment);
         transaction.commit();
 
         participantFragment.setPresenter(participantPresenter);

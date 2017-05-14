@@ -1,9 +1,8 @@
 package com.test.cupertinojudo.tournament.categories;
 
-import android.database.Cursor;
-
 import com.test.cupertinojudo.BasePresenterInterface;
 import com.test.cupertinojudo.BaseViewInterface;
+import com.test.cupertinojudo.data.models.Participant;
 
 /**
  * Created by fabiohh on 5/13/17.
@@ -11,11 +10,10 @@ import com.test.cupertinojudo.BaseViewInterface;
 
 public interface CJTDetailParticipantContract {
     interface Presenter extends BasePresenterInterface {
-
     }
 
     interface ViewInterface extends BaseViewInterface<Presenter> {
-        void loadParticipant(Cursor participant);
+        void loadParticipant(Participant participant);
         void setLoadingIndicator(boolean enable);
 
     }

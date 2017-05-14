@@ -37,10 +37,10 @@ public class CJTDetailParticipantPresenter implements CJTDetailParticipantContra
     private int mParticipantId;
 
     public CJTDetailParticipantPresenter(CJTDetailParticipantContract.ActivityInterface activityInterface,
-                             CJTLoaderProvider loaderProvider,
-                             LoaderManager loaderManager,
+                                         CJTLoaderProvider loaderProvider,
+                                         LoaderManager loaderManager,
                                          CJTDetailParticipantContract.ViewInterface viewInterface,
-                             CJTRepository repository, int participantId) {
+                                         CJTRepository repository, int participantId) {
         mActivityInterface = activityInterface;
         mLoaderProvider = loaderProvider;
         mLoaderManager = loaderManager;
@@ -52,16 +52,8 @@ public class CJTDetailParticipantPresenter implements CJTDetailParticipantContra
 
     @Override
     public void start() {
-        loadParticipants();
-    }
-
-    private void loadParticipants() {
         mViewInterface.setLoadingIndicator(true);
         mTournamentRepository.getParticipant(mParticipantId, this);
-    }
-
-    private void loadParticipant(Cursor data) {
-        mViewInterface.loadParticipant(data);
     }
 
     /**
@@ -81,7 +73,8 @@ public class CJTDetailParticipantPresenter implements CJTDetailParticipantContra
                 onDataEmpty();
             }
         } else {
-            onDataNotAvailable();;
+            onDataNotAvailable();
+            ;
         }
     }
 
@@ -95,7 +88,7 @@ public class CJTDetailParticipantPresenter implements CJTDetailParticipantContra
      */
 
     @Override
-    public void onParticipantLoaded (Participant participant) {
+    public void onParticipantLoaded(Participant participant) {
         // We don't care about the result since the CursorLoader will load the data for us
         if (mLoaderManager.getLoader(PARTICIPANT_LOADER) == null) {
             mLoaderManager.initLoader(PARTICIPANT_LOADER, null, this);
@@ -117,7 +110,8 @@ public class CJTDetailParticipantPresenter implements CJTDetailParticipantContra
     @Override
     public void onDataLoaded(Cursor data) {
         mViewInterface.setLoadingIndicator(false);
-        mViewInterface.loadParticipant(data);
+        Participant participant = Participant.from(data);
+        mViewInterface.loadParticipant(participant);
     }
 
     @Override
