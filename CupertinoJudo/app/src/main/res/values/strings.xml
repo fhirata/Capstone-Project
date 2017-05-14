@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">CupertinoJudo</string>
     <string name="title_tournament">Tournament</string>
     <string name="title_club">Club</string>
@@ -87,4 +87,11 @@
     <string name="schedule">Schedule</string>
     <string name="tournament_pools">Tournament Pools</string>
     <string name="content_authority">com.test.cupertinojudo</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="format_full_friendly_date"><xliff:g id="day">%1$s</xliff:g>, <xliff:g id="date">%2$s</xliff:g></string>
+    <string name="pool_title">Pool <xliff:g id="pool">%1$s</xliff:g></string>
+    <string name="failed_to_load_data">Failed to Load data.</string>
+    <string name="participant_screen_title">Player Detail</string>
+    <string name="weight_in_pounds"> <xliff:g id="weight">%1$d</xliff:g> lbs</string>
 </resources>

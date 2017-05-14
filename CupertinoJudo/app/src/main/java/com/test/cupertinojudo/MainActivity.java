@@ -16,7 +16,7 @@ import com.test.cupertinojudo.notifications.CJudoNotificationsFragment;
 import com.test.cupertinojudo.tournament.CJTContract;
 import com.test.cupertinojudo.tournament.CJTFragment;
 import com.test.cupertinojudo.tournament.CJTPresenter;
-import com.test.cupertinojudo.tournament.pools.CJTPoolsActivity;
+import com.test.cupertinojudo.tournament.categories.CJTCategoriesActivity;
 import com.test.cupertinojudo.tournament.schedule.CJTScheduleFragment;
 import com.test.cupertinojudo.tournament.schedule.CJTSchedulePresenter;
 import com.test.cupertinojudo.tournament.venue.CJTVenueFragment;
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
 
     @Override
     public void handlePoolsClick() {
-        Intent intent = new Intent(this, CJTPoolsActivity.class);
+        Intent intent = new Intent(this, CJTCategoriesActivity.class);
         startActivity(intent);
     }
 

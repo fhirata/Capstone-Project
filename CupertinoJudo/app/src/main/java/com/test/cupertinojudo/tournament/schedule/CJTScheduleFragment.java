@@ -27,7 +27,9 @@ public class CJTScheduleFragment extends Fragment implements CJTScheduleContract
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        if (null != mPresenter) {
+            mPresenter.start();
+        }
     }
 
     @Override

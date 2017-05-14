@@ -1,6 +1,8 @@
 package com.test.cupertinojudo.data.models;
 
-import java.util.List;
+import android.database.Cursor;
+
+import com.test.cupertinojudo.data.source.local.CJTPersistenceContract;
 
 /**
  * Created by fabiohh on 5/9/17.
@@ -8,18 +10,17 @@ import java.util.List;
 
 public class TournamentCategory {
     private String mName;
-    private List<TournamentPool> mPools;
 
-    public TournamentCategory(String name, List<TournamentPool> pools) {
+    public TournamentCategory(String name) {
         mName = name;
-        mPools = pools;
     }
 
     public String getName() {
         return mName;
     }
 
-    public List<TournamentPool> getPools() {
-        return mPools;
+    public static TournamentCategory from(Cursor cursor) {
+        String category = cursor.getString(cursor.getColumnIndex(CJTPersistenceContract.CJudoParticipantEntry.COLUMN_NAME_CATEGORY));
+        return new TournamentCategory(category);
     }
 }

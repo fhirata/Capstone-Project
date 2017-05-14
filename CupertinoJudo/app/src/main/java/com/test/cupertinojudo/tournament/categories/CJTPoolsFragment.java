@@ -1,4 +1,4 @@
-package com.test.cupertinojudo.tournament.pools;
+package com.test.cupertinojudo.tournament.categories;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -21,73 +21,80 @@ import com.test.cupertinojudo.data.models.TournamentPool;
  * For a given category, list all the available pools
  */
 
-public class CJTCategoryFragment extends Fragment implements CJTCategoryContract.ViewInterface {
-    CJTCategoryContract.Presenter mPresenterInterface;
+public class CJTPoolsFragment extends Fragment implements CJTPoolsContract.ViewInterface {
+    CJTPoolsContract.Presenter mPresenterInterface;
     RecyclerView mCategoryRecyclerview;
-    CJudoTournamentCategoryAdapter mTournamentCategoryAdapter;
+    CJudoTournamentPoolsAdapter mTournamentPoolsAdapter;
 
-    public static CJTCategoryFragment newInstance() {
-        return new CJTCategoryFragment();
+    public static CJTPoolsFragment newInstance() {
+        return new CJTPoolsFragment();
     }
 
     protected PoolsItemListener mPoolsItemListener = new PoolsItemListener() {
         @Override
-        public void onPoolsItemClick(int category) {
-            mPresenterInterface.handlePoolsItemClick(category);
+        public void onPoolsItemClick(String category, String poolName) {
+            mPresenterInterface.handlePoolItemClick(category, poolName);
         }
     };
 
     @Override
-    public void setPresenter(CJTCategoryContract.Presenter presenter) {
-        mPresenterInterface = presenter;
-    }
-
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
-        mTournamentCategoryAdapter = new CJudoTournamentCategoryAdapter(getContext(), null, mPoolsItemListener);
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (null != mPresenterInterface) {
+            mPresenterInterface.start();
+        }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pools, container, false);
+        View view = inflater.inflate(R.layout.fragment_categories, container, false);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.pools_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(mPresenterInterface.getCategory());
+
+        mTournamentPoolsAdapter = new CJudoTournamentPoolsAdapter(getActivity(), null, mPoolsItemListener);
 
         mCategoryRecyclerview = (RecyclerView) view.findViewById(R.id.pools_recyclerview);
         mCategoryRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mCategoryRecyclerview.setAdapter(mTournamentCategoryAdapter);
+        mCategoryRecyclerview.setAdapter(mTournamentPoolsAdapter);
 
         return view;
     }
 
     @Override
-    public void showPools(Cursor poolsCursor) {
-        mTournamentCategoryAdapter.swapCursor(poolsCursor);
+    public void loadPools(Cursor cursor) {
+        mTournamentPoolsAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void setLoadingIndicator(boolean enable) {
+
+    }
+
+    @Override
+    public void setPresenter(CJTPoolsContract.Presenter presenter) {
+        mPresenterInterface = presenter;
     }
 
     public interface PoolsItemListener {
-        void onPoolsItemClick(int categoryId);
+        void onPoolsItemClick(String category, String poolName);
     }
 
-    private static class CJudoTournamentCategoryAdapter extends CursorRecyclerViewAdapter<CJudoTournamentCategoryAdapter.ViewHolder> {
+    private static class CJudoTournamentPoolsAdapter extends CursorRecyclerAdapter<CJudoTournamentPoolsAdapter.ViewHolder> {
         private PoolsItemListener mPoolsItemListener;
-        Cursor mCursor;
 
-        public CJudoTournamentCategoryAdapter(Context context, Cursor cursor, PoolsItemListener poolsItemListener) {
-            super(context, cursor);
+        public CJudoTournamentPoolsAdapter(Context context, Cursor cursor, PoolsItemListener poolsItemListener) {
+            super(cursor);
             mPoolsItemListener = poolsItemListener;
-            mCursor = cursor;
         }
 
         @Override
@@ -99,27 +106,21 @@ public class CJTCategoryFragment extends Fragment implements CJTCategoryContract
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, Cursor cursor) {
-            final TournamentPool tournamentPool = TournamentPool.from(cursor);
-            holder.mTitle.setText(tournamentPool.getPoolName());
+        public void onBindViewHolderCursor(ViewHolder holder, Cursor cursor) {
+            final TournamentPool pool = TournamentPool.from(cursor);
+            Context context = holder.itemView.getContext();
+            String poolText = context.getString(R.string.pool_title);
+
+            holder.mTitle.setText(String.format(poolText,pool.getPoolName()));
             holder.mRowView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mPoolsItemListener.onPoolsItemClick(tournamentPool.getCategoryId());
+                    mPoolsItemListener.onPoolsItemClick(pool.getCategory(), pool.getPoolName());
                 }
             });
         }
 
-        @Override
-        public int getItemCount() {
-            if (null == mCursor) {
-                return 0;
-            }
-
-            return mCursor.getCount();
-        }
-
-        public static class ViewHolder extends RecyclerView.ViewHolder{
+        static class ViewHolder extends RecyclerView.ViewHolder{
             public final View mRowView;
             public final TextView mTitle;
 
