@@ -52,7 +52,9 @@ public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInt
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        if (null != mPresenter) {
+            mPresenter.start();
+        }
     }
 
     @Nullable

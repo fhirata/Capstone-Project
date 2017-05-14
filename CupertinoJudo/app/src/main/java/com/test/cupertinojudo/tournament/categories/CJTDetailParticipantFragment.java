@@ -40,7 +40,9 @@ public class CJTDetailParticipantFragment extends Fragment implements CJTDetailP
     @Override
     public void onResume() {
         super.onResume();
-        mPresenterInterface.start();
+        if (null != mPresenterInterface) {
+            mPresenterInterface.start();
+        }
     }
 
     @Nullable

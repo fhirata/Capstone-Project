@@ -69,7 +69,9 @@ public class CJTFragment extends Fragment implements CJTContract.ViewInterface {
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        if (null != mPresenter) {
+            mPresenter.start();
+        }
     }
 
     @Override
