@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.test.cupertinojudo"
+        applicationId "com.cupertinojudo.android"
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
@@ -56,4 +56,9 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:retrofit-mock:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+    compile 'com.google.firebase:firebase-messaging:10.2.0'
+
 }
+
+apply plugin: 'com.google.gms.google-services'
