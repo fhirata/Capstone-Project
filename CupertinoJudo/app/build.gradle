@@ -57,3 +57,5 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit-mock:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

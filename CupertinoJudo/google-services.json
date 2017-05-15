@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1072014285055",
+    "firebase_url": "https://peaceful-parity-123202.firebaseio.com",
+    "project_id": "peaceful-parity-123202",
+    "storage_bucket": "peaceful-parity-123202.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072014285055:android:f1c69da1f3e39bf2",
+        "android_client_info": {
+          "package_name": "com.cupertinojudo.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072014285055-vdcf5pjesmlmaguk8vreqvkmldqhn20j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD7LSB0RPuIptTullvaGDuqsWVTfJmu8M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
