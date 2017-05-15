@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.format.Time;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,6 +13,8 @@ import java.util.Date;
  */
 
 public class DateFormatterUtil {
+    public static SimpleDateFormat sDateTimeFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy");;
+    public static SimpleDateFormat sRecentDateFormat = new SimpleDateFormat("EEE, MMM dd");
 
     static String formatDate(long dateInMillis) {
         Date date = new Date(dateInMillis);
@@ -88,6 +91,43 @@ public class DateFormatterUtil {
             // Otherwise, the format is just the day of the week (e.g "Wednesday".
             SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
             return dayFormat.format(dateInMillis);
+        }
+    }
+
+
+    public static String formatTimestamp(Date timestamp, Context context) {
+        Date currentDate = new Date();
+        long diff = currentDate.getTime() - timestamp.getTime();
+        long seconds = diff / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        long days = hours / 24;
+
+        if (days < 1 && hours < 1 && minutes < 1) {
+            return context.getResources().getString(R.string.just_now);
+        } else if (days < 1 && hours < 1) {
+            if (seconds <= 30) {
+                return String.format(context.getResources().getString(R.string.minutes_ago), minutes);
+            } else {
+                return String.format(context.getResources().getString(R.string.minutes_ago), minutes + 1);
+            }
+        } else if (days < 1) {
+            if (minutes <= 30) {
+                return String.format(context.getResources().getString(R.string.hours_ago), hours);
+            } else {
+                return String.format(context.getResources().getString(R.string.hours_ago), hours + 1);
+            }
+        } else if (days < 3) {
+            return String.format(context.getResources().getString(R.string.days_ago), days);
+        } else {
+            try {
+                Date convertedDate;
+                convertedDate = sDateTimeFormat.parse(timestamp.toString());
+                return sRecentDateFormat.format(convertedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 

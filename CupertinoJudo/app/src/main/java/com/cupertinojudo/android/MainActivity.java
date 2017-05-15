@@ -21,10 +21,14 @@ import com.cupertinojudo.android.tournament.schedule.CJTScheduleFragment;
 import com.cupertinojudo.android.tournament.schedule.CJTSchedulePresenter;
 import com.cupertinojudo.android.tournament.venue.CJTVenueFragment;
 import com.cupertinojudo.android.tournament.venue.CJTVenuePresenter;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity implements CJTContract.ActivityInterface {
+    public static final String NOTIFICATION_IDENTIFIER = "Notification";
+    public static final String NOTIFICATION_OBJECT = "notification_object";
+
     private BottomNavigationView mBottomNavigationView;
     private Vector<Fragment> mFragments;
     private final int MENU_ITEMS = 3;
@@ -59,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        // Firebase notification topic subscription
+        FirebaseMessaging.getInstance().subscribeToTopic(getString(R.string.notification_topic));
 
         mFragments = new Vector<>(MENU_ITEMS);
 
