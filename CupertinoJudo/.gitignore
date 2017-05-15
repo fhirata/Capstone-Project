@@ -47,5 +47,6 @@ captures/
 .externalNativeBuild
 
 # Google Services (e.g. APIs or Firebase)
-google-services.json
+# Adding invalid file for CI
+# google-services.json
 
