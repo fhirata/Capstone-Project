@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.cupertinojudo.android.club.CJClubFragment;
+import com.cupertinojudo.android.notifications.CJudoNotificationContract;
+import com.cupertinojudo.android.notifications.CJudoNotificationPresenter;
 import com.cupertinojudo.android.notifications.CJudoNotificationsFragment;
 import com.cupertinojudo.android.tournament.CJTContract;
 import com.cupertinojudo.android.tournament.CJTFragment;
@@ -25,7 +27,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Vector;
 
-public class MainActivity extends AppCompatActivity implements CJTContract.ActivityInterface {
+public class MainActivity extends AppCompatActivity implements CJTContract.ActivityInterface, CJudoNotificationContract.ActivityInterface {
     public static final String NOTIFICATION_IDENTIFIER = "Notification";
     public static final String NOTIFICATION_OBJECT = "notification_object";
 
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         if (null == notificationsFragment) {
             notificationsFragment = CJudoNotificationsFragment.newInstance();
         }
+        new CJudoNotificationPresenter(this, notificationsFragment, Injection.provideClubRepository(getApplicationContext()));
         mFragments.add(NOTIFICATIONS, notificationsFragment);
 
         if (null == savedInstanceState) {

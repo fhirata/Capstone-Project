@@ -12,7 +12,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.cupertinojudo.android.MainActivity;
 import com.cupertinojudo.android.R;
-import com.cupertinojudo.android.data.models.CJNotification;
+import com.cupertinojudo.android.data.models.CJudoNotification;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -28,17 +28,17 @@ public class CJFCMMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        CJNotification notification = parseReceivedFCMPayload(remoteMessage);
+        CJudoNotification notification = parseReceivedFCMPayload(remoteMessage);
 
         sendNotification(notification);
     }
 
-    private CJNotification parseReceivedFCMPayload(RemoteMessage remoteMessage) {
+    private CJudoNotification parseReceivedFCMPayload(RemoteMessage remoteMessage) {
         Map<String, String> messageData = remoteMessage.getData();
-        return new CJNotification(messageData.get("title"), messageData.get("body"), new Date());
+        return new CJudoNotification(messageData.get("title"), messageData.get("body"), new Date());
     }
 
-    private void sendNotification(CJNotification notification) {
+    private void sendNotification(CJudoNotification notification) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         if (prefs.getBoolean(getString(R.string.notification_prefs), true)) {

@@ -14,20 +14,20 @@ import java.util.Date;
  * CupertinoJudoNotification
  */
 
-public class CJNotification implements Parcelable {
+public class CJudoNotification implements Parcelable {
 
     private String mTitle;
     private String mBody;
     private boolean mSeen;
     private final Date mTimestamp;
 
-    public CJNotification(String title, String body, Date timestamp) {
+    public CJudoNotification(String title, String body, Date timestamp) {
         mTitle = title;
         mBody = body;
         mTimestamp = timestamp;
     }
 
-    public CJNotification() {
+    public CJudoNotification() {
         mTimestamp = null;
     }
 
@@ -63,7 +63,7 @@ public class CJNotification implements Parcelable {
         return null;
     }
 
-    public boolean getIfSeen() {
+    public boolean wasSeen() {
         return mSeen;
     }
 
@@ -90,18 +90,18 @@ public class CJNotification implements Parcelable {
         dest.writeInt(mSeen ? 1 : 0);
     }
 
-    public static final Parcelable.Creator<CJNotification> CREATOR
-            = new Parcelable.Creator<CJNotification>() {
-        public CJNotification createFromParcel(Parcel in) {
-            return new CJNotification(in);
+    public static final Parcelable.Creator<CJudoNotification> CREATOR
+            = new Parcelable.Creator<CJudoNotification>() {
+        public CJudoNotification createFromParcel(Parcel in) {
+            return new CJudoNotification(in);
         }
 
-        public CJNotification[] newArray(int size) {
-            return new CJNotification[size];
+        public CJudoNotification[] newArray(int size) {
+            return new CJudoNotification[size];
         }
     };
 
-    private CJNotification(Parcel in) {
+    private CJudoNotification(Parcel in) {
         mTimestamp = new Date(in.readLong());
         mTitle = in.readString();
         mBody = in.readString();
