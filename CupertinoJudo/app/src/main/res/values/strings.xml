@@ -86,7 +86,7 @@
     <string name="directions">Directions</string>
     <string name="schedule">Schedule</string>
     <string name="tournament_pools">Tournament Pools</string>
-    <string name="content_authority">com.test.cupertinojudo</string>
+    <string name="content_authority">com.cupertinojudo.android</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="format_full_friendly_date"><xliff:g id="day">%1$s</xliff:g>, <xliff:g id="date">%2$s</xliff:g></string>
