@@ -12,15 +12,14 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.cupertinojudo.android.R;
-import com.cupertinojudo.android.tournament.schedule.CJTScheduleFragment;
 
 
 public class CJTConcessionFragment extends Fragment implements CJTConcessionContract.ViewInterface {
     private WebView mWebView;
     private CJTConcessionContract.Presenter mPresenter;
 
-    public static CJTScheduleFragment newInstance() {
-        return new CJTScheduleFragment();
+    public static CJTConcessionFragment newInstance() {
+        return new CJTConcessionFragment();
     }
 
     @Override

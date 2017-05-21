@@ -17,6 +17,8 @@ import com.cupertinojudo.android.tournament.CJTContract;
 import com.cupertinojudo.android.tournament.CJTFragment;
 import com.cupertinojudo.android.tournament.CJTPresenter;
 import com.cupertinojudo.android.tournament.categories.CJTCategoriesActivity;
+import com.cupertinojudo.android.tournament.concession.CJTConcessionFragment;
+import com.cupertinojudo.android.tournament.concession.CJTConcessionPresenter;
 import com.cupertinojudo.android.tournament.schedule.CJTScheduleFragment;
 import com.cupertinojudo.android.tournament.schedule.CJTSchedulePresenter;
 import com.cupertinojudo.android.tournament.venue.CJTVenueFragment;
@@ -156,7 +158,11 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
 
     @Override
     public void handleConcessionClick() {
+        CJTConcessionFragment tournamentConcessionFragment = CJTConcessionFragment.newInstance();
 
+        CJudoFragmentManager.replaceFragment(this, R.id.content, tournamentConcessionFragment);
+
+        new CJTConcessionPresenter(tournamentConcessionFragment, this);
     }
 
 

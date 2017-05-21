@@ -3,13 +3,13 @@ package com.cupertinojudo.android.tournament.concession;
 import com.cupertinojudo.android.tournament.CJTContract;
 
 /**
- * Created by fabiohh on 5/21/17.
+ * 
  */
 
 public class CJTConcessionPresenter implements CJTConcessionContract.Presenter {
     CJTConcessionContract.ViewInterface mViewInterface;
     CJTContract.ActivityInterface mActivityInterface;
-    String mFile = "file:///android_asset/concessio.html";
+    String mFile = "file:///android_asset/concession.html";
 
     public CJTConcessionPresenter(CJTConcessionContract.ViewInterface viewInterface, CJTContract.ActivityInterface activityInterface) {
         mViewInterface = viewInterface;
@@ -23,7 +23,7 @@ public class CJTConcessionPresenter implements CJTConcessionContract.Presenter {
         loadConcession();
     }
 
-    private void loadSchedule() {
+    private void loadConcession() {
         mViewInterface.loadConcession(mFile);
     }
 }
