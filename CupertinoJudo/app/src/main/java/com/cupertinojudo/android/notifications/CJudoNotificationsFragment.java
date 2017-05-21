@@ -43,7 +43,6 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("HERE", "start called.");
         mPresenter.start();
     }
 
@@ -57,14 +56,15 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle(R.string.title_notifications);
 
-        mNotificationsRecyclerView = (RecyclerView) view.findViewById(R.id.notifications_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mNotificationsRecyclerView = (RecyclerView) view.findViewById(R.id.notifications_recyclerview);
+        mNotificationAdapter = new CJudoNotificationAdapter();
 
-        mNotificationsRecyclerView.setLayoutManager(layoutManager);
-        mNotificationsRecyclerView.setAdapter(mNotificationAdapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mNotificationsRecyclerView.getContext(),
                 layoutManager.getOrientation());
         mNotificationsRecyclerView.addItemDecoration(dividerItemDecoration);
+        mNotificationsRecyclerView.setAdapter(mNotificationAdapter);
+        mNotificationsRecyclerView.setLayoutManager(layoutManager);
 
         return view;
     }
@@ -81,14 +81,13 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
 
     @Override
     public void updateNotifications(List<Notification> notifications) {
-        mNotificationAdapter = new CJudoNotificationAdapter(notifications);
+        mNotificationAdapter.updateData(notifications);
     }
 
     private static class CJudoNotificationAdapter extends RecyclerView.Adapter<CJudoNotificationAdapter.ViewHolder> {
         List<Notification> mNotificationList;
 
-        public CJudoNotificationAdapter(List<Notification> notificationList) {
-            mNotificationList = notificationList;
+        public CJudoNotificationAdapter() {
         }
 
         @Override
@@ -104,6 +103,11 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
             holder.mTitle.setText(mNotificationList.get(position).getTitle());
             holder.mBody.setText(mNotificationList.get(position).getBody());
             holder.mDate.setText(mNotificationList.get(position).getDate());
+        }
+
+        public void updateData(List<Notification> notifications) {
+            mNotificationList = notifications;
+            notifyDataSetChanged();
         }
 
         @Override
