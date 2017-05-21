@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.cupertinojudo.android.BuildConfig;
 import com.cupertinojudo.android.data.models.Club;
+import com.cupertinojudo.android.data.models.News;
 import com.cupertinojudo.android.data.models.Notification;
 import com.cupertinojudo.android.data.source.CJudoClubDataSource;
 
@@ -21,8 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class CJudoClubRemoteDataSource implements CJudoClubDataSource {
-    private static final String BASE_URL = BuildConfig.NOTIFICATIONS_BASE_URL;
-    private static final String TOURNAMENT_URI = BuildConfig.NOTIFICATIONS_URI;
+    private static final String BASE_URL = BuildConfig.NEWS_NOTIFICATIONS_BASE_URL;
+    private static final String TOURNAMENT_URI = BuildConfig.NEWS_NOTIFICATIONS_URI;
     private static CJudoClubRemoteDataSource sRemoteDataSource;
 
     private CJTServerInterface mCJudoInterface;
@@ -68,8 +69,24 @@ public class CJudoClubRemoteDataSource implements CJudoClubDataSource {
     }
 
     @Override
-    public void getNews(@NonNull GetNewsCallback callback) {
+    public void getNews(@NonNull final GetNewsCallback callback) {
+        Call<Club> call = mCJudoInterface.getClubData();
+        call.enqueue(new Callback<Club>() {
+            @Override
+            public void onResponse(Call<Club> call, Response<Club> response) {
+                if (response.isSuccessful()) {
+                    List<News> newsList = response.body().getNews();
 
+                    callback.onNewsLoaded(newsList);
+                } else {
+                    // Log error
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Club> call, Throwable t) {
+                callback.onDataNotAvailable(t.getMessage());
+            }
+        });
     }
-
 }
