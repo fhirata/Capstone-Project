@@ -39,9 +39,9 @@ public class CJTConcessionFragment extends Fragment implements CJTConcessionCont
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_tournament_schedule, container, false);
+        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_tournament_concession, container, false);
 
-        mWebView = (WebView) viewGroup.findViewById(R.id.tournament_schedule_webview);
+        mWebView = (WebView) viewGroup.findViewById(R.id.tournament_concession_webview);
 
         Toolbar toolbar = (Toolbar) viewGroup.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
