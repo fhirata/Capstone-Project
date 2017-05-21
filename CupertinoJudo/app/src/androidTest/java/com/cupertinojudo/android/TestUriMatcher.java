@@ -8,7 +8,7 @@ import com.cupertinojudo.android.data.source.local.CJTPersistenceContract;
 import com.cupertinojudo.android.data.source.local.CJTProvider;
 
 /**
- * Created by fabiohh on 5/10/17.
+ *
  */
 
 public class TestUriMatcher extends AndroidTestCase {

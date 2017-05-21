@@ -3,7 +3,7 @@ package com.cupertinojudo.android.tournament.schedule;
 import com.cupertinojudo.android.tournament.CJTContract;
 
 /**
- * Created by fabiohh on 5/8/17.
+ *
  */
 
 public class CJTSchedulePresenter implements CJTScheduleContract.Presenter {

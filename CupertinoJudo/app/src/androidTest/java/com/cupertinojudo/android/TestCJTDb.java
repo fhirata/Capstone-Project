@@ -12,7 +12,7 @@ import com.cupertinojudo.android.data.source.local.CJTPersistenceContract;
 import java.util.HashSet;
 
 /**
- * Created by fabiohh on 5/10/17.
+ *
  */
 
 public class TestCJTDb extends AndroidTestCase {

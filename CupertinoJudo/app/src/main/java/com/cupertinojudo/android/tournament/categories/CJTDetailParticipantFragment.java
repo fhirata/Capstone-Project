@@ -16,7 +16,7 @@ import com.cupertinojudo.android.UnitsFormatterUtil;
 import com.cupertinojudo.android.data.models.Participant;
 
 /**
- * Created by fabiohh on 5/13/17.
+ *
  */
 
 public class CJTDetailParticipantFragment extends Fragment implements CJTDetailParticipantContract.ViewInterface {

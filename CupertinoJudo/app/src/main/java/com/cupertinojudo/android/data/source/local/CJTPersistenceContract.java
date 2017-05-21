@@ -10,7 +10,7 @@ import com.cupertinojudo.android.BuildConfig;
 import java.util.List;
 
 /**
- * Created by fabiohh on 5/9/17.
+ *
  */
 
 public class CJTPersistenceContract {

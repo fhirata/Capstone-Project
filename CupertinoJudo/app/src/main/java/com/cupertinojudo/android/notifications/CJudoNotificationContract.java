@@ -1,28 +1,28 @@
-package com.cupertinojudo.android.tournament.categories;
-
-import android.database.Cursor;
+package com.cupertinojudo.android.notifications;
 
 import com.cupertinojudo.android.BasePresenterInterface;
 import com.cupertinojudo.android.BaseViewInterface;
+import com.cupertinojudo.android.data.models.Notification;
+
+import java.util.List;
 
 /**
  *
  */
 
-public interface CJTCategoriesContract {
+public interface CJudoNotificationContract {
+
     interface Presenter extends BasePresenterInterface {
-        void handlePoolsItemClick(String category);
     }
 
     interface ViewInterface extends BaseViewInterface<Presenter> {
-        void loadCategories(Cursor categories);
-        void setLoadingIndicator(boolean enable);
-
+        void setLoadingIndicator(boolean active);
+        void updateNotifications(List<Notification> notifications);
     }
 
     interface ActivityInterface {
-        void handlePoolsItemClick(String category);
         void showError(int messageId);
         void showError(String message);
+        void showSuccess(int messageId);
     }
 }

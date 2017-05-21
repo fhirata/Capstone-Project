@@ -5,7 +5,7 @@ import com.cupertinojudo.android.BaseViewInterface;
 import com.cupertinojudo.android.data.models.Participant;
 
 /**
- * Created by fabiohh on 5/13/17.
+ *
  */
 
 public interface CJTDetailParticipantContract {

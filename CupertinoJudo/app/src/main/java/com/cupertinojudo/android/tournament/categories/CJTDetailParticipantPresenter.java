@@ -13,7 +13,7 @@ import com.cupertinojudo.android.data.source.CJTLoaderProvider;
 import com.cupertinojudo.android.data.source.CJTRepository;
 
 /**
- * Created by fabiohh on 5/13/17.
+ *
  */
 
 public class CJTDetailParticipantPresenter implements CJTDetailParticipantContract.Presenter,

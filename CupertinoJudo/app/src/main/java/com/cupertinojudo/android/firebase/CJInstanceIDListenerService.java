@@ -9,7 +9,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 import static com.google.android.gms.internal.zzt.TAG;
 
 /**
- * Created by fabiohh on 5/14/17.
+ *
  */
 
 public class CJInstanceIDListenerService extends FirebaseInstanceIdService {

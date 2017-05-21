@@ -13,7 +13,7 @@ import android.webkit.WebView;
 import com.cupertinojudo.android.R;
 
 /**
- * Created by fabiohh on 5/8/17.
+ *
  */
 
 public class CJTVenueFragment extends Fragment implements CJTVenueContract.ViewInterface {

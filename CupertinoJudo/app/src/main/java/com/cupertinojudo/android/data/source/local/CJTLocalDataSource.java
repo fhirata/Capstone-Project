@@ -15,7 +15,7 @@ import java.util.List;
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
- * Created by fabiohh on 5/9/17.
+ *
  */
 
 public class CJTLocalDataSource implements CJTDataSource {

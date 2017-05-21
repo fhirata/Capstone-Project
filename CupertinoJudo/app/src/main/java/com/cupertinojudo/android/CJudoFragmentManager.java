@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 /**
- * Created by fabiohh on 5/8/17.
+ *
  */
 
 public class CJudoFragmentManager {

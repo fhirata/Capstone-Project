@@ -2,8 +2,11 @@ package com.cupertinojudo.android.tournament.categories;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -16,7 +19,9 @@ import com.cupertinojudo.android.data.source.CJTLoaderProvider;
  */
 
 public class CJTCategoriesActivity extends AppCompatActivity implements CJTCategoriesContract.ActivityInterface,
-CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetailParticipantContract.ActivityInterface {
+        CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetailParticipantContract.ActivityInterface {
+
+    protected CoordinatorLayout mSnackbarLayout;
     private CJTCategoriesFragment mCategoryFragment;
     private CJTCategoriesPresenter mCategoryPresenter;
     private static final int TOURNAMENT_YEAR = 2016;
@@ -29,6 +34,10 @@ CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetail
 
         mCategoryFragment = CJTCategoriesFragment.newInstance();
 
+        // Snackbar status
+        mSnackbarLayout = (CoordinatorLayout) findViewById(R.id.snackbar_layout);
+
+
         CJTLoaderProvider loaderProvider = new CJTLoaderProvider(this);
         mCategoryPresenter = new CJTCategoriesPresenter(
                 this,
@@ -37,7 +46,7 @@ CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetail
                 mCategoryFragment,
                 Injection.provideTournamentRepository(this),
                 TOURNAMENT_YEAR
-                );
+        );
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -116,7 +125,9 @@ CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetail
 
     @Override
     public void showError(int messageId) {
-
+        Snackbar snackbar = Snackbar.make(mSnackbarLayout, messageId, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed));
+        snackbar.show();
     }
 
     @Override
@@ -126,5 +137,13 @@ CJTPoolsContract.ActivityInterface, CJTPoolContract.ActivityInterface, CJTDetail
                 onBackPressed();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showError(String message) {
+        Snackbar snackbar = Snackbar.make(mSnackbarLayout, message, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed));
+        snackbar.show();
+
     }
 }

@@ -12,7 +12,7 @@ import com.cupertinojudo.android.R;
 import java.util.List;
 
 /**
- * Created by fabiohh on 4/30/17.
+ *
  */
 
 public class CJTGridViewAdapter extends BaseAdapter {
