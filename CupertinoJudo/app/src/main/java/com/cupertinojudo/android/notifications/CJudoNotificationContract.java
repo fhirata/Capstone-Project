@@ -7,13 +7,12 @@ import com.cupertinojudo.android.data.models.Notification;
 import java.util.List;
 
 /**
- * Created by fabiohh on 5/15/17.
+ *
  */
 
 public interface CJudoNotificationContract {
 
     interface Presenter extends BasePresenterInterface {
-
     }
 
     interface ViewInterface extends BaseViewInterface<Presenter> {
@@ -22,6 +21,8 @@ public interface CJudoNotificationContract {
     }
 
     interface ActivityInterface {
-
+        void showError(int messageId);
+        void showError(String message);
+        void showSuccess(int messageId);
     }
 }

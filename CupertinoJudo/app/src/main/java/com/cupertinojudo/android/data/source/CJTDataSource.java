@@ -9,7 +9,7 @@ import com.cupertinojudo.android.data.models.TournamentPool;
 import java.util.List;
 
 /**
- * Created by fabiohh on 5/9/17.
+ *
  */
 
 public interface CJTDataSource {

@@ -5,7 +5,7 @@ import android.test.suitebuilder.TestSuiteBuilder;
 import junit.framework.Test;
 
 /**
- * Created by fabiohh on 9/4/16.
+*
  */
 public class FullTestSuite {
     public static Test suite() {

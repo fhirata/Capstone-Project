@@ -14,7 +14,7 @@ import com.cupertinojudo.android.data.source.remote.CJudoClubRemoteDataSource;
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
- * Created by fabiohh on 5/11/17.
+ *
  */
 
 public class Injection {

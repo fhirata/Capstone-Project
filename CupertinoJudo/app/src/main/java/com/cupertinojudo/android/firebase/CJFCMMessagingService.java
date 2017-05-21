@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * Created by fabiohh on 5/14/17.
+ *
  */
 
 public class CJFCMMessagingService extends FirebaseMessagingService {

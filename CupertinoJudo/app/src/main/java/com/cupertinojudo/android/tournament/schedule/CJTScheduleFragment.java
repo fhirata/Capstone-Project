@@ -13,7 +13,7 @@ import android.webkit.WebView;
 import com.cupertinojudo.android.R;
 
 /**
- * Created by fabiohh on 5/8/17.
+ *
  */
 
 public class CJTScheduleFragment extends Fragment implements CJTScheduleContract.ViewInterface {

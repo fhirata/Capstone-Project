@@ -3,7 +3,7 @@ package com.cupertinojudo.android.tournament;
 import android.graphics.drawable.Drawable;
 
 /**
- * Created by fabiohh on 4/30/17.
+ *
  */
 
 public class CJTTile {

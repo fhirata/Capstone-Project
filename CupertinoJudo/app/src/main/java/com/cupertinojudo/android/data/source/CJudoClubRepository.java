@@ -1,5 +1,6 @@
 package com.cupertinojudo.android.data.source;
 
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 
 import com.cupertinojudo.android.data.models.News;
@@ -8,7 +9,7 @@ import com.cupertinojudo.android.data.models.Notification;
 import java.util.List;
 
 /**
- * Created by fabiohh on 5/15/17.
+ *
  */
 
 public class CJudoClubRepository implements CJudoClubDataSource {
@@ -55,5 +56,15 @@ public class CJudoClubRepository implements CJudoClubDataSource {
                 callback.onDataNotAvailable(errorMessage);
             }
         });
+    }
+
+    public interface LoadDataCallback {
+        void onDataLoaded(Cursor data);
+
+        void onDataEmpty();
+
+        void onDataNotAvailable();
+
+        void onDataReset();
     }
 }

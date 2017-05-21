@@ -3,7 +3,7 @@ package com.cupertinojudo.android.tournament.venue;
 import com.cupertinojudo.android.tournament.CJTContract;
 
 /**
- * Created by fabiohh on 5/8/17.
+ *
  */
 
 

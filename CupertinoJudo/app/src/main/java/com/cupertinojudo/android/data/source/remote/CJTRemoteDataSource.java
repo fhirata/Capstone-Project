@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by fabiohh on 5/9/17.
+ *
  */
 
 public class CJTRemoteDataSource implements CJTDataSource {

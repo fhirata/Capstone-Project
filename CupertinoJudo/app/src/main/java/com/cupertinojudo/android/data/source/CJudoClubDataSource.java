@@ -8,7 +8,7 @@ import com.cupertinojudo.android.data.models.Notification;
 import java.util.List;
 
 /**
- * Created by fabiohh on 5/15/17.
+ *
  */
 
 public interface CJudoClubDataSource {

@@ -20,7 +20,7 @@ import java.util.Set;
 import static com.cupertinojudo.android.data.source.local.CJTPersistenceContract.CJudoParticipantEntry.TABLE_NAME;
 
 /**
- * Created by fabiohh on 5/10/17.
+ *
  */
 
 public class TestUtility extends AndroidTestCase {

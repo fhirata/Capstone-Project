@@ -7,5 +7,6 @@
     <color name="lightGray">#FAFAFA</color>
     <color name="white">#FFFFFF</color>
     <color name="colorBlueGreen">#1B95BA</color>
+    <color name="colorRed">#ff3700</color>
     <color name="colorOrange">#F23B1C</color>
 </resources>

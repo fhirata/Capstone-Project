@@ -5,13 +5,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.cupertinojudo.android.club.CJClubFragment;
+import com.cupertinojudo.android.data.source.CJTLoaderProvider;
 import com.cupertinojudo.android.notifications.CJudoNotificationContract;
 import com.cupertinojudo.android.notifications.CJudoNotificationPresenter;
 import com.cupertinojudo.android.notifications.CJudoNotificationsFragment;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
     public static final String NOTIFICATION_IDENTIFIER = "Notification";
     public static final String NOTIFICATION_OBJECT = "notification_object";
 
+    protected CoordinatorLayout mSnackbarLayout;
     private BottomNavigationView mBottomNavigationView;
     private Vector<Fragment> mFragments;
     private final int MENU_ITEMS = 3;
@@ -69,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         // Firebase notification topic subscription
         FirebaseMessaging.getInstance().subscribeToTopic(getString(R.string.notification_topic));
 
+        // Snackbar status
+        mSnackbarLayout = (CoordinatorLayout) findViewById(R.id.snackbar_layout);
+
         mFragments = new Vector<>(MENU_ITEMS);
 
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -94,7 +102,14 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         if (null == notificationsFragment) {
             notificationsFragment = CJudoNotificationsFragment.newInstance();
         }
-        new CJudoNotificationPresenter(this, notificationsFragment, Injection.provideClubRepository(getApplicationContext()));
+
+        CJTLoaderProvider loaderProvider = new CJTLoaderProvider(this);
+        new CJudoNotificationPresenter(this,
+                loaderProvider,
+                getSupportLoaderManager(),
+                notificationsFragment,
+                Injection.provideClubRepository(getApplicationContext()));
+
         mFragments.add(NOTIFICATIONS, notificationsFragment);
 
         if (null == savedInstanceState) {
@@ -166,5 +181,26 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
     @Override
     public void handleStatsClick() {
 
+    }
+
+    @Override
+    public void showError(int messageId) {
+        Snackbar snackbar = Snackbar.make(mSnackbarLayout, messageId, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed));
+        snackbar.show();
+    }
+
+    @Override
+    public void showSuccess(int messageId) {
+        Snackbar snackbar = Snackbar.make(mSnackbarLayout, messageId, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorBlueGreen));
+        snackbar.show();
+    }
+
+    @Override
+    public void showError(String message) {
+        Snackbar snackbar = Snackbar.make(mSnackbarLayout, message, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed));
+        snackbar.show();
     }
 }

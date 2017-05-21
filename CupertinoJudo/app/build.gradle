@@ -15,7 +15,7 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "CUPERTINO_BASE_URL", '"http://api.myjson.com/"'
+            buildConfigField "String", "CUPERTINO_BASE_URL", '"https://api.myjson.com/"'
             buildConfigField "String", "CUPERTINO_TOURNAMENT_URI", '"bins/1c0fc1"'
             buildConfigField "String", "NEWS_NOTIFICATIONS_BASE_URL", '"https://api.myjson.com/"'
             buildConfigField "String", "NEWS_NOTIFICATIONS_URI", '"bins/1c4ipl"'
@@ -23,7 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "CUPERTINO_BASE_URL", '"http://api.myjson.com/"'
+            buildConfigField "String", "CUPERTINO_BASE_URL", '"https://api.myjson.com/"'
             buildConfigField "String", "CUPERTINO_TOURNAMENT_URI", '"bins/1c0fc1"'
             buildConfigField "String", "NEWS_NOTIFICATIONS_BASE_URL", '"https://api.myjson.com/"'
             buildConfigField "String", "NEWS_NOTIFICATIONS_URI", '"bins/1c4ipl"'
@@ -57,6 +57,8 @@ dependencies {
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.6.3'
 
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:retrofit-mock:2.1.0'

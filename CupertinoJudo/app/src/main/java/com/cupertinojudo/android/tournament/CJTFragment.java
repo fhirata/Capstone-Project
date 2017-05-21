@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by fabiohh on 4/23/17.
+ *
  */
 
 public class CJTFragment extends Fragment implements CJTContract.ViewInterface {

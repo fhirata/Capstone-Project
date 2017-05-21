@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,7 @@ import com.cupertinojudo.android.data.models.Notification;
 import java.util.List;
 
 /**
- * Created by fabiohh on 4/23/17.
+ *
  */
 
 public class CJudoNotificationsFragment extends Fragment implements CJudoNotificationContract.ViewInterface {
@@ -38,6 +40,13 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
         setRetainInstance(true);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("HERE", "start called.");
+        mPresenter.start();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,8 +58,13 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
         toolbar.setTitle(R.string.title_notifications);
 
         mNotificationsRecyclerView = (RecyclerView) view.findViewById(R.id.notifications_recyclerview);
-        mNotificationsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+
+        mNotificationsRecyclerView.setLayoutManager(layoutManager);
         mNotificationsRecyclerView.setAdapter(mNotificationAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mNotificationsRecyclerView.getContext(),
+                layoutManager.getOrientation());
+        mNotificationsRecyclerView.addItemDecoration(dividerItemDecoration);
 
         return view;
     }

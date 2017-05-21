@@ -1,6 +1,7 @@
 package com.cupertinojudo.android.data.source.remote;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.cupertinojudo.android.BuildConfig;
 import com.cupertinojudo.android.data.models.Club;
@@ -11,6 +12,7 @@ import com.cupertinojudo.android.data.source.CJudoClubDataSource;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,7 +20,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by fabiohh on 5/15/17.
+ *
  */
 
 public class CJudoClubRemoteDataSource implements CJudoClubDataSource {
@@ -33,8 +35,12 @@ public class CJudoClubRemoteDataSource implements CJudoClubDataSource {
     }
 
     private CJudoClubRemoteDataSource() {
+        HttpLoggingInterceptor bodyInterceptor = new HttpLoggingInterceptor();
+        bodyInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         OkHttpClient client = new OkHttpClient()
                 .newBuilder()
+                .addInterceptor(bodyInterceptor)
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -55,6 +61,7 @@ public class CJudoClubRemoteDataSource implements CJudoClubDataSource {
                 if (response.isSuccessful()) {
                     List<Notification> notificationList = response.body().getNotifications();
 
+                    Log.d("HERE", "onResponse() called with: call = [" + call + "], response = [" + response + "]");
                     callback.onNotificationsLoaded(notificationList);
                 } else {
                     // Log error

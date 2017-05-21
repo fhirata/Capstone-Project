@@ -6,7 +6,7 @@ import com.cupertinojudo.android.BasePresenterInterface;
 import com.cupertinojudo.android.BaseViewInterface;
 
 /**
- * Created by fabiohh on 5/9/17.
+ *
  */
 
 public interface CJTCategoriesContract {
@@ -23,5 +23,6 @@ public interface CJTCategoriesContract {
     interface ActivityInterface {
         void handlePoolsItemClick(String category);
         void showError(int messageId);
+        void showError(String message);
     }
 }

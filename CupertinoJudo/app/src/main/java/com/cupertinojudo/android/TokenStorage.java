@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Created by fabiohh on 5/14/17.
+ *
  */
 
 public class TokenStorage {

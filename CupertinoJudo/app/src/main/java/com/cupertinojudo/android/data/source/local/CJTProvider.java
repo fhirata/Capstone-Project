@@ -21,7 +21,7 @@ import static com.cupertinojudo.android.data.source.local.CJTPersistenceContract
 
 
 /**
- * Created by fabiohh on 5/10/17.
+ *
  */
 
 public class CJTProvider extends ContentProvider {

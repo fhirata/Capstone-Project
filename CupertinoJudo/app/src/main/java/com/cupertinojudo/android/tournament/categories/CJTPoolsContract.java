@@ -6,7 +6,7 @@ import com.cupertinojudo.android.BasePresenterInterface;
 import com.cupertinojudo.android.BaseViewInterface;
 
 /**
- * Created by fabiohh on 5/13/17.
+ *
  */
 
 public interface CJTPoolsContract {

@@ -12,7 +12,7 @@ import com.cupertinojudo.android.R;
 
 
 /**
- * Created by fabiohh on 4/23/17.
+ *
  */
 
 public class CJClubFragment extends Fragment {

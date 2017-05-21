@@ -4,7 +4,7 @@ import com.cupertinojudo.android.BasePresenterInterface;
 import com.cupertinojudo.android.BaseViewInterface;
 
 /**
- * Created by fabiohh on 4/26/17.
+ *
  */
 
 public interface CJTContract {
@@ -24,5 +24,9 @@ public interface CJTContract {
         void handleConcessionClick();
         void handleVenueClick();
         void handleStatsClick();
+
+        void showError(int messageId);
+        void showError(String message);
+        void showSuccess(int messageId);
     }
 }
