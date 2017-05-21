@@ -1,7 +1,6 @@
 package com.cupertinojudo.android.data.source.remote;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.cupertinojudo.android.BuildConfig;
 import com.cupertinojudo.android.data.models.Club;
@@ -60,8 +59,6 @@ public class CJudoClubRemoteDataSource implements CJudoClubDataSource {
             public void onResponse(Call<Club> call, Response<Club> response) {
                 if (response.isSuccessful()) {
                     List<Notification> notificationList = response.body().getNotifications();
-
-                    Log.d("HERE", "onResponse() called with: call = [" + call + "], response = [" + response + "]");
                     callback.onNotificationsLoaded(notificationList);
                 } else {
                     // Log error
