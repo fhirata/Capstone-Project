@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +102,7 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.mTitle.setText(mNotificationList.get(position).getTitle());
+            Log.i("HERE", "Here: " + mNotificationList.get(position).getDate());
             holder.mDate.setText(DateFormatterUtil.formatTimestamp(mNotificationList.get(position).getDate(), holder.itemView.getContext()));
         }
 

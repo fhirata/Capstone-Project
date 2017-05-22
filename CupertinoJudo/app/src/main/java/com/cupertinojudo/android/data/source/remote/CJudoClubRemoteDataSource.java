@@ -1,6 +1,7 @@
 package com.cupertinojudo.android.data.source.remote;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.cupertinojudo.android.BuildConfig;
 import com.cupertinojudo.android.data.models.Club;
