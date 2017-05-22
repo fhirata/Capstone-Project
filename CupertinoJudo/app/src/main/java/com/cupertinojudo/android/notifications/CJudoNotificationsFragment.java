@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cupertinojudo.android.DateFormatterUtil;
 import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.Notification;
 
@@ -101,8 +102,8 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.mTitle.setText(mNotificationList.get(position).getTitle());
-            holder.mBody.setText(mNotificationList.get(position).getBody());
-            holder.mDate.setText(mNotificationList.get(position).getDate());
+            Log.i("HERE", "Here: " + mNotificationList.get(position).getDate());
+            holder.mDate.setText(DateFormatterUtil.formatTimestamp(mNotificationList.get(position).getDate(), holder.itemView.getContext()));
         }
 
         public void updateData(List<Notification> notifications) {
@@ -120,14 +121,12 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
 
         static class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mTitle;
-            public TextView mBody;
             public TextView mDate;
 
             public ViewHolder(View itemView) {
                 super(itemView);
 
                 mTitle = (TextView) itemView.findViewById(R.id.notification_title);
-                mBody = (TextView) itemView.findViewById(R.id.notification_body);
                 mDate = (TextView) itemView.findViewById(R.id.notification_time);
             }
         }

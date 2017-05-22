@@ -4,28 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="12dp">
 
     <TextView
         android:id="@+id/notification_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="17sp"
+        android:textColor="@color/colorDarkGray"
         tools:text="Notification Title"/>
-
-    <TextView
-        android:id="@+id/notification_body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        tools:text="Mark your calendars"/>
 
     <TextView
         android:id="@+id/notification_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:paddingTop="5dp"
         android:textStyle="italic"
         tools:text="Just Now"/>

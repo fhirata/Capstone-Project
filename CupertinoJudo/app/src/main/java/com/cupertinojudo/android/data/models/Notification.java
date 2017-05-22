@@ -1,7 +1,13 @@
 package com.cupertinojudo.android.data.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Notification {
 
@@ -14,6 +20,9 @@ public class Notification {
     @SerializedName("date")
     @Expose
     private String date;
+
+    private static transient SimpleDateFormat sServerTimeFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy");
+    private static transient Date sTimeStamp;
 
     /**
      * No args constructor for use in serialization
@@ -51,8 +60,17 @@ public class Notification {
         this.body = body;
     }
 
-    public String getDate() {
+    public String getRawDate() {
         return date;
+    }
+
+    public Date getDate() {
+        try {
+            return sServerTimeFormat.parse(date);
+        } catch (ParseException parseException) {
+            Log.e("HERE", parseException.getMessage());
+        }
+        return null;
     }
 
     public void setDate(String date) {

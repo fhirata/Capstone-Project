@@ -1,6 +1,5 @@
 package com.cupertinojudo.android.tournament.concession;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +12,9 @@ import android.webkit.WebView;
 
 import com.cupertinojudo.android.R;
 
+/**
+ *
+ */
 
 public class CJTConcessionFragment extends Fragment implements CJTConcessionContract.ViewInterface {
     private WebView mWebView;
@@ -58,5 +60,4 @@ public class CJTConcessionFragment extends Fragment implements CJTConcessionCont
     public void setPresenter(CJTConcessionContract.Presenter presenter) {
         mPresenter = presenter;
     }
-
 }
