@@ -1,12 +1,12 @@
 package com.cupertinojudo.android.data.source.remote;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.cupertinojudo.android.BuildConfig;
 import com.cupertinojudo.android.data.models.Club;
 import com.cupertinojudo.android.data.models.News;
 import com.cupertinojudo.android.data.models.Notification;
+import com.cupertinojudo.android.data.models.Practice;
 import com.cupertinojudo.android.data.source.CJudoClubDataSource;
 
 import java.util.List;
@@ -90,7 +90,29 @@ public class CJudoClubRemoteDataSource implements CJudoClubDataSource {
 
             @Override
             public void onFailure(Call<Club> call, Throwable t) {
-                callback.onDataNotAvailable(t.getMessage());
+                callback.onNewsDataNotAvailable(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getPractices(@NonNull final GetPracticesCallback callback) {
+        Call<Club> call = mCJudoInterface.getClubData();
+        call.enqueue(new Callback<Club>() {
+            @Override
+            public void onResponse(Call<Club> call, Response<Club> response) {
+                if (response.isSuccessful()) {
+                    List<Practice> practiceList = response.body().getPractice();
+
+                    callback.onPracticesLoaded(practiceList);
+                } else {
+                    // Log error
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Club> call, Throwable t) {
+                callback.onPracticeDataNotAvailable(t.getMessage());
             }
         });
     }

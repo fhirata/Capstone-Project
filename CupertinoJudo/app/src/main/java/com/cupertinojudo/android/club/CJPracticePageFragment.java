@@ -17,6 +17,7 @@ import com.cupertinojudo.android.R;
 public class CJPracticePageFragment extends Fragment {
     private static final String KEY_TITLE = "practices";
     private TextView mTextView;
+    private CJClubContract.PresenterInterface mPresenterInterface;
 
     public static CJPracticePageFragment newInstance(String sTitle) {
         CJPracticePageFragment mFragment = new CJPracticePageFragment();
@@ -26,6 +27,10 @@ public class CJPracticePageFragment extends Fragment {
         mFragment.setArguments(args);
 
         return mFragment;
+    }
+
+    public void setPresenter(CJClubContract.PresenterInterface presenterInterface) {
+        mPresenterInterface = presenterInterface;
     }
 
     @Nullable
