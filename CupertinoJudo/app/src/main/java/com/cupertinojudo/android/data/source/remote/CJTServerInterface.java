@@ -15,6 +15,6 @@ public interface CJTServerInterface {
     @GET("/bins/1cfvl1")
     Call<Tournament> getTournamentParticipants();
 
-    @GET("/bins/mz69t")
+    @GET("/bins/z6qf9")
     Call<Club> getClubData();
 }

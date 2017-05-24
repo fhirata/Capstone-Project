@@ -82,6 +82,6 @@ public class CJClubFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
     public void loadPractices(List<Practice> practices) {
-
+        mPracticePageFragment.loadPractice(practices);
     }
 }

@@ -26,7 +26,6 @@ import java.util.List;
 
 public class CJNewsPageFragment extends Fragment {
     private static final String KEY_TITLE = "news";
-    private TextView mTextView;
     private CJClubContract.PresenterInterface mPresenterInterface;
     private RecyclerView mNewsRecyclerView;
     private CJudoNewsAdapter mNewsAdapter;

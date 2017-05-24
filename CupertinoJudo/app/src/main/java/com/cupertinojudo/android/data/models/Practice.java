@@ -3,16 +3,20 @@ package com.cupertinojudo.android.data.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class Practice {
 
-    @SerializedName("regular")
+    @SerializedName("type")
     @Expose
-    private List<Regular> regular = null;
-    @SerializedName("kangeiko")
+    private String type;
+    @SerializedName("day")
     @Expose
-    private List<Kangeiko> kangeiko = null;
+    private String day;
+    @SerializedName("time1")
+    @Expose
+    private String time1;
+    @SerializedName("time2")
+    @Expose
+    private String time2;
 
     /**
      * No args constructor for use in serialization
@@ -23,29 +27,48 @@ public class Practice {
 
     /**
      *
-     * @param kangeiko
-     * @param regular
+     * @param time2
+     * @param time1
+     * @param day
+     * @param type
      */
-    public Practice(List<Regular> regular, List<Kangeiko> kangeiko) {
+    public Practice(String day, String time1, String time2, String type) {
         super();
-        this.regular = regular;
-        this.kangeiko = kangeiko;
+        this.day = day;
+        this.time1 = time1;
+        this.time2 = time2;
+        this.type = type;
     }
 
-    public List<Regular> getRegular() {
-        return regular;
+    public String getDay() {
+        return day;
     }
 
-    public void setRegular(List<Regular> regular) {
-        this.regular = regular;
+    public void setDay(String day) {
+        this.day = day;
     }
 
-    public List<Kangeiko> getKangeiko() {
-        return kangeiko;
+    public String getTime1() {
+        return time1;
     }
 
-    public void setKangeiko(List<Kangeiko> kangeiko) {
-        this.kangeiko = kangeiko;
+    public void setTime1(String time1) {
+        this.time1 = time1;
     }
 
+    public String getTime2() {
+        return time2;
+    }
+
+    public void setTime2(String time2) {
+        this.time2 = time2;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

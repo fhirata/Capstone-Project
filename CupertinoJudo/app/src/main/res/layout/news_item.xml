@@ -27,6 +27,7 @@
             android:id="@+id/news_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autoLink="web"
             android:textColor="@color/colorDarkGray"
             android:textSize="17sp"
             tools:text="News Title" />
@@ -35,6 +36,7 @@
             android:id="@+id/news_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autoLink="web"
             android:textColor="@color/colorDarkGray"
             android:textSize="17sp"
             tools:text="Body" />
