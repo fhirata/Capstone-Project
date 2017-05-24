@@ -33,7 +33,7 @@ public class CJClubFragment extends Fragment implements CJClubContract.ViewInter
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        mFragmentPagerAdapter = new CJClubFragmentPagerAdapter(getFragmentManager(), mPresenterInterface);
+        mFragmentPagerAdapter = new CJClubFragmentPagerAdapter(getChildFragmentManager(), mPresenterInterface);
 
     }
 
