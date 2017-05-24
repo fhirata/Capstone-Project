@@ -101,4 +101,12 @@
     <string name="notification_topic">news</string>
     <string name="notification_prefs">notification</string>
 
+    <string name="version">Version</string>
+    <string name="open_source_license">Open Source Licenses</string>
+    <string name="android_mpchart">MPAndroid Chart</string>
+    <string name="format_version">Version <xliff:g id="version">%1$s</xliff:g></string>
+    <string name="android_gson">GSON</string>
+    <string name="android_retrofit2">Retrofit2</string>
+    <string name="android_guava">Guava</string>
+    <string name="android_robotium">Robotium</string>
 </resources>

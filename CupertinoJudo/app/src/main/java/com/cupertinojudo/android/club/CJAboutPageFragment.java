@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cupertinojudo.android.BuildConfig;
 import com.cupertinojudo.android.R;
 
 /**
@@ -31,11 +32,13 @@ public class CJAboutPageFragment extends Fragment {
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View mView = inflater.inflate(R.layout.fragment_about, container, false);
-            mTextView = (TextView) mView.findViewById(R.id.about_textview);
-            mTextView.setText(getTitle());
+            View view = inflater.inflate(R.layout.fragment_about, container, false);
 
-            return mView;
+            TextView appVersionTextview = (TextView) view.findViewById(R.id.version_textview);
+            appVersionTextview.setText(String.format(getString(R.string.format_version), BuildConfig.VERSION_NAME));
+
+
+            return view;
         }
 
         public String getTitle() {
