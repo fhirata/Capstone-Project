@@ -1,12 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/about_textview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
-</LinearLayout>
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/version_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/version"
+            android:textStyle="bold"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/version_value_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="1.0"
+            android:padding="5dp"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/credits_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/open_source_license"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/mpchart_credits_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:padding="5dp"
+            android:text="@string/android_mpchart"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/mpchart_value_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:paddingLeft="5dp"
+            android:text="@string/android_mpchart_value"
+            android:textColor="@color/colorBlueGreen"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/guava_credits_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:padding="5dp"
+            android:text="@string/android_guava"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/guava_value_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:paddingLeft="5dp"
+            android:text="@string/android_guava_value"
+            android:textColor="@color/colorBlueGreen"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/robotium_credits_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:padding="5dp"
+            android:text="@string/android_robotium"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/robotium_value_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:padding="5dp"
+            android:text="@string/android_robotium_value"
+            android:textColor="@color/colorBlueGreen"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/retrofit2_credits_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:padding="5dp"
+            android:text="@string/android_retrofit2"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/retrofit2_value_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:padding="5dp"
+            android:text="@string/android_retrofit2_value"
+            android:textColor="@color/colorBlueGreen"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/gson_credits_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:padding="5dp"
+            android:text="@string/android_gson"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/gson_value_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:padding="5dp"
+            android:text="@string/android_gson_value"
+            android:textColor="@color/colorBlueGreen"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
