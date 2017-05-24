@@ -78,10 +78,16 @@ public class CJClubFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
     public void loadNews(List<News> newsList) {
+        if (null == mNewsPageFragment) {
+            return;
+        }
         mNewsPageFragment.loadNews(newsList);
     }
 
     public void loadPractices(List<Practice> practices) {
+        if (null == mPracticePageFragment) {
+            return;
+        }
         mPracticePageFragment.loadPractice(practices);
     }
 }

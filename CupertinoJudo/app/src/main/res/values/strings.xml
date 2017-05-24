@@ -109,4 +109,9 @@
     <string name="android_retrofit2">Retrofit2</string>
     <string name="android_guava">Guava</string>
     <string name="android_robotium">Robotium</string>
+    <string name="android_mpchart_value">https://github.com/PhilJay/MPAndroidChart</string>
+    <string name="android_gson_value">https://github.com/google/gson</string>
+    <string name="android_retrofit2_value">https://github.com/square/retrofit</string>
+    <string name="android_guava_value">https://github.com/google/guava</string>
+    <string name="android_robotium_value">https://github.com/RobotiumTech/robotium</string>
 </resources>
