@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.cupertinojudo.android.data.models.News;
 import com.cupertinojudo.android.data.models.Notification;
+import com.cupertinojudo.android.data.models.Practice;
 
 import java.util.List;
 
@@ -52,8 +53,23 @@ public class CJudoClubRepository implements CJudoClubDataSource {
             }
 
             @Override
-            public void onDataNotAvailable(String errorMessage) {
-                callback.onDataNotAvailable(errorMessage);
+            public void onNewsDataNotAvailable(String errorMessage) {
+                callback.onNewsDataNotAvailable(errorMessage);
+            }
+        });
+    }
+
+    @Override
+    public void getPractices(@NonNull final GetPracticesCallback callback) {
+        mRemoteDataSource.getPractices(new GetPracticesCallback() {
+            @Override
+            public void onPracticesLoaded(@NonNull List<Practice> practices) {
+                callback.onPracticesLoaded(practices);
+            }
+
+            @Override
+            public void onPracticeDataNotAvailable(String errorMessage) {
+                callback.onPracticeDataNotAvailable(errorMessage);
             }
         });
     }

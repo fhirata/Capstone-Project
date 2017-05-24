@@ -17,6 +17,7 @@ import com.cupertinojudo.android.R;
 public class CJAboutPageFragment extends Fragment {
         private static final String KEY_TITLE = "about";
         private TextView mTextView;
+        private CJClubContract.PresenterInterface mPresenterInterface;
 
         public static CJAboutPageFragment newInstance(String sTitle) {
             CJAboutPageFragment mFragment = new CJAboutPageFragment();
@@ -26,6 +27,10 @@ public class CJAboutPageFragment extends Fragment {
             mFragment.setArguments(args);
 
             return mFragment;
+        }
+
+        public void setPresenter(CJClubContract.PresenterInterface presenterInterface) {
+            mPresenterInterface = presenterInterface;
         }
 
         @Nullable

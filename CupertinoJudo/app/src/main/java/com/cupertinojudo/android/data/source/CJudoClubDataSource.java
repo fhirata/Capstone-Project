@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.cupertinojudo.android.data.models.News;
 import com.cupertinojudo.android.data.models.Notification;
+import com.cupertinojudo.android.data.models.Practice;
 
 import java.util.List;
 
@@ -20,11 +21,17 @@ public interface CJudoClubDataSource {
 
     interface GetNewsCallback {
         void onNewsLoaded(@NonNull List<News> notifications);
-        void onDataNotAvailable(String errorMessage);
+        void onNewsDataNotAvailable(String errorMessage);
     }
 
+    interface GetPracticesCallback {
+        void onPracticesLoaded(@NonNull List<Practice> practiceList);
+        void onPracticeDataNotAvailable(String errorMessage);
+    }
 
     void getNotifications(@NonNull GetNotificationsCallback callback);
 
     void getNews(@NonNull GetNewsCallback callback);
+
+    void getPractices(@NonNull GetPracticesCallback callback);
 }
