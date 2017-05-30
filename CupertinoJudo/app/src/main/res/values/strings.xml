@@ -70,7 +70,7 @@
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
 
-    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_new_message_notifications">Enable notifications</string>
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
@@ -99,15 +99,11 @@
     <string name="days_ago">"%d days ago"</string>
     <string name="notification_topic">news</string>
     <string name="notification_prefs">notification</string>
-    <string name="pref_enable_notifications_key" translatable="false">enable_notifications</string>
-    <string name="pref_enable_notifications_label">Weather Notifications</string>
-    <string name="pref_enable_notifications_true">Enabled</string>
-    <string name="pref_enable_notifications_false">Not Enabled</string>
-    <string name="pref_enable_notifications_default" translatable="false">true</string>
     <!-- SyncAdapter related -->
     <string name="sync_account_type">android.cupertinojudo.com</string>
     <string name="content_authority">com.cupertinojudo.android.app</string>
-    <string name="format_notification">Forecast: <xliff:g id="condition">%1$s</xliff:g> High: <xliff:g id="high">%2$s</xliff:g> Low: <xliff:g id="low">%3$s</xliff:g></string>
+    <string name="format_notification">Total participants: <xliff:g id="condition">%1$d</xliff:g></string>
+    <string name="participants_count"><xliff:g id="year">%1$d</xliff:g> participants: <xliff:g id="count">%2$d</xliff:g></string>
     <string name="pref_last_notification">last_notification</string>
 
     <string name="version">Version</string>
@@ -123,4 +119,16 @@
     <string name="android_retrofit2_value">https://github.com/square/retrofit</string>
     <string name="android_guava_value">https://github.com/google/guava</string>
     <string name="android_robotium_value">https://github.com/RobotiumTech/robotium</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="pref_enable_notifications_key" translatable="false">enable_notifications</string>
+    <string name="pref_enable_notifications_label">Club Notifications</string>
+    <string name="pref_enable_notifications_true">Enabled</string>
+    <string name="pref_enable_notifications_false">Not Enabled</string>
+    <string name="pref_enable_notifications_default" translatable="false">true</string>
+
+    <string name="pref_2017_participants_count_key" translatable="false">2017_participants</string>
+    <string name="pref_2017_participants_count_default" translatable="false">0</string>
+
+    <string name="widget_participants">Participants</string>
 </resources>

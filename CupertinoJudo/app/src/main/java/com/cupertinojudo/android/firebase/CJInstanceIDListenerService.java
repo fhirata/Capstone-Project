@@ -20,6 +20,5 @@ public class CJInstanceIDListenerService extends FirebaseInstanceIdService {
         String fcmToken = FirebaseInstanceId.getInstance().getToken();
         TokenStorage tokenStorage = new TokenStorage(getApplicationContext());
         tokenStorage.setFcmToken(fcmToken);
-
     }
 }

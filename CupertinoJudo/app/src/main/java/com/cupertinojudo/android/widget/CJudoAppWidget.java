@@ -3,9 +3,11 @@ package com.cupertinojudo.android.widget;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.cupertinojudo.android.R;
+import com.cupertinojudo.android.sync.CJudoSyncAdapter;
 
 /**
  * Implementation of App Widget functionality.
@@ -18,10 +20,18 @@ public class CJudoAppWidget extends AppWidgetProvider {
         CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
+//        views.setTextViewText(R.id.appwidget_text, widgetText);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        if (CJudoSyncAdapter.ACTION_DATA_UPDATED.equals(intent.getAction())) {
+            context.startService(new Intent(context, WidgetUpdateService.class));
+        }
     }
 
     @Override

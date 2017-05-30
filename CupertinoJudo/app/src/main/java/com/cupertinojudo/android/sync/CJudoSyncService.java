@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.cupertinojudo.android.Injection;
+
 /**
  *
  */
@@ -18,7 +20,7 @@ public class CJudoSyncService extends Service {
         Log.d("SunshineSyncService", "onCreate - SunshineSyncService");
         synchronized (sSyncAdapterLock) {
             if (sSyncAdapter == null) {
-                sSyncAdapter = new CJudoSyncAdapter(getApplicationContext(), true);
+                sSyncAdapter = new CJudoSyncAdapter(getApplicationContext(), Injection.provideTournamentRepository(getApplicationContext()), true);
             }
         }
     }

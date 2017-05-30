@@ -23,6 +23,7 @@ import com.cupertinojudo.android.data.source.remote.CJudoClubRemoteDataSource;
 import com.cupertinojudo.android.notifications.CJudoNotificationContract;
 import com.cupertinojudo.android.notifications.CJudoNotificationPresenter;
 import com.cupertinojudo.android.notifications.CJudoNotificationsFragment;
+import com.cupertinojudo.android.sync.CJudoSyncAdapter;
 import com.cupertinojudo.android.tournament.CJTContract;
 import com.cupertinojudo.android.tournament.CJTFragment;
 import com.cupertinojudo.android.tournament.CJTPresenter;
@@ -120,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         if (null == savedInstanceState) {
             swapFragment(TOURNAMENT);
         }
+
+        CJudoSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override
