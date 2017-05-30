@@ -1,5 +1,6 @@
 package com.cupertinojudo.android.notifications;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -17,6 +21,7 @@ import android.widget.TextView;
 import com.cupertinojudo.android.DateFormatterUtil;
 import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.Notification;
+import com.cupertinojudo.android.settings.CJudoSettingsActivity;
 
 import java.util.List;
 
@@ -54,8 +59,13 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.notifications_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toolbar.setTitle(R.string.title_notifications);
+
+        setHasOptionsMenu(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mNotificationsRecyclerView = (RecyclerView) view.findViewById(R.id.notifications_recyclerview);
@@ -68,6 +78,22 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
         mNotificationsRecyclerView.setLayoutManager(layoutManager);
 
         return view;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_settings:
+                startActivity(new Intent(getActivity(), CJudoSettingsActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.settings, menu);
     }
 
     @Override

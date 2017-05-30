@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import com.cupertinojudo.android.MainActivity;
 import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.CJudoNotification;
+import com.cupertinojudo.android.settings.CJudoSettingsActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -29,8 +30,11 @@ public class CJFCMMessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 
         CJudoNotification notification = parseReceivedFCMPayload(remoteMessage);
-
-        sendNotification(notification);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        
+        if (prefs.getBoolean(getApplicationContext().getString(R.string.pref_enable_notifications_key), CJudoSettingsActivity.getNotificationEnabled(getApplicationContext()))) {
+            sendNotification(notification);
+        }
     }
 
     private CJudoNotification parseReceivedFCMPayload(RemoteMessage remoteMessage) {
@@ -39,30 +43,27 @@ public class CJFCMMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(CJudoNotification notification) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        if (prefs.getBoolean(getString(R.string.notification_prefs), true)) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra(MainActivity.NOTIFICATION_IDENTIFIER, true);
-            intent.putExtra(MainActivity.NOTIFICATION_OBJECT, notification);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                    PendingIntent.FLAG_ONE_SHOT);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(MainActivity.NOTIFICATION_IDENTIFIER, true);
+        intent.putExtra(MainActivity.NOTIFICATION_OBJECT, notification);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT);
 
-            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.drawable.ic_stat)
-                    .setContentTitle(notification.getTitle())
-                    .setContentText(notification.getBody())
-                    .setAutoCancel(true)
-                    .setSound(defaultSoundUri)
-                    .setContentIntent(pendingIntent);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_stat)
+                .setContentTitle(notification.getTitle())
+                .setContentText(notification.getBody())
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
 
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-            notificationManager.notify(0, notificationBuilder.build());
-        }
+        notificationManager.notify(0, notificationBuilder.build());
     }
 }

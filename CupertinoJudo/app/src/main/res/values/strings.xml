@@ -70,7 +70,7 @@
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
 
-    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_new_message_notifications">Enable notifications</string>
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
@@ -114,4 +114,12 @@
     <string name="android_retrofit2_value">https://github.com/square/retrofit</string>
     <string name="android_guava_value">https://github.com/google/guava</string>
     <string name="android_robotium_value">https://github.com/RobotiumTech/robotium</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="pref_enable_notifications_key" translatable="false">enable_notifications</string>
+    <string name="pref_enable_notifications_label">Club Notifications</string>
+    <string name="pref_enable_notifications_true">Enabled</string>
+    <string name="pref_enable_notifications_false">Not Enabled</string>
+    <string name="pref_enable_notifications_default" translatable="false">true</string>
+
 </resources>

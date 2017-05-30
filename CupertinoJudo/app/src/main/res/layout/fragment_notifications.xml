@@ -14,7 +14,9 @@
         android:elevation="6dp"
         android:title="@string/title_notifications"
         app:titleTextColor="@color/colorPrimaryDark"
-        tools:src="Notifications" />
+        tools:src="Notifications">
+
+        </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/notifications_recyclerview"
