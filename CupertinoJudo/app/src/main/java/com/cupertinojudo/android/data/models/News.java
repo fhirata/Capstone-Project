@@ -1,16 +1,31 @@
 package com.cupertinojudo.android.data.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class News {
 
-    @SerializedName("content")
+    @SerializedName("title")
     @Expose
-    private String content;
+    private String title;
+    @SerializedName("body")
+    @Expose
+    private String body;
+    @SerializedName("bg_image")
+    @Expose
+    private String bgImage;
     @SerializedName("date")
     @Expose
     private String date;
+
+    private static transient SimpleDateFormat sServerTimeFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy");
+    private static transient Date sTimeStamp;
 
     /**
      * No args constructor for use in serialization
@@ -21,26 +36,56 @@ public class News {
 
     /**
      *
-     * @param content
+     * @param body
+     * @param title
+     * @param bgImage
      * @param date
      */
-    public News(String content, String date) {
+    public News(String title, String body, String bgImage, String date) {
         super();
-        this.content = content;
+        this.title = title;
+        this.body = body;
+        this.bgImage = bgImage;
         this.date = date;
     }
 
-    public String getContent() {
-        return content;
+    public String getTitle() {
+        return title;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDate() {
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getBgImage() {
+        return bgImage;
+    }
+
+    public void setBgImage(String bgImage) {
+        this.bgImage = bgImage;
+    }
+
+    public String getRawDate() {
         return date;
     }
+
+    public Date getDate() {
+        try {
+            return sServerTimeFormat.parse(date);
+        } catch (ParseException parseException) {
+            Log.e("HERE", parseException.getMessage());
+        }
+        return null;
+    }
+
 
     public void setDate(String date) {
         this.date = date;

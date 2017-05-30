@@ -14,8 +14,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.cupertinojudo.android.club.CJClubContract;
 import com.cupertinojudo.android.club.CJClubFragment;
+import com.cupertinojudo.android.club.CJClubPresenter;
 import com.cupertinojudo.android.data.source.CJTLoaderProvider;
+import com.cupertinojudo.android.data.source.CJudoClubRepository;
+import com.cupertinojudo.android.data.source.remote.CJudoClubRemoteDataSource;
 import com.cupertinojudo.android.notifications.CJudoNotificationContract;
 import com.cupertinojudo.android.notifications.CJudoNotificationPresenter;
 import com.cupertinojudo.android.notifications.CJudoNotificationsFragment;
@@ -33,7 +37,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Vector;
 
-public class MainActivity extends AppCompatActivity implements CJTContract.ActivityInterface, CJudoNotificationContract.ActivityInterface {
+public class MainActivity extends AppCompatActivity implements CJTContract.ActivityInterface, CJudoNotificationContract.ActivityInterface, CJClubContract.ActivityInterface {
     public static final String NOTIFICATION_IDENTIFIER = "Notification";
     public static final String NOTIFICATION_OBJECT = "notification_object";
 
@@ -97,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         if (null == clubFragment) {
             clubFragment = CJClubFragment.newInstance();
         }
+        new CJClubPresenter(this, clubFragment, CJudoClubRepository.getInstance(CJudoClubRemoteDataSource.getInstance()));
         mFragments.add(CLUB, clubFragment);
 
         // Notifications fragment init
@@ -107,8 +112,6 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
 
         CJTLoaderProvider loaderProvider = new CJTLoaderProvider(this);
         new CJudoNotificationPresenter(this,
-                loaderProvider,
-                getSupportLoaderManager(),
                 notificationsFragment,
                 Injection.provideClubRepository(getApplicationContext()));
 
