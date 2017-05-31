@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.TournamentCategory;
+import com.cupertinojudo.android.widget.WidgetUpdateService;
 
 /**
  * For a given category, list all the available pools
@@ -72,6 +73,7 @@ public class CJTCategoriesFragment extends Fragment implements CJTCategoriesCont
         mCategoryRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         mCategoryRecyclerview.setAdapter(mTournamentCategoryAdapter);
 
+        WidgetUpdateService.startActionUpdatePlayersWidgets(getContext());
         return view;
     }
 
@@ -106,7 +108,7 @@ public class CJTCategoriesFragment extends Fragment implements CJTCategoriesCont
         }
 
         @Override
-        public void onBindViewHolderCursor(ViewHolder holder, Cursor cursor) {
+        public void onBindViewHolderCursor(final ViewHolder holder, Cursor cursor) {
             final TournamentCategory category = TournamentCategory.from(cursor);
             holder.mTitle.setText(category.getName());
             holder.mRowView.setOnClickListener(new View.OnClickListener() {

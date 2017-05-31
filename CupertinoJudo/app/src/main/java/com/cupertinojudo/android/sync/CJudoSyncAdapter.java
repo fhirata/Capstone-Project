@@ -57,7 +57,8 @@ public class CJudoSyncAdapter extends AbstractThreadedSyncAdapter {
     private final CJTRepository mTournamentRepository;
     int mTournamentYear = 2016;
 
-    public static final String ACTION_DATA_UPDATED = "com.cupertinojudoclub.android.app.ACTION_DATA_UPDATED";
+    public static final String ACTION_UPDATE_PLAYERS = "com.cupertinojudoclub.android.ACTION_UPDATE_PLAYERS";
+    public static final String ACTION_UPDATE_PLAYERS_WIDGETS = "com.cupertinojudoclub.android.ACTION_UPDATE_PLAYERS_WIDGET";
 
     public CJudoSyncAdapter(Context context, CJTRepository repository, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -136,7 +137,7 @@ public class CJudoSyncAdapter extends AbstractThreadedSyncAdapter {
                 notifyParticipantCount();
 
                 // send broadcast to update widget
-                Intent dataUpdated = new Intent(ACTION_DATA_UPDATED);
+                Intent dataUpdated = new Intent(ACTION_UPDATE_PLAYERS);
                 getContext().sendBroadcast(dataUpdated);
             }
 

@@ -17,11 +17,17 @@ public class CJudoAppWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
+//        String date = DateFormatterUtil.formatTimestamp(mNotificationList.get(position).getDate(), holder.itemView.getContext())
+
+//        CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
-//        views.setTextViewText(R.id.appwidget_text, widgetText);
+//        views.setTextViewText(R.id.widget_updated_at, widgetText);
+//
+//        Intent intent = new Intent(context, MainActivity.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
+//        views.setOnClickPendingIntent(R.id.widget_image, pendingIntent);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
@@ -29,7 +35,7 @@ public class CJudoAppWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if (CJudoSyncAdapter.ACTION_DATA_UPDATED.equals(intent.getAction())) {
+        if (CJudoSyncAdapter.ACTION_UPDATE_PLAYERS.equals(intent.getAction())) {
             context.startService(new Intent(context, WidgetUpdateService.class));
         }
     }

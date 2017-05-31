@@ -78,6 +78,7 @@ public class CJTLocalDataSource implements CJTDataSource {
         if (insertCount == 0) {
             // Log error inserting
         }
+
         return insertCount;
     }
 

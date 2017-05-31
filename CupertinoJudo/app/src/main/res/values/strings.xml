@@ -76,7 +76,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_updated_on_text">Updated on <xliff:g id="timestamp">%1$s</xliff:g></string>
     <string name="add_widget">Add widget</string>
     <!--Tiles-->
     <string name="concession">Concession</string>
@@ -101,7 +101,7 @@
     <string name="notification_prefs">notification</string>
     <!-- SyncAdapter related -->
     <string name="sync_account_type">android.cupertinojudo.com</string>
-    <string name="content_authority">com.cupertinojudo.android.app</string>
+    <string name="content_authority">com.cupertinojudo.android</string>
     <string name="format_notification">Total participants: <xliff:g id="condition">%1$d</xliff:g></string>
     <string name="participants_count"><xliff:g id="year">%1$d</xliff:g> participants: <xliff:g id="count">%2$d</xliff:g></string>
     <string name="pref_last_notification">last_notification</string>
