@@ -78,6 +78,7 @@ public class CJTLocalDataSource implements CJTDataSource {
         if (insertCount == 0) {
             // Log error inserting
         }
+
         return insertCount;
     }
 
@@ -88,7 +89,7 @@ public class CJTLocalDataSource implements CJTDataSource {
                 new String[]{String.valueOf(year)},
                 null);
 
-        return (cursor.getCount() > 0);
+        return (null != cursor && cursor.getCount() > 0);
     }
 
     private int deleteParticipants(@NonNull int year) {

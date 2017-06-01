@@ -23,6 +23,7 @@ import com.cupertinojudo.android.data.source.remote.CJudoClubRemoteDataSource;
 import com.cupertinojudo.android.notifications.CJudoNotificationContract;
 import com.cupertinojudo.android.notifications.CJudoNotificationPresenter;
 import com.cupertinojudo.android.notifications.CJudoNotificationsFragment;
+import com.cupertinojudo.android.sync.CJudoSyncAdapter;
 import com.cupertinojudo.android.tournament.CJTContract;
 import com.cupertinojudo.android.tournament.CJTFragment;
 import com.cupertinojudo.android.tournament.CJTPresenter;
@@ -33,6 +34,7 @@ import com.cupertinojudo.android.tournament.schedule.CJTScheduleFragment;
 import com.cupertinojudo.android.tournament.schedule.CJTSchedulePresenter;
 import com.cupertinojudo.android.tournament.venue.CJTVenueFragment;
 import com.cupertinojudo.android.tournament.venue.CJTVenuePresenter;
+import com.cupertinojudo.android.widget.WidgetUpdateService;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Vector;
@@ -120,6 +122,9 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         if (null == savedInstanceState) {
             swapFragment(TOURNAMENT);
         }
+
+        CJudoSyncAdapter.initializeSyncAdapter(this);
+        WidgetUpdateService.startActionUpdatePlayersWidgets(this);
     }
 
     @Override

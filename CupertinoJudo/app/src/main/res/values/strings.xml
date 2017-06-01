@@ -76,7 +76,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_updated_on_text">Updated on <xliff:g id="timestamp">%1$s</xliff:g></string>
     <string name="add_widget">Add widget</string>
     <!--Tiles-->
     <string name="concession">Concession</string>
@@ -86,7 +86,6 @@
     <string name="directions">Directions</string>
     <string name="schedule">Schedule</string>
     <string name="tournament_pools">Tournament Pools</string>
-    <string name="content_authority">com.cupertinojudo.android</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="format_full_friendly_date"><xliff:g id="day">%1$s</xliff:g>, <xliff:g id="date">%2$s</xliff:g></string>
@@ -100,6 +99,12 @@
     <string name="days_ago">"%d days ago"</string>
     <string name="notification_topic">news</string>
     <string name="notification_prefs">notification</string>
+    <!-- SyncAdapter related -->
+    <string name="sync_account_type">android.cupertinojudo.com</string>
+    <string name="content_authority">com.cupertinojudo.android</string>
+    <string name="format_notification">Total participants: <xliff:g id="condition">%1$d</xliff:g></string>
+    <string name="participants_count"><xliff:g id="year">%1$d</xliff:g> participants: <xliff:g id="count">%2$d</xliff:g></string>
+    <string name="pref_last_notification">last_notification</string>
 
     <string name="version">Version</string>
     <string name="open_source_license">Open Source Licenses</string>
@@ -122,4 +127,8 @@
     <string name="pref_enable_notifications_false">Not Enabled</string>
     <string name="pref_enable_notifications_default" translatable="false">true</string>
 
+    <string name="pref_2017_participants_count_key" translatable="false">2017_participants</string>
+    <string name="pref_2017_participants_count_default" translatable="false">0</string>
+
+    <string name="widget_participants">Participants</string>
 </resources>
