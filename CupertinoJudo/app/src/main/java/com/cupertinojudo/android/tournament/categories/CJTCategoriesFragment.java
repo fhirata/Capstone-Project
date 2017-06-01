@@ -1,6 +1,7 @@
 package com.cupertinojudo.android.tournament.categories;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +17,8 @@ import android.widget.TextView;
 
 import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.TournamentCategory;
-import com.cupertinojudo.android.widget.WidgetUpdateService;
+
+import static com.cupertinojudo.android.widget.WidgetUpdateService.ACTION_UPDATE_PLAYER_WIDGETS;
 
 /**
  * For a given category, list all the available pools
@@ -73,7 +75,10 @@ public class CJTCategoriesFragment extends Fragment implements CJTCategoriesCont
         mCategoryRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         mCategoryRecyclerview.setAdapter(mTournamentCategoryAdapter);
 
-        WidgetUpdateService.startActionUpdatePlayersWidgets(getContext());
+        // send broadcast to update widget
+        Intent dataUpdated = new Intent(ACTION_UPDATE_PLAYER_WIDGETS);
+        getContext().sendBroadcast(dataUpdated);
+
         return view;
     }
 

@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:text="2017 Participants: 300" />
+            tools:text="2017 Participants: 0" />
 
         <TextView
             android:id="@+id/widget_updated_at"

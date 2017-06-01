@@ -1,29 +1,27 @@
 package com.cupertinojudo.android.widget;
 
 import android.app.IntentService;
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
-import android.widget.RemoteViews;
+import android.preference.PreferenceManager;
 
-import com.cupertinojudo.android.DateFormatterUtil;
-import com.cupertinojudo.android.MainActivity;
 import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.source.local.CJTPersistenceContract;
-
-import java.util.Date;
-
-import static com.cupertinojudo.android.sync.CJudoSyncAdapter.ACTION_UPDATE_PLAYERS_WIDGETS;
+import com.cupertinojudo.android.sync.CJudoSyncAdapter;
 
 /**
  * Created by fabiohh on 5/29/17.
  */
 
 public class WidgetUpdateService extends IntentService {
+
+    public static final String ACTION_UPDATE_PLAYERS = "com.cupertinojudoclub.android.ACTION_UPDATE_PLAYERS";
+    public static final String ACTION_UPDATE_PLAYER_WIDGETS = "com.cupertinojudoclub.android.ACTION_UPDATE_PLAYER_WIDGET";
 
     @Override
     public void onCreate() {
@@ -42,7 +40,7 @@ public class WidgetUpdateService extends IntentService {
      */
     public static void startActionUpdatePlayersWidgets(Context context) {
         Intent intent = new Intent(context, WidgetUpdateService.class);
-        intent.setAction(ACTION_UPDATE_PLAYERS_WIDGETS);
+        intent.setAction(ACTION_UPDATE_PLAYER_WIDGETS);
         context.startService(intent);
     }
 
@@ -51,41 +49,39 @@ public class WidgetUpdateService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (null != intent) {
             final String action = intent.getAction();
-            if (ACTION_UPDATE_PLAYERS_WIDGETS.equals(action)) {
+            if (ACTION_UPDATE_PLAYERS.equals(action)) {
+                handleActionUpdatePlayers();
+            } else if (ACTION_UPDATE_PLAYER_WIDGETS.equals(action)) {
                 handleActionUpdatePlayerWidgets();
             }
         }
     }
 
+    private void handleActionUpdatePlayers() {
+        CJudoSyncAdapter.syncImmediately(this);
+    }
+
     private void handleActionUpdatePlayerWidgets() {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, CJudoAppWidget.class));
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, CJudoAppWidgetProvider.class));
 
         int tournamentYear = 2016;
         Uri participantsUri = CJTPersistenceContract.CJudoParticipantEntry.buildParticipantsUri(tournamentYear);
 
-        // we'll query our contentProvider, as always
+        // Query our contentProvider for participants count
         Cursor cursor = getContentResolver().query(participantsUri, null, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
+
             int count = cursor.getCount();
             cursor.close();
 
-            for (int appWidgetId : appWidgetIds) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String lastNotificationKey = getString(R.string.pref_last_notification);
+            long lastSync = prefs.getLong(lastNotificationKey, 0);
 
-                RemoteViews views = new RemoteViews(
-                        getBaseContext().getPackageName(), R.layout.widget);
-
-                // intent to launch app
-                Intent openWidgetIntent = new Intent(getBaseContext(), MainActivity.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, openWidgetIntent, 0);
-                views.setOnClickPendingIntent(R.id.widget, pendingIntent);
-
-                // set widget dynamic information
-                views.setTextViewText(R.id.widget_participants_count, String.format(getString(R.string.participants_count), tournamentYear, count));
-                views.setTextViewText(R.id.widget_updated_at, DateFormatterUtil.formatTimestamp(new Date(), this));
-
-                appWidgetManager.updateAppWidget(appWidgetId, views);
+            for(int appWidgetId : appWidgetIds) {
+                CJudoAppWidgetProvider.updateAppWidget(this, appWidgetManager, count, lastSync, tournamentYear, appWidgetId);
             }
         }
     }

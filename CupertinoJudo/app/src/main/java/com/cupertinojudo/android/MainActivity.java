@@ -34,6 +34,7 @@ import com.cupertinojudo.android.tournament.schedule.CJTScheduleFragment;
 import com.cupertinojudo.android.tournament.schedule.CJTSchedulePresenter;
 import com.cupertinojudo.android.tournament.venue.CJTVenueFragment;
 import com.cupertinojudo.android.tournament.venue.CJTVenuePresenter;
+import com.cupertinojudo.android.widget.WidgetUpdateService;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Vector;
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         }
 
         CJudoSyncAdapter.initializeSyncAdapter(this);
+        WidgetUpdateService.startActionUpdatePlayersWidgets(this);
     }
 
     @Override

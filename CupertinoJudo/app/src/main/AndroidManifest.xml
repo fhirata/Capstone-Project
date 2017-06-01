@@ -34,9 +34,10 @@
             android:name=".settings.CJudoSettingsActivity"
             android:label="@string/title_activity_cjudo_settings" />
 
-        <receiver android:name=".widget.CJudoAppWidget">
+        <receiver android:name=".widget.CJudoAppWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.cupertinojudoclub.android.ACTION_UPDATE_PLAYERS" />
             </intent-filter>
 
             <meta-data
@@ -81,6 +82,7 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
+        <service android:name=".widget.WidgetUpdateService" />
     </application>
 
 </manifest>

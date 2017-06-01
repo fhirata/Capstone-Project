@@ -36,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static com.cupertinojudo.android.widget.WidgetUpdateService.ACTION_UPDATE_PLAYER_WIDGETS;
 import static java.lang.System.currentTimeMillis;
 
 /**
@@ -56,10 +57,6 @@ public class CJudoSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private final CJTRepository mTournamentRepository;
     int mTournamentYear = 2016;
-
-    public static final String ACTION_UPDATE_PLAYERS = "com.cupertinojudoclub.android.ACTION_UPDATE_PLAYERS";
-    public static final String ACTION_UPDATE_PLAYERS_WIDGETS = "com.cupertinojudoclub.android.ACTION_UPDATE_PLAYERS_WIDGET";
-
     public CJudoSyncAdapter(Context context, CJTRepository repository, boolean autoInitialize) {
         super(context, autoInitialize);
         mTournamentRepository = repository;
@@ -130,14 +127,14 @@ public class CJudoSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.d(LOG_TAG, "onPerformSync Called.");
-        // Fetch from remote
+        // Fetch participants from remote and store into database
         mTournamentRepository.getParticipants(mTournamentYear, new CJTDataSource.GetParticipantsCallback() {
             @Override
             public void onParticipantsLoaded(@NonNull List<Participant> participants) {
                 notifyParticipantCount();
 
-                // send broadcast to update widget
-                Intent dataUpdated = new Intent(ACTION_UPDATE_PLAYERS);
+                // Send broadcast to update widget
+                Intent dataUpdated = new Intent(ACTION_UPDATE_PLAYER_WIDGETS);
                 getContext().sendBroadcast(dataUpdated);
             }
 
