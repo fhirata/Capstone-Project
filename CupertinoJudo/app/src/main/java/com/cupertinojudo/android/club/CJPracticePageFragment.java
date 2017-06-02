@@ -28,6 +28,19 @@ public class CJPracticePageFragment extends Fragment {
     private CJudoPracticeAdapter mPracticeAdapter;
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPracticeAdapter = null;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+
     public static CJPracticePageFragment newInstance(String sTitle) {
         CJPracticePageFragment mFragment = new CJPracticePageFragment();
 
@@ -48,7 +61,6 @@ public class CJPracticePageFragment extends Fragment {
         mPresenterInterface.loadPractices();
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +73,6 @@ public class CJPracticePageFragment extends Fragment {
 
         mPracticeRecyclerView.setAdapter(mPracticeAdapter);
         mPracticeRecyclerView.setLayoutManager(layoutManager);
-
         return view;
     }
 

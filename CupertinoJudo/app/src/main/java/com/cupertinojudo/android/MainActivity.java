@@ -94,29 +94,27 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         CJTFragment tournamentFragment = (CJTFragment) getSupportFragmentManager().findFragmentByTag(CJTFragment.FRAGMENT_TAG);
         if (null == tournamentFragment) {
             tournamentFragment = CJTFragment.newInstance();
+            new CJTPresenter(tournamentFragment, this);
         }
-        new CJTPresenter(tournamentFragment, this);
         mFragments.add(TOURNAMENT, tournamentFragment);
 
         // Club fragment init
         CJClubFragment clubFragment = (CJClubFragment) getSupportFragmentManager().findFragmentByTag(CJClubFragment.FRAGMENT_TAG);
         if (null == clubFragment) {
             clubFragment = CJClubFragment.newInstance();
+            new CJClubPresenter(this, clubFragment, CJudoClubRepository.getInstance(CJudoClubRemoteDataSource.getInstance()));
         }
-        new CJClubPresenter(this, clubFragment, CJudoClubRepository.getInstance(CJudoClubRemoteDataSource.getInstance()));
         mFragments.add(CLUB, clubFragment);
 
         // Notifications fragment init
         CJudoNotificationsFragment notificationsFragment = (CJudoNotificationsFragment) getSupportFragmentManager().findFragmentByTag(CJudoNotificationsFragment.FRAGMENT_TAG);
         if (null == notificationsFragment) {
             notificationsFragment = CJudoNotificationsFragment.newInstance();
+            CJTLoaderProvider loaderProvider = new CJTLoaderProvider(this);
+            new CJudoNotificationPresenter(this,
+                    notificationsFragment,
+                    Injection.provideClubRepository(getApplicationContext()));
         }
-
-        CJTLoaderProvider loaderProvider = new CJTLoaderProvider(this);
-        new CJudoNotificationPresenter(this,
-                notificationsFragment,
-                Injection.provideClubRepository(getApplicationContext()));
-
         mFragments.add(NOTIFICATIONS, notificationsFragment);
 
         if (null == savedInstanceState) {

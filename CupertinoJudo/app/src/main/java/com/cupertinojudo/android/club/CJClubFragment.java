@@ -35,9 +35,17 @@ public class CJClubFragment extends Fragment implements CJClubContract.ViewInter
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+    }
 
-        mFragmentPagerAdapter = new CJClubFragmentPagerAdapter(getChildFragmentManager(), mPresenterInterface);
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mFragmentPagerAdapter = null;
     }
 
     @Override
@@ -49,6 +57,8 @@ public class CJClubFragment extends Fragment implements CJClubContract.ViewInter
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mFragmentPagerAdapter = new CJClubFragmentPagerAdapter(getChildFragmentManager(), mPresenterInterface);
+
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_club, container, false);
 
         // Change color of appbarlayout when collapsed
@@ -73,8 +83,6 @@ public class CJClubFragment extends Fragment implements CJClubContract.ViewInter
 
                 } else {
                     clubToolbar.setVisibility(View.GONE);
-//                    clubToolbar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-//                    clubToolbar.setTitle("");
                 }
             }
         });
