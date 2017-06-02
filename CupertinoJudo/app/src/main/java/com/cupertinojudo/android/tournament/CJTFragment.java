@@ -52,10 +52,12 @@ public class CJTFragment extends Fragment implements CJTContract.ViewInterface {
         try {
             TypedArray icons = getResources().obtainTypedArray(R.array.icons);
             String[] titles = getResources().getStringArray(R.array.title);
+            String[] contentDescriptions = getResources().getStringArray(R.array.content_descriptions);
+
             int[] ids = getResources().getIntArray(R.array.tile_ids);
 
             for (int i = 0; i < icons.length(); i++) {
-                tournamentTiles.add(new CJTTile(titles[i], icons.getDrawable(i), ids[i]));
+                tournamentTiles.add(new CJTTile(titles[i], icons.getDrawable(i), contentDescriptions[i], ids[i]));
             }
         } catch (Resources.NotFoundException ResNotFoundException) {
             Log.e("Adapter", ResNotFoundException.getMessage() );
