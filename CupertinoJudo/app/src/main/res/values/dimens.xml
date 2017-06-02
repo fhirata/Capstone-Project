@@ -10,4 +10,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="widget_margin">8dp</dimen>
     <dimen name="tile_margin">10dp</dimen>
     <dimen name="card_size">112dp</dimen>
+    <integer name="grid_columns">2</integer>
 </resources>
