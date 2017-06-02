@@ -30,6 +30,11 @@ public class CJNewsPageFragment extends Fragment {
     private RecyclerView mNewsRecyclerView;
     private CJudoNewsAdapter mNewsAdapter;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     public static CJNewsPageFragment newInstance(String sTitle) {
         CJNewsPageFragment mFragment = new CJNewsPageFragment();
@@ -68,7 +73,7 @@ public class CJNewsPageFragment extends Fragment {
     }
 
     public String getTitle() {
-        return(getArguments().getString(KEY_TITLE));
+        return (getArguments().getString(KEY_TITLE));
     }
 
     public void loadNews(List<News> newsList) {
