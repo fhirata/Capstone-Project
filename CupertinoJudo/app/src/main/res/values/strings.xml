@@ -84,8 +84,10 @@
     <string name="pools">Pools</string>
     <string name="pools_label">Tournament Pools</string>
     <string name="venue_map">Venue Map</string>
-    <string name="venue_map_label">Venue Map</string>
     <string name="stats">Stats</string>
+    <string name="stats_title">Tournament Stats</string>
+    <string name="stats_feature_coming_soon">Coming soon! You will be able to see previous tournament statistics.</string>
+    <string name="venue_map_label">Venue Map</string>
     <string name="stats_label">Tournament Statistics</string>
     <string name="directions">Directions</string>
     <string name="directions_label">Directions to Tournament</string>
