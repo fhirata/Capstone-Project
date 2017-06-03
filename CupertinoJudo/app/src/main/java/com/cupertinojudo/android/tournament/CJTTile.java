@@ -7,18 +7,20 @@ import android.graphics.drawable.Drawable;
  */
 
 public class CJTTile {
-    private String mDescription;
+    private String mTitle;
     private Drawable mIcon;
     private int mId;
+    private String mContentDescriptions;
 
-    public CJTTile(String description, Drawable icon, int id) {
-        mDescription = description;
+    public CJTTile(String title, Drawable icon, String contentDescriptions, int id) {
+        mTitle = title;
         mIcon = icon;
         mId = id;
+        mContentDescriptions = contentDescriptions;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public String getTitle() {
+        return mTitle;
     }
 
     public Drawable getDrawable() {
@@ -27,5 +29,9 @@ public class CJTTile {
 
     public int getId() {
         return mId;
+    }
+
+    public String getDescription() {
+        return mContentDescriptions;
     }
 }

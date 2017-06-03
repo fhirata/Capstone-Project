@@ -19,6 +19,7 @@ import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.TournamentCategory;
 
 import static com.cupertinojudo.android.widget.WidgetUpdateService.ACTION_UPDATE_PLAYER_WIDGETS;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * For a given category, list all the available pools
@@ -42,7 +43,7 @@ public class CJTCategoriesFragment extends Fragment implements CJTCategoriesCont
 
     @Override
     public void setPresenter(CJTCategoriesContract.Presenter presenter) {
-        mPresenterInterface = presenter;
+        mPresenterInterface = checkNotNull(presenter);
     }
 
     @Override

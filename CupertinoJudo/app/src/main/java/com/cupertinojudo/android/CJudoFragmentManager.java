@@ -14,6 +14,6 @@ public class CJudoFragmentManager {
         transaction.setCustomAnimations(R.anim.bottom_up, R.anim.bottom_down);
         transaction.addToBackStack(null);
         transaction.replace(fragmentContainer, fragment);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 }

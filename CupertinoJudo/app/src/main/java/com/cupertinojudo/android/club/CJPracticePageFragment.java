@@ -16,6 +16,8 @@ import com.cupertinojudo.android.data.models.Practice;
 
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  *
  */
@@ -52,7 +54,7 @@ public class CJPracticePageFragment extends Fragment {
     }
 
     public void setPresenter(CJClubContract.PresenterInterface presenterInterface) {
-        mPresenterInterface = presenterInterface;
+        mPresenterInterface = checkNotNull(presenterInterface);
     }
 
     @Override

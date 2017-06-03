@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.TournamentPool;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * For a given category, list all the available pools
  */
@@ -82,7 +84,7 @@ public class CJTPoolsFragment extends Fragment implements CJTPoolsContract.ViewI
 
     @Override
     public void setPresenter(CJTPoolsContract.Presenter presenter) {
-        mPresenterInterface = presenter;
+        mPresenterInterface = checkNotNull(presenter);
     }
 
     public interface PoolsItemListener {

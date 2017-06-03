@@ -15,6 +15,8 @@ import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.UnitsFormatterUtil;
 import com.cupertinojudo.android.data.models.Participant;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  *
  */
@@ -79,6 +81,6 @@ public class CJTDetailParticipantFragment extends Fragment implements CJTDetailP
 
     @Override
     public void setPresenter(CJTDetailParticipantContract.Presenter presenter) {
-        mPresenterInterface = presenter;
+        mPresenterInterface = checkNotNull(presenter);
     }
 }

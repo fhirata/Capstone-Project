@@ -12,6 +12,8 @@ import android.webkit.WebView;
 
 import com.cupertinojudo.android.R;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  *
  */
@@ -35,7 +37,7 @@ public class CJTScheduleFragment extends Fragment implements CJTScheduleContract
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+//        setRetainInstance(true);
     }
 
     @Nullable
@@ -58,7 +60,7 @@ public class CJTScheduleFragment extends Fragment implements CJTScheduleContract
 
     @Override
     public void setPresenter(CJTScheduleContract.Presenter presenter) {
-        mPresenter = presenter;
+        mPresenter = checkNotNull(presenter);
     }
 
 }
