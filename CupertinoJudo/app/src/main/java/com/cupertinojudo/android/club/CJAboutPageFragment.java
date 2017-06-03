@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.cupertinojudo.android.BuildConfig;
 import com.cupertinojudo.android.R;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  *
  */
@@ -41,7 +43,7 @@ public class CJAboutPageFragment extends Fragment {
 
 
     public void setPresenter(CJClubContract.PresenterInterface presenterInterface) {
-        mPresenterInterface = presenterInterface;
+        mPresenterInterface = checkNotNull(presenterInterface);
     }
 
     @Nullable

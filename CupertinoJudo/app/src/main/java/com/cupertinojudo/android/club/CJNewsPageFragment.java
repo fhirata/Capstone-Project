@@ -20,6 +20,8 @@ import com.cupertinojudo.android.data.models.News;
 
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  *
  */
@@ -47,7 +49,7 @@ public class CJNewsPageFragment extends Fragment {
     }
 
     public void setPresenter(CJClubContract.PresenterInterface presenterInterface) {
-        mPresenterInterface = presenterInterface;
+        mPresenterInterface = checkNotNull(presenterInterface);
     }
 
     @Override

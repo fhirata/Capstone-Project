@@ -80,12 +80,19 @@
     <string name="add_widget">Add widget</string>
     <!--Tiles-->
     <string name="concession">Concession</string>
+    <string name="concession_label">Concession</string>
     <string name="pools">Pools</string>
+    <string name="pools_label">Tournament Pools</string>
     <string name="venue_map">Venue Map</string>
-    <string name="stats">Tournament Stats</string>
+    <string name="stats">Stats</string>
+    <string name="stats_title">Tournament Stats</string>
     <string name="stats_feature_coming_soon">Coming soon! You will be able to see previous tournament statistics.</string>
+    <string name="venue_map_label">Venue Map</string>
+    <string name="stats_label">Tournament Statistics</string>
     <string name="directions">Directions</string>
+    <string name="directions_label">Directions to Tournament</string>
     <string name="schedule">Schedule</string>
+    <string name="schedule_label">Tournament Schedule</string>
     <string name="tournament_pools">Tournament Pools</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
@@ -132,4 +139,7 @@
     <string name="pref_2017_participants_count_default" translatable="false">0</string>
 
     <string name="widget_participants">Participants</string>
+
+    <!-- Accessibility strings -->
+    <string name="tournament_day_image_description">Tournament gym picture</string>
 </resources>

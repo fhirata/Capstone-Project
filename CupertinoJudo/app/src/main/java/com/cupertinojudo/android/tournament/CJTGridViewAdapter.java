@@ -45,8 +45,9 @@ public class CJTGridViewAdapter extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View gridViewItem =  inflater.inflate(R.layout.gridview_item, parent, false);
 
-        TextView description = (TextView) gridViewItem.findViewById(R.id.tile_description);
-        description.setText(mTournamentTiles.get(position).getDescription());
+        TextView title = (TextView) gridViewItem.findViewById(R.id.tile_title);
+        title.setText(mTournamentTiles.get(position).getTitle());
+        title.setContentDescription(mTournamentTiles.get(position).getDescription());
 
         ImageView imageView = (ImageView) gridViewItem.findViewById(R.id.tile_image);
         imageView.setImageDrawable(mTournamentTiles.get(position).getDrawable());

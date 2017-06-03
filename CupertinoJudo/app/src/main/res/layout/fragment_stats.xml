@@ -13,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
         android:elevation="6dp"
-        android:title="@string/stats"
+        android:title="@string/stats_title"
         app:titleTextColor="@color/colorPrimaryDark"
         tools:src="Tournament Pool" />
 
