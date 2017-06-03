@@ -63,6 +63,13 @@ public class CJTDetailParticipantFragment extends Fragment implements CJTDetailP
         mBeltTextView = (TextView) view.findViewById(R.id.belt_textview);
         mWeightTextView = (TextView) view.findViewById(R.id.weight_textview);
 
+        // Small work around to not handle click
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // do nothing.
+            }
+        });
         return view;
     }
 
