@@ -12,6 +12,8 @@ import android.webkit.WebView;
 
 import com.cupertinojudo.android.R;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  *
  */
@@ -56,6 +58,6 @@ public class CJTVenueFragment extends Fragment implements CJTVenueContract.ViewI
 
     @Override
     public void setPresenter(CJTVenueContract.PresenterInterface presenterInterface) {
-        mPresenterInterface = presenterInterface;
+        mPresenterInterface = checkNotNull(presenterInterface);
     }
 }

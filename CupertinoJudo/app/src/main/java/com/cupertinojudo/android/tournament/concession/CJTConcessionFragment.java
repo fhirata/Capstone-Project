@@ -12,6 +12,8 @@ import android.webkit.WebView;
 
 import com.cupertinojudo.android.R;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  *
  */
@@ -58,6 +60,6 @@ public class CJTConcessionFragment extends Fragment implements CJTConcessionCont
 
     @Override
     public void setPresenter(CJTConcessionContract.Presenter presenter) {
-        mPresenter = presenter;
+        mPresenter = checkNotNull(presenter);
     }
 }

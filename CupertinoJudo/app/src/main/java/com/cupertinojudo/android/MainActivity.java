@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
     private final int NOTIFICATIONS = 2;
     private static final String MAP_INTENT_PKG = "com.google.android.apps.maps";
     private static final String LYNBROOK_HS_ADDRESS = "Lynbrook High School, 1280 Johnson Ave, San Jose, CA 95129";
+    private CJTPresenter mTournamentPresenter;
+    private CJudoNotificationPresenter mNotificationPresenter;
+    private CJClubPresenter mClubPresenter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -91,43 +94,30 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Tournament fragment init
-        CJTFragment tournamentFragment = (CJTFragment) getSupportFragmentManager().findFragmentByTag(CJTFragment.FRAGMENT_TAG);
-        if (null == tournamentFragment) {
-            tournamentFragment = CJTFragment.newInstance();
-            new CJTPresenter(tournamentFragment, this);
-        }
-        mFragments.add(TOURNAMENT, tournamentFragment);
+        CJTFragment tournamentFragment = CJTFragment.newInstance();
+        mTournamentPresenter = new CJTPresenter(tournamentFragment, this);
 
         // Club fragment init
-        CJClubFragment clubFragment = (CJClubFragment) getSupportFragmentManager().findFragmentByTag(CJClubFragment.FRAGMENT_TAG);
-        if (null == clubFragment) {
-            clubFragment = CJClubFragment.newInstance();
-            new CJClubPresenter(this, clubFragment, CJudoClubRepository.getInstance(CJudoClubRemoteDataSource.getInstance()));
-        }
-        mFragments.add(CLUB, clubFragment);
+        CJClubFragment clubFragment = CJClubFragment.newInstance();
+        mClubPresenter = new CJClubPresenter(this, clubFragment, CJudoClubRepository.getInstance(CJudoClubRemoteDataSource.getInstance()));
 
         // Notifications fragment init
-        CJudoNotificationsFragment notificationsFragment = (CJudoNotificationsFragment) getSupportFragmentManager().findFragmentByTag(CJudoNotificationsFragment.FRAGMENT_TAG);
-        if (null == notificationsFragment) {
-            notificationsFragment = CJudoNotificationsFragment.newInstance();
-            CJTLoaderProvider loaderProvider = new CJTLoaderProvider(this);
-            new CJudoNotificationPresenter(this,
-                    notificationsFragment,
-                    Injection.provideClubRepository(getApplicationContext()));
-        }
+        CJudoNotificationsFragment notificationsFragment = CJudoNotificationsFragment.newInstance();
+        CJTLoaderProvider loaderProvider = new CJTLoaderProvider(this);
+
+        mNotificationPresenter = new CJudoNotificationPresenter(this,
+                notificationsFragment,
+                Injection.provideClubRepository(getApplicationContext()));
+
+
+        mFragments.add(TOURNAMENT, tournamentFragment);
+        mFragments.add(CLUB, clubFragment);
         mFragments.add(NOTIFICATIONS, notificationsFragment);
 
-        if (null == savedInstanceState) {
-            swapFragment(TOURNAMENT);
-        }
+        swapFragment(TOURNAMENT);
 
         CJudoSyncAdapter.initializeSyncAdapter(this);
         WidgetUpdateService.startActionUpdatePlayersWidgets(this);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -143,25 +133,26 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content, mFragments.get(position));
-        fragmentTransaction.commit();
+        fragmentTransaction.replace(R.id.content, mFragments.get(position), mFragments.get(position).getTag());
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     @Override
     public void handleScheduleClick() {
         CJTScheduleFragment tournamentScheduleFragment = CJTScheduleFragment.newInstance();
 
-        CJudoFragmentManager.replaceFragment(this, R.id.content, tournamentScheduleFragment);
-
         new CJTSchedulePresenter(tournamentScheduleFragment, this);
+
+        CJudoFragmentManager.replaceFragment(this, R.id.content, tournamentScheduleFragment);
     }
 
     @Override
     public void handleVenueClick() {
         CJTVenueFragment venueFragment = CJTVenueFragment.newInstance();
-        CJudoFragmentManager.replaceFragment(this, R.id.content, venueFragment);
 
         new CJTVenuePresenter(venueFragment, this);
+
+        CJudoFragmentManager.replaceFragment(this, R.id.content, venueFragment);
     }
 
     @Override
@@ -184,9 +175,9 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
     public void handleConcessionClick() {
         CJTConcessionFragment tournamentConcessionFragment = CJTConcessionFragment.newInstance();
 
-        CJudoFragmentManager.replaceFragment(this, R.id.content, tournamentConcessionFragment);
-
         new CJTConcessionPresenter(tournamentConcessionFragment, this);
+
+        CJudoFragmentManager.replaceFragment(this, R.id.content, tournamentConcessionFragment);
     }
 
 

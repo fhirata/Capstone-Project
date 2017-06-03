@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.Participant;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Lists the participats of a single pool
  */
@@ -78,7 +80,7 @@ public class CJTPoolFragment extends Fragment implements CJTPoolContract.ViewInt
 
     @Override
     public void setPresenter(CJTPoolContract.Presenter presenter) {
-        mPresenter = presenter;
+        mPresenter = checkNotNull(presenter);
     }
 
 

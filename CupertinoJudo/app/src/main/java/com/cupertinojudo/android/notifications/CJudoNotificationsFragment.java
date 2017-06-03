@@ -25,6 +25,8 @@ import com.cupertinojudo.android.settings.CJudoSettingsActivity;
 
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  *
  */
@@ -98,7 +100,7 @@ public class CJudoNotificationsFragment extends Fragment implements CJudoNotific
 
     @Override
     public void setPresenter(CJudoNotificationContract.Presenter presenter) {
-        mPresenter = presenter;
+        mPresenter = checkNotNull(presenter);
     }
 
     @Override

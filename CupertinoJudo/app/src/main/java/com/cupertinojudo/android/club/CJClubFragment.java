@@ -18,6 +18,8 @@ import com.cupertinojudo.android.data.models.Practice;
 
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 
 /**
  *
@@ -119,6 +121,6 @@ public class CJClubFragment extends Fragment implements CJClubContract.ViewInter
 
     @Override
     public void setPresenter(CJClubContract.PresenterInterface presenter) {
-        mPresenterInterface = presenter;
+        mPresenterInterface = checkNotNull(presenter);
     }
 }
