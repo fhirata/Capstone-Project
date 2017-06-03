@@ -95,17 +95,23 @@ public class CJTCategoriesPresenter implements CJTCategoriesContract.Presenter,
     @Override
     public void onParticipantsLoaded(@NonNull List<Participant> participants) {
         // We don't care about the result since the CursorLoader will load the data for us
-        if (mLoaderManager.getLoader(CATEGORIES_LOADER) == null) {
-            mLoaderManager.initLoader(CATEGORIES_LOADER, null, this);
-        } else {
-            mLoaderManager.restartLoader(CATEGORIES_LOADER, null, this);
-        }
+        loadFromLocalRepository();
     }
 
     @Override
     public void onDataNotAvailable(String errorMessage) {
         mViewInterface.setLoadingIndicator(false);
-        mActivityInterface.showError(R.string.failed_to_load_data);
+        mActivityInterface.showError(R.string.failed_to_load_data_using_cache);
+        loadFromLocalRepository();
+    }
+
+    private void loadFromLocalRepository() {
+        // We don't care about the result since the CursorLoader will load the data for us
+        if (mLoaderManager.getLoader(CATEGORIES_LOADER) == null) {
+            mLoaderManager.initLoader(CATEGORIES_LOADER, null, this);
+        } else {
+            mLoaderManager.restartLoader(CATEGORIES_LOADER, null, this);
+        }
     }
 
     /**
