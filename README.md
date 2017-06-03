@@ -14,3 +14,7 @@ For tournament information, we will provide app Notifications of up-to-date stat
 This application gives users the peace of mind to know exactly when the polling of players start and when they complete on the day of the tournament.
 
 For a detailed description of the app, please download the PDF documentat [here](https://github.com/fhirata/Capstone-Project/blob/master/Capstone_Stage1.pdf)
+
+![Tournament](./images/tournament_screen.png)
+![Club](./images/club_screen.png)
+![Notification](./images/notification_screen.png)
