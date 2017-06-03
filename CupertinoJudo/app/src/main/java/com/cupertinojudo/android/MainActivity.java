@@ -32,6 +32,9 @@ import com.cupertinojudo.android.tournament.concession.CJTConcessionFragment;
 import com.cupertinojudo.android.tournament.concession.CJTConcessionPresenter;
 import com.cupertinojudo.android.tournament.schedule.CJTScheduleFragment;
 import com.cupertinojudo.android.tournament.schedule.CJTSchedulePresenter;
+import com.cupertinojudo.android.tournament.stats.CJTStatsContract;
+import com.cupertinojudo.android.tournament.stats.CJTStatsFragment;
+import com.cupertinojudo.android.tournament.stats.CJTStatsPresenter;
 import com.cupertinojudo.android.tournament.venue.CJTVenueFragment;
 import com.cupertinojudo.android.tournament.venue.CJTVenuePresenter;
 import com.cupertinojudo.android.widget.WidgetUpdateService;
@@ -39,7 +42,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Vector;
 
-public class MainActivity extends AppCompatActivity implements CJTContract.ActivityInterface, CJudoNotificationContract.ActivityInterface, CJClubContract.ActivityInterface {
+public class MainActivity extends AppCompatActivity implements CJTContract.ActivityInterface, CJudoNotificationContract.ActivityInterface, CJClubContract.ActivityInterface, CJTStatsContract.ActivityInterface {
     public static final String NOTIFICATION_IDENTIFIER = "Notification";
     public static final String NOTIFICATION_OBJECT = "notification_object";
 
@@ -192,7 +195,11 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
 
     @Override
     public void handleStatsClick() {
+        CJTStatsFragment statsFragment = CJTStatsFragment.newInstance();
 
+        CJudoFragmentManager.replaceFragment(this, R.id.content, statsFragment);
+
+        new CJTStatsPresenter(statsFragment, this);
     }
 
     @Override

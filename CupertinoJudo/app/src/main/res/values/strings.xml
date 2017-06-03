@@ -82,7 +82,8 @@
     <string name="concession">Concession</string>
     <string name="pools">Pools</string>
     <string name="venue_map">Venue Map</string>
-    <string name="stats">Stats</string>
+    <string name="stats">Tournament Stats</string>
+    <string name="stats_feature_coming_soon">Coming soon! You will be able to see previous tournament statistics.</string>
     <string name="directions">Directions</string>
     <string name="schedule">Schedule</string>
     <string name="tournament_pools">Tournament Pools</string>
