@@ -97,26 +97,24 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
         CJTFragment tournamentFragment = CJTFragment.newInstance();
         mTournamentPresenter = new CJTPresenter(tournamentFragment, this);
 
-        mFragments.add(TOURNAMENT, tournamentFragment);
-
         // Club fragment init
         CJClubFragment clubFragment = CJClubFragment.newInstance();
         mClubPresenter = new CJClubPresenter(this, clubFragment, CJudoClubRepository.getInstance(CJudoClubRemoteDataSource.getInstance()));
 
-        mFragments.add(CLUB, clubFragment);
-
         // Notifications fragment init
         CJudoNotificationsFragment notificationsFragment = CJudoNotificationsFragment.newInstance();
         CJTLoaderProvider loaderProvider = new CJTLoaderProvider(this);
+
         mNotificationPresenter = new CJudoNotificationPresenter(this,
                 notificationsFragment,
                 Injection.provideClubRepository(getApplicationContext()));
 
+
+        mFragments.add(TOURNAMENT, tournamentFragment);
+        mFragments.add(CLUB, clubFragment);
         mFragments.add(NOTIFICATIONS, notificationsFragment);
 
-        if (null == savedInstanceState) {
-            swapFragment(TOURNAMENT);
-        }
+        swapFragment(TOURNAMENT);
 
         CJudoSyncAdapter.initializeSyncAdapter(this);
         WidgetUpdateService.startActionUpdatePlayersWidgets(this);
