@@ -50,3 +50,7 @@ captures/
 # Adding invalid file for CI
 # google-services.json
 
+# Application signing information for signing release apks
+keystore.properties
+
+

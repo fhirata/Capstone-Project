@@ -1,6 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    if(project.hasProperty("RELEASE_STORE_FILE")) {
+        signingConfigs {
+            release {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -28,6 +38,11 @@ android {
             buildConfigField "String", "NEWS_NOTIFICATIONS_BASE_URL", '"https://api.myjson.com/"'
             buildConfigField "String", "NEWS_NOTIFICATIONS_URI", '"bins/z6qf9"'
         }
+        if(project.hasProperty("RELEASE_STORE_FILE")) {
+            release {
+                signingConfig signingConfigs.release
+            }
+    }
     }
     lintOptions {
         abortOnError false
@@ -35,7 +50,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -43,28 +58,21 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:gridlayout-v7:25.3.1'
-    compile "com.google.guava:guava:18.0"
-
+    compile 'com.google.guava:guava:18.0'
     testCompile 'junit:junit:4.12'
-
     compile 'com.github.bumptech.glide:glide:3.5.2'
     compile 'com.android.support:support-v4:25.3.1'
-
     androidTestCompile 'com.android.support.test:runner:0.4.1'
     androidTestCompile 'com.android.support.test:rules:0.4.1'
     androidTestCompile 'com.android.support:support-annotations:25.3.1'
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.6.3'
-
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
-
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:retrofit-mock:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-
     compile 'com.google.firebase:firebase-messaging:10.2.0'
-
 }
 
 apply plugin: 'com.google.gms.google-services'
