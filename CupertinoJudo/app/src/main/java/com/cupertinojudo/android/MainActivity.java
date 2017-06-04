@@ -201,6 +201,13 @@ public class MainActivity extends AppCompatActivity implements CJTContract.Activ
     }
 
     @Override
+    public void showWarning(int messageId) {
+        Snackbar snackbar = Snackbar.make(mSnackbarLayout, messageId, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorMediumGray));
+        snackbar.show();
+    }
+
+    @Override
     public void showSuccess(int messageId) {
         Snackbar snackbar = Snackbar.make(mSnackbarLayout, messageId, Snackbar.LENGTH_LONG);
         snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorBlueGreen));

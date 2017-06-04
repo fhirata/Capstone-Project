@@ -49,7 +49,7 @@ public class CJudoNotificationPresenter implements CJudoNotificationContract.Pre
             @Override
             public void onDataNotAvailable(String errorMessage) {
                 // Error message
-                mActivityInterface.showError(errorMessage);
+                mActivityInterface.showError(R.string.network_problem_try_later);
             }
         });
     }

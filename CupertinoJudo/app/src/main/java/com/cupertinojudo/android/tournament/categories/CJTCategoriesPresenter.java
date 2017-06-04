@@ -101,7 +101,7 @@ public class CJTCategoriesPresenter implements CJTCategoriesContract.Presenter,
     @Override
     public void onDataNotAvailable(String errorMessage) {
         mViewInterface.setLoadingIndicator(false);
-        mActivityInterface.showError(R.string.failed_to_load_data_using_cache);
+        mActivityInterface.showWarning(R.string.failed_to_load_data_using_cache);
         loadFromLocalRepository();
     }
 

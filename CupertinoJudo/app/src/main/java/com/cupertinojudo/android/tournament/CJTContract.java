@@ -28,5 +28,6 @@ public interface CJTContract {
         void showError(int messageId);
         void showError(String message);
         void showSuccess(int messageId);
+        void showWarning(int messageId);
     }
 }
