@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
+import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.News;
 import com.cupertinojudo.android.data.models.Practice;
 
@@ -19,7 +20,7 @@ public class CJClubFragmentPagerAdapter extends FragmentPagerAdapter {
     private final static int PRACTICE = 1;
     private final static int ABOUT = 2;
     final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "News", "Practice", "About" };
+    private String[] mTabTitles;
     private CJClubContract.PresenterInterface mPresenterInterface;
     private CJNewsPageFragment mNewsPageFragment;
     private CJPracticePageFragment mPracticePageFragment;
@@ -56,14 +57,18 @@ public class CJClubFragmentPagerAdapter extends FragmentPagerAdapter {
             case NEWS:
                 mNewsPageFragment = (CJNewsPageFragment) createdFragment;
                 mNewsPageFragment.setPresenter(mPresenterInterface);
+                mTabTitles[NEWS] = container.getContext().getString(R.string.news);
                 break;
             case PRACTICE:
                 mPracticePageFragment = (CJPracticePageFragment) createdFragment;
                 mPracticePageFragment.setPresenter(mPresenterInterface);
+                mTabTitles[PRACTICE] = container.getContext().getString(R.string.practice);
                 break;
             case ABOUT:
                 mAboutPageFragment = (CJAboutPageFragment) createdFragment;
                 mAboutPageFragment.setPresenter(mPresenterInterface);
+                mTabTitles[ABOUT] = container.getContext().getString(R.string.about);
+
                 break;
             default:
                 throw new IllegalStateException();
@@ -74,7 +79,7 @@ public class CJClubFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         // Generate title based on item position
-        return tabTitles[position];
+        return mTabTitles[position];
     }
 
     public void loadNews(List<News> newsList) {
