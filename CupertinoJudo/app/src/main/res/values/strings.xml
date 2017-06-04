@@ -140,6 +140,7 @@
     <string name="pref_2017_participants_count_default" translatable="false">0</string>
 
     <string name="widget_participants">Participants</string>
+    <string name="network_problem_try_later">Network faiure.  Please check your connection and try again.</string>
 
     <!-- Accessibility strings -->
     <string name="tournament_day_image_description">Tournament gym picture</string>

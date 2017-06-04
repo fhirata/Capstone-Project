@@ -131,6 +131,13 @@ public class CJTCategoriesActivity extends AppCompatActivity implements CJTCateg
     }
 
     @Override
+    public void showWarning(int messageId) {
+        Snackbar snackbar = Snackbar.make(mSnackbarLayout, messageId, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorMediumGray));
+        snackbar.show();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:

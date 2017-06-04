@@ -24,5 +24,6 @@ public interface CJTCategoriesContract {
         void handlePoolsItemClick(String category);
         void showError(int messageId);
         void showError(String message);
+        void showWarning(int messageId);
     }
 }

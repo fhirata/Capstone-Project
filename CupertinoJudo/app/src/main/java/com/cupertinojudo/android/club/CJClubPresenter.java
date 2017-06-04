@@ -2,6 +2,7 @@ package com.cupertinojudo.android.club;
 
 import android.support.annotation.NonNull;
 
+import com.cupertinojudo.android.R;
 import com.cupertinojudo.android.data.models.News;
 import com.cupertinojudo.android.data.models.Practice;
 import com.cupertinojudo.android.data.source.CJudoClubDataSource;
@@ -44,7 +45,7 @@ public class CJClubPresenter implements CJClubContract.PresenterInterface, CJudo
             @Override
             public void onNewsDataNotAvailable(String errorMessage) {
                 // Error message
-                mActivityInterface.showError(errorMessage);
+                mActivityInterface.showError(R.string.network_problem_try_later);
             }
         });
     }
@@ -61,7 +62,7 @@ public class CJClubPresenter implements CJClubContract.PresenterInterface, CJudo
             @Override
             public void onPracticeDataNotAvailable(String errorMessage) {
                 // Error message
-                mActivityInterface.showError(errorMessage);
+                mActivityInterface.showError(R.string.network_problem_try_later);
             }
         });
     }
