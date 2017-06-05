@@ -3,9 +3,10 @@ package com.cupertinojudo.android.data.models;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.cupertinojudo.android.data.source.local.CJTPersistenceContract;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.cupertinojudo.android.data.source.local.CJTPersistenceContract;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -117,7 +118,7 @@ public class Participant {
         try {
             mDateDOB = sDateFormat.parse(dOB);
         } catch (ParseException parseException) {
-            // Log error could not parse
+            FirebaseCrash.report(parseException);
         }
     }
 

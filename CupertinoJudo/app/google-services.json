@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "TODO:Include-Real-info-Here",
-    "firebase_url": "TODO:Include-Real-info-Here",
-    "project_id": "TODO:Include-Real-info-Here",
-    "storage_bucket": "TODO:Include-Real-info-Here"
+    "project_number": "123412341234",
+    "firebase_url": "https://dummy-host-1234.firebaseio.com",
+    "project_id": "dummy-host-1234",
+    "storage_bucket": "dummy-host-1234.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "TODO:Include-Real-info-Here",
+        "mobilesdk_app_id": "1:123412341234:android:1f23e4",
         "android_client_info": {
           "package_name": "com.cupertinojudo.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "TODO:Include-Real-info-Here",
+          "client_id": "123412341234.23rwer.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "TODO:Add-Client-Key-Here"
+          "current_key": "TullvaGDuIzaSfJmu8MyCD7LSB0RPu"
         }
       ],
       "services": {
