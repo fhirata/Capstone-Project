@@ -5,7 +5,7 @@ android {
         release {
             keyAlias 'udacity'
             keyPassword 'password'
-            storeFile rootProject.file("./keystore.jks")
+            storeFile file('keystore.jks')
             storePassword 'password'
         }
     }
