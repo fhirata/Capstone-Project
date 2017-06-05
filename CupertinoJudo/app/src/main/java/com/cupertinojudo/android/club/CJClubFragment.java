@@ -59,9 +59,10 @@ public class CJClubFragment extends Fragment implements CJClubContract.ViewInter
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mFragmentPagerAdapter = new CJClubFragmentPagerAdapter(getChildFragmentManager(), mPresenterInterface);
 
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_club, container, false);
+
+        mFragmentPagerAdapter = new CJClubFragmentPagerAdapter(getChildFragmentManager(), mPresenterInterface, view.getContext());
 
         // Change color of appbarlayout when collapsed
         AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.club_appbarlayout);

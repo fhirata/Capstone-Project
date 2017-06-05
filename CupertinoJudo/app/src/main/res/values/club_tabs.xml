@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="club_tabs_array">
+        <item>@string/news</item>
+        <item>@string/practice</item>
+        <item>@string/about</item>
+    </string-array>
+</resources>
