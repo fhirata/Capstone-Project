@@ -41,7 +41,8 @@ captures/
 .idea/libraries
 
 # Keystore files
-*.jks
+# Commenting out for now for Udacity review
+# *.jks
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
@@ -51,6 +52,6 @@ captures/
 # google-services.json
 
 # Application signing information for signing release apks
-keystore.properties
+# Commenting it out for Udacity review
 
 
