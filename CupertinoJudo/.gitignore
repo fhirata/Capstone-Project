@@ -51,6 +51,7 @@ captures/
 # google-services.json
 
 # Application signing information for signing release apks
-keystore.properties
+# Commenting it out for Udacity review
+# keystore.properties
 
 
