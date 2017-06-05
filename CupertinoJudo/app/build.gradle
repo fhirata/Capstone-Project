@@ -1,14 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    if(project.hasProperty("RELEASE_STORE_FILE")) {
-        signingConfigs {
-            release {
-                storeFile file(RELEASE_STORE_FILE)
-                storePassword RELEASE_STORE_PASSWORD
-                keyAlias RELEASE_KEY_ALIAS
-                keyPassword RELEASE_KEY_PASSWORD
-            }
+    signingConfigs {
+        release {
+            keyAlias 'udacity'
+            keyPassword 'password'
+            storeFile file("../keystore.jks")
+            storePassword 'password'
         }
     }
     compileSdkVersion 25
@@ -31,6 +29,7 @@ android {
             buildConfigField "String", "NEWS_NOTIFICATIONS_URI", '"bins/z6qf9"'
         }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "CUPERTINO_BASE_URL", '"https://api.myjson.com/"'
@@ -38,11 +37,6 @@ android {
             buildConfigField "String", "NEWS_NOTIFICATIONS_BASE_URL", '"https://api.myjson.com/"'
             buildConfigField "String", "NEWS_NOTIFICATIONS_URI", '"bins/z6qf9"'
         }
-        if(project.hasProperty("RELEASE_STORE_FILE")) {
-            release {
-                signingConfig signingConfigs.release
-            }
-    }
     }
     lintOptions {
         abortOnError false
