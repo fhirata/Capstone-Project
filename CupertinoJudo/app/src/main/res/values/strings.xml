@@ -2,6 +2,8 @@
     <string name="app_name">CupertinoJudo</string>
     <string name="title_tournament">Tournament</string>
     <string name="title_club">Club</string>
+    <string name="weight">Weight</string>
+    <string name="belt">Belt</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_cjudo_settings">Settings</string>
 
