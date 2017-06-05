@@ -1,7 +1,6 @@
 package com.cupertinojudo.android.data.models;
 
-import android.util.Log;
-
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -81,7 +80,7 @@ public class News {
         try {
             return sServerTimeFormat.parse(date);
         } catch (ParseException parseException) {
-            Log.e("HERE", parseException.getMessage());
+            FirebaseCrash.report(parseException);
         }
         return null;
     }

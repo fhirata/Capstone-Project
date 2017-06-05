@@ -30,6 +30,7 @@ import com.cupertinojudo.android.data.models.Participant;
 import com.cupertinojudo.android.data.source.CJTDataSource;
 import com.cupertinojudo.android.data.source.CJTRepository;
 import com.cupertinojudo.android.data.source.local.CJTPersistenceContract;
+import com.google.firebase.crash.FirebaseCrash;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -86,6 +87,7 @@ public class CJudoSyncAdapter extends AbstractThreadedSyncAdapter {
                 cursor = context.getContentResolver().query(participantsUri, null, null, null, null);
             } catch (ParseException e) {
                 cursor = null;
+                FirebaseCrash.report(e);
             }
 
             int count = PreferenceUtil.getParticipantsCount(getContext());

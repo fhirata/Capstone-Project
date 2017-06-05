@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.cupertinojudo.android.DateFormatterUtil;
+import com.google.firebase.crash.FirebaseCrash;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -57,8 +58,8 @@ public class CJudoNotification implements Parcelable {
             Date convertedDate;
             convertedDate = DateFormatterUtil.sDateTimeFormat.parse(mTimestamp.toString());
             return format.format(convertedDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException parseException) {
+            FirebaseCrash.report(parseException);
         }
         return null;
     }

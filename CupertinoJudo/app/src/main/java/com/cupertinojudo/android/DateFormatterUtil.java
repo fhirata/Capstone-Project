@@ -3,6 +3,8 @@ package com.cupertinojudo.android;
 import android.content.Context;
 import android.text.format.Time;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -125,7 +127,7 @@ public class DateFormatterUtil {
                 convertedDate = sDateTimeFormat.parse(timestamp.toString());
                 return sRecentDateFormat.format(convertedDate);
             } catch (ParseException e) {
-                e.printStackTrace();
+                FirebaseCrash.report(e);
             }
             return null;
         }
