@@ -1,5 +1,7 @@
 package com.cupertinojudo.android.club;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -26,9 +28,12 @@ public class CJClubFragmentPagerAdapter extends FragmentPagerAdapter {
     private CJPracticePageFragment mPracticePageFragment;
     private CJAboutPageFragment mAboutPageFragment;
 
-    public CJClubFragmentPagerAdapter(FragmentManager fm, CJClubContract.PresenterInterface presenterInterface) {
+    public CJClubFragmentPagerAdapter(FragmentManager fm, CJClubContract.PresenterInterface presenterInterface, Context context) {
         super(fm);
         mPresenterInterface = presenterInterface;
+
+        Resources res = context.getResources();
+        mTabTitles = res.getStringArray(R.array.club_tabs_array);
     }
 
     @Override
@@ -57,17 +62,14 @@ public class CJClubFragmentPagerAdapter extends FragmentPagerAdapter {
             case NEWS:
                 mNewsPageFragment = (CJNewsPageFragment) createdFragment;
                 mNewsPageFragment.setPresenter(mPresenterInterface);
-                mTabTitles[NEWS] = container.getContext().getString(R.string.news);
                 break;
             case PRACTICE:
                 mPracticePageFragment = (CJPracticePageFragment) createdFragment;
                 mPracticePageFragment.setPresenter(mPresenterInterface);
-                mTabTitles[PRACTICE] = container.getContext().getString(R.string.practice);
                 break;
             case ABOUT:
                 mAboutPageFragment = (CJAboutPageFragment) createdFragment;
                 mAboutPageFragment.setPresenter(mPresenterInterface);
-                mTabTitles[ABOUT] = container.getContext().getString(R.string.about);
 
                 break;
             default:
