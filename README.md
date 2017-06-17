@@ -9,7 +9,7 @@ This Android application will provide general club information:
  * General club and contact information (map of club, practice hours)
  * Tournament information
   
-For tournament information, we will provide app Notifications of up-to-date status of pooling information on the day of the tournament.  We will also provide the brackets of judokas fighting for current and previous tournaments.
+For tournament information, users will receive push Notifications for pooling information on the day of the tournament.  Competitors can see their brackets for current and previous tournaments.
    
 This application gives users the peace of mind to know exactly when the polling of players start and when they complete on the day of the tournament.
 
